@@ -334,7 +334,7 @@
                     </section><!--//section-->
 
                     <section class="docs-section" id="item-1-4">
-                        <h2 class="section-heading">Section Item 1.4</h2>
+                        <h2 class="section-heading">Introduction to StackSAGA</h2>
                         <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
                             leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis
                             felis
@@ -344,26 +344,68 @@
                             amet,
                             commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
 
+                        <ul>
+                            <li>Fully success transaction</li>
+                            <li>Rollback/Compensation/Revert success transaction</li>
+                            <li>Rollback/Compensation/Revert failed transaction</li>
+                        </ul>
 
-                        <h5>Pagination Example:</h5>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pl-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <br>
+                        <h5>01 : Fully success transaction</h5>
+                        <div>
+                            <a target="_blank" href="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg" alt=""
+                                    title="CoderPro Home Page"/></a>
+                        </div>
+                        <p>
+                            As we discussed earlier, we had used number of microservices for doing one single execution.
+                            Just assume we have used 5 microservices to be executed and all of them have been worked
+                            without any errors. Then there is no revert processes have been executed. That's means, all
+                            the microservices are up and running and there haven't been occurred exceptions internally
+                            inside each microservice.
+                        </p>
 
-                        <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                            leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis
-                            felis
-                            bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in
-                            felis
-                            ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit
-                            amet,
-                            commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                        <br>
+                        <h5>02 : Rollback/Compensation/Revert success transaction</h5>
+                        <div>
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/rollback-compensation-revert-success-transaction-with-stacksaga.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/rollback-compensation-revert-success-transaction-with-stacksaga.svg"
+                                    alt=""
+                                    title="CoderPro Home Page"/></a>
+                        </div>
+                        <p>
+                            In this time, An exception has occurred when one of microservices get execute. Just assume
+                            coordinator has been executed 3 microservices successfully but at the 4th one, an error has
+                            occurred due to a network exception or whatever internal exception that the microservices
+                            has been thrown. Now the coordinator has to execute revert function regarding the all
+                            microservices that executed earlier. So the coordinator will start to execute all the revert
+                            functions one by one as a sequence. If those revert functions has been executed
+                            successfully, this kind of transactions are going to these types. Simply we did a set of
+                            transactions but unfortunately got an error but all the revert processes are done
+                            successfully.
+                        </p>
+
+                        <br>
+                        <h5>03 : Rollback/Compensation/Revert failed transaction</h5>
+                        <div>
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"
+                                    alt=""
+                                    title="CoderPro Home Page"/></a>
+                        </div>
+                        <p>
+                            In this time, the coordinator try to execute the transactions one by one. But while doing
+                            the execution, an error get occurred after doing some executions and the coordinator get
+                            started to execute all the revert processes that regards to the microservices that
+                            previously executed. But unfortunately while doing the revert executions an error get
+                            occurred because of a network issues. (Network issues means it can be happened because of
+                            there is no endpoint in active at that time or kind of actual network problems)
+                        </p>
 
                     </section><!--//section-->
                     <section class="docs-section" id="item-1-5">
