@@ -353,9 +353,11 @@
                         <br>
                         <h5>01 : Fully success transaction</h5>
                         <div>
-                            <a target="_blank" href="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg"><img
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg"><img
                                     class="img-fluid  "
-                                    src="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg" alt=""
+                                    src="../../assets/images/architecture/1.0/transaction-success-with-stacksaga.svg"
+                                    alt=""
                                     title="CoderPro Home Page"/></a>
                         </div>
                         <p>
@@ -407,17 +409,142 @@
                             there is no endpoint in active at that time or kind of actual network problems)
                         </p>
 
+                        <h2>StackSAGA Execution Approaches</h2>
+                        <p>according to the requirements of requests, execution approaches are 3 types.</p>
+                        <ol>
+                            <li>Send As Fire And Forget</li>
+                            <li>Send As Fire And Forget On Process</li>
+                            <li>Send As Synchronous</li>
+                        </ol>
+                        <h3>Summary of Execution Approaches</h3>
+
+                        <div class="table-responsive my-4">
+                            <table class="table table-bordered table-hover">
+                                <!--<thead>
+                                <tr>
+                                    <th scope="col" rowspan="2">#</th>
+                                    <th scope="col" rowspan="2">Execution Approaches</th>
+                                    <th scope="col" rowspan="2">Method/Function</th>
+                                    <th scope="col" style="text-align: center" colspan="3">Transaction Types</th>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #30ff6b" scope="col">Fully Success Transaction</th>
+                                    <th style="background-color: #ffcf30" scope="col">Revert Success Transaction</th>
+                                    <th style="background-color: #ff4f30" scope="col">Revert Failed Transaction</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>-->
+
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Execution Approaches</th>
+                                    <th scope="col">Method/Function</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">01</th>
+                                    <td>Fire And Forget</td>
+                                    <td><code>fireAndForget()</code></td>
+                                    <td>fire the request and forget. after completing the process controller class's <a
+                                            href="@">listener</a> will
+                                        be notified by saga coordinator.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">02</th>
+                                    <td>Fire And Forget On Process</td>
+                                    <td><code>fireAndForgetOnProcess()</code></td>
+                                    <td>Fire the request and the request keep waiting until process complete or get an
+                                        error when executing one of executors' do-process method. (The request will be
+                                        forgotten if
+                                        occurred a do-process
+                                        error). the rest of execution will be done by the coordinator and after
+                                        completing the execution, controller class's <a
+                                                href="#">listener</a> will
+                                        be notified by saga coordinator.
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th scope="row">03</th>
+                                    <td>Synchronous</td>
+                                    <td><code>process()</code></td>
+                                    <td>Fire the request and the request keep waiting until process complete or get an
+                                        error when executing one of executors' do-revert method. (The request will be
+                                        forgotten if only
+                                        occurred a do-revert
+                                        error). the rest of execution will be done by the coordinator, and after
+                                        completing the execution, controller class's <a
+                                                href="#">listener</a> will
+                                        be notified by saga coordinator.
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div><!--//table-responsive-->
+
                     </section><!--//section-->
                     <section class="docs-section" id="item-1-5">
-                        <h2 class="section-heading">Section Item 1.5</h2>
-                        <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                            leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis
-                            felis
-                            bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in
-                            felis
-                            ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit
-                            amet,
-                            commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                        <h2 class="section-heading">What is an executor in stackSAGA?</h2>
+                        <p>
+                            As you know we have to communicate multiple microservices when we are going with
+                            microservices architecture. If we don't use stackSAGA framework you can use call your
+                            another microservice by using http client or whatever related protocol method for that
+                            particular microservice inside your single method. Just assume you have to communicate with
+                            100 of microservices to do a transaction. Then you have to call those 100 microservices one
+                            by one inside of your single method. And you can't get understand clearly those steps. But
+                            if you use stackSAGA, we don't have to worry about it. You have a template to implement and
+                            store the transaction in a clear mechanism. Those implemented classes called as executors.
+                            In other words, the classes are responsible for doing transactions and doing revert
+                            processes regarding each microservice called as executors.
+                        </p>
+                        <h5>Executors are mainly two types.</h5>
+                        <ol>
+                            <li>command executors</li>
+                            <li>query executors</li>
+                        </ol>
+
+                        <br>
+                        <h3>Command executors.</h3>
+                        <a target="_blank"
+                           href="../../assets/images/architecture/1.0/command-service.svg"><img
+                                class="img-fluid  "
+                                src="../../assets/images/architecture/1.0/command-service.svg"
+                                alt=""
+                                title="CoderPro Home Page"/></a>
+                        <p>
+                            Assume you are going to do a transaction with 10 microservices' endpoint. Some microservices
+                            might be services that data change in their database due to the calling. As an example if it
+                            was update stock endpoint, exactly the stocks will be updated due to the calling it.
+                            According to the saga pattern every command executions like this have a compensation
+                            transaction to recompense if the transaction will not be executed as we accepted. Therefore
+                            we should recover the updated data. The classes which doing this kind of execution called as
+                            command executors.
+                        </p>
+                        <br>
+                        <h3>Query executors.</h3>
+                        <a target="_blank"
+                           href="../../assets/images/architecture/1.0/query-service.svg"><img
+                                class="img-fluid  "
+                                src="../../assets/images/architecture/1.0/query-service.svg"
+                                alt=""
+                                title="CoderPro Home Page"/></a>
+                        <p>
+                            If There is no data changing In the microservice's database that you called due to the
+                            calling endpoint, to execute that kind of endpoint you should use query executors. Because
+                            it's a just retrieve the data to get a decision. Nothing to recover.
+                        </p>
+
+
                     </section><!--//section-->
                     <section class="docs-section" id="item-1-6">
                         <h2 class="section-heading">Section Item 1.6</h2>
