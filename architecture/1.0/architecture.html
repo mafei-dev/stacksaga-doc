@@ -424,23 +424,138 @@
                         </div>
                         <ul>
                             <li>
-                                <span class="badge rounded-pill bg-number">1</span> test1
-                                <ul>
-                                    <li>
-                                        <span class="badge rounded-pill bg-number">1.1</span> test1
+                                <span class="badge rounded-pill bg-number">1</span>
+                                As the first step a request cokes to
+                                the microservice which we are going to start transaction.
+                            </li>
 
-                                    </li>
-                                </ul>
+                            <li>
+                                <span class="badge rounded-pill bg-number">2</span>
+                                the request mapping method will catch the request handover the process into stack
+                                saga template (stack saga state machine). After that the SSSM will take care of all the
+                                process onwards.
                             </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">3</span>
+                                Before doing any execution process, SSSM saves the dataset which it got initially in
+                                event store.
+
+                                <div class="callout-block callout-block-info">
+
+                                    <div class="content">
+                                        <h4 class="callout-title">
+	                                <span class="callout-icon-holder me-1">
+		                                <i class="fas fa-info-circle"></i>
+		                            </span><!--//icon-holder-->
+                                            Note
+                                        </h4>
+                                        <p>Now is the time to be executed all the service classes one by one to do the
+                                            transaction fallowing the instructions that you have coded.</p>
+                                    </div><!--//content-->
+                                </div><!--//callout-block-->
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4</span>
+                                you are already know that you can use the main server that you want to start the
+                                transaction as the coordinator. Then it will act as a coordinator as well as a
+                                microservice. Therefore, the first execution will be a self transaction. (The request
+                                not
+                                going to another service).
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.1</span>
+                                after executing the do-process method successfully, updated dataset will be saved in the
+                                event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.2</span>
+                                after saving the event state in the store the main service class will be notified as one
+                                execution has been processed successfully. (This is the place that you can update the
+                                status of the transaction each time after doing execution successfully)
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5</span>
+                                CheckUserStatus executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.1</span>
+                                same as the first execution, after executing the do-process method successfully, updated
+                                dataset will be saved in the event store.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.2</span>
+                                same as the first execution, after saving the event state in the store the main service
+                                class will be notified as one execution has been processed successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6</span>
+                                StockUpdate executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7</span>
+                                MakePayment executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">8</span>
+                                The stackSAGA coordinator (SSC) knows the process is completed now. Therefore, it will
+                                notify to the onComplete method inside the controller (it is an Asynchronous
+                                invocation).
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R9</span>
+                                R9 after completing all the process SSC returns to the controller with all the
+                                historical dataset that executed.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R10</span>
+                                The controller returns the response
+                                back to the client.
+                            </li>
+
+
                         </ul>
-                        <!--<ol type="">
-                            <li>Send As Fire And Forget
-                                <ol type="1">
-                                    <li>Fire And Forget full process</li>
-                                    <li>Fire And Forget On Process</li>
-                                </ol>
-                            </li>
-                        </ol>-->
+
                         <p>
                             As we discussed earlier, we had used number of microservices for doing one single execution.
                             Just assume we have used 5 microservices to be executed and all of them have been worked
@@ -453,12 +568,146 @@
                         <h5>02 : Rollback/Compensation/Revert success transaction</h5>
                         <div>
                             <a target="_blank"
-                               href="../../assets/images/architecture/1.0/rollback-compensation-revert-success-transaction-with-stacksaga.svg"><img
+                               href="../../assets/images/architecture/1.0/revert-success-transaction-stacksaga.svg"><img
                                     class="img-fluid  "
-                                    src="../../assets/images/architecture/1.0/rollback-compensation-revert-success-transaction-with-stacksaga.svg"
+                                    src="../../assets/images/architecture/1.0/revert-success-transaction-stacksaga.svg"
                                     alt=""
                                     title="CoderPro Home Page"/></a>
                         </div>
+                        <ul>
+                            <li>
+                                <span class="badge rounded-pill bg-number">1</span>
+                                As the first step a request cokes to
+                                the microservice which we are going to start transaction.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">2</span>
+                                the request mapping method will catch the request handover the process into stack
+                                saga template (stack saga state machine). After that the SSSM will take care of all the
+                                process onwards.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">3</span>
+                                Before doing any execution process, SSSM saves the dataset which it got initially in
+                                event store.
+
+                                <div class="callout-block callout-block-info">
+
+                                    <div class="content">
+                                        <h4 class="callout-title">
+	                                <span class="callout-icon-holder me-1">
+		                                <i class="fas fa-info-circle"></i>
+		                            </span><!--//icon-holder-->
+                                            Note
+                                        </h4>
+                                        <p>Now is the time to be executed all the service classes one by one to do the
+                                            transaction fallowing the instructions that you have coded.</p>
+                                    </div><!--//content-->
+                                </div><!--//callout-block-->
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4</span>
+                                you are already know that you can use the main server that you want to start the
+                                transaction as the coordinator. Then it will act as a coordinator as well as a
+                                microservice. Therefore, the first execution will be a self transaction. (The request
+                                not
+                                going to another service).
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.1</span>
+                                after executing the do-process method successfully, updated dataset will be saved in the
+                                event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.2</span>
+                                after saving the event state in the store the main service class will be notified as one
+                                execution has been processed successfully. (This is the place that you can update the
+                                status of the transaction each time after doing execution successfully)
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5</span>
+                                CheckUserStatus executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.1</span>
+                                same as the first execution, after executing the do-process method successfully, updated
+                                dataset will be saved in the event store.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.2</span>
+                                same as the first execution, after saving the event state in the store the main service
+                                class will be notified as one execution has been processed successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6</span>
+                                StockUpdate executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7</span>
+                                MakePayment executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">8</span>
+                                The stackSAGA coordinator (SSC) knows the process is completed now. Therefore, it will
+                                notify to the onComplete method inside the controller (it is an Asynchronous
+                                invocation).
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R9</span>
+                                R9 after completing all the process SSC returns to the controller with all the
+                                historical dataset that executed.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R10</span>
+                                The controller returns the response
+                                back to the client.
+                            </li>
+
+
+                        </ul>
+
                         <p>
                             In this time, An exception has occurred when one of microservices get execute. Just assume
                             coordinator has been executed 3 microservices successfully but at the 4th one, an error has
@@ -475,12 +724,146 @@
                         <h5>03 : Rollback/Compensation/Revert failed transaction</h5>
                         <div>
                             <a target="_blank"
-                               href="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"><img
+                               href="../../assets/images/architecture/1.0/revert-failed-transaction-stacksaga.svg"><img
                                     class="img-fluid  "
-                                    src="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"
+                                    src="../../assets/images/architecture/1.0/revert-failed-transaction-stacksaga.svg"
                                     alt=""
-                                    title="CoderPro Home Page"/></a>
+                                    title="revert failed transaction stacksaga"/></a>
                         </div>
+                        <ul>
+                            <li>
+                                <span class="badge rounded-pill bg-number">1</span>
+                                As the first step a request cokes to
+                                the microservice which we are going to start transaction.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">2</span>
+                                the request mapping method will catch the request handover the process into stack
+                                saga template (stack saga state machine). After that the SSSM will take care of all the
+                                process onwards.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">3</span>
+                                Before doing any execution process, SSSM saves the dataset which it got initially in
+                                event store.
+
+                                <div class="callout-block callout-block-info">
+
+                                    <div class="content">
+                                        <h4 class="callout-title">
+	                                <span class="callout-icon-holder me-1">
+		                                <i class="fas fa-info-circle"></i>
+		                            </span><!--//icon-holder-->
+                                            Note
+                                        </h4>
+                                        <p>Now is the time to be executed all the service classes one by one to do the
+                                            transaction fallowing the instructions that you have coded.</p>
+                                    </div><!--//content-->
+                                </div><!--//callout-block-->
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4</span>
+                                you are already know that you can use the main server that you want to start the
+                                transaction as the coordinator. Then it will act as a coordinator as well as a
+                                microservice. Therefore, the first execution will be a self transaction. (The request
+                                not
+                                going to another service).
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.1</span>
+                                after executing the do-process method successfully, updated dataset will be saved in the
+                                event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">4.2</span>
+                                after saving the event state in the store the main service class will be notified as one
+                                execution has been processed successfully. (This is the place that you can update the
+                                status of the transaction each time after doing execution successfully)
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5</span>
+                                CheckUserStatus executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.1</span>
+                                same as the first execution, after executing the do-process method successfully, updated
+                                dataset will be saved in the event store.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5.2</span>
+                                same as the first execution, after saving the event state in the store the main service
+                                class will be notified as one execution has been processed successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6</span>
+                                StockUpdate executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7</span>
+                                MakePayment executor class will be executed because of the previous execution doing
+                                successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.1</span>
+                                same as the previous execution, after executing the do-process method successfully,
+                                updated dataset will be saved in the event store.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">7.2</span>
+                                same as the previous execution, after saving the event state in the store the main
+                                service class will be notified as one execution has been processed successfully.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">8</span>
+                                The stackSAGA coordinator (SSC) knows the process is completed now. Therefore, it will
+                                notify to the onComplete method inside the controller (it is an Asynchronous
+                                invocation).
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R9</span>
+                                R9 after completing all the process SSC returns to the controller with all the
+                                historical dataset that executed.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">R10</span>
+                                The controller returns the response
+                                back to the client.
+                            </li>
+
+
+                        </ul>
+
                         <p>
                             In this time, the coordinator try to execute the transactions one by one. But while doing
                             the execution, an error get occurred after doing some executions and the coordinator get
