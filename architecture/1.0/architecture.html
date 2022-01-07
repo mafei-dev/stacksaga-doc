@@ -335,14 +335,64 @@
 
                     <section class="docs-section" id="item-1-4">
                         <h2 class="section-heading">Introduction to StackSAGA</h2>
-                        <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                            leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis
-                            felis
-                            bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in
-                            felis
-                            ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit
-                            amet,
-                            commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                        <p>
+                            StackSAGA is framework as well as kind of a design pattern for execute saga orchestration
+                            pattern with spring boot by using as a library.
+                        </p>
+                        <h5>Act as a coordinator</h5>
+                        <div>
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/how-involve-stacksaga.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/how-involve-stacksaga.svg"
+                                    alt=""
+                                    title="how-involve-stacksaga for microservice"/></a>
+                        </div>
+                        <p>
+
+                            StackSAGA framework mainly focus on saga orchestration design pattern. The main responsibility is, manage
+                            all the execution for each microservice one by one. And if an error occurred, do a
+                            compensation for all executed transactions that affected to the database due to the
+                            transaction that been happening until the error and keep all the states of each transaction
+                            as can be replied in a store. As well as the framework provides you to a clean and clear
+                            architecture to store your code regarding each microservice instead of calling all the
+                            microservices inside your boilerplate single method. If you use stackSAGA framework you
+                            don't want to worry about the compensation and other boring stuff, because the only thing
+                            you have to do is, provide your logic inside of <a href="#">saga executors</a>. Then the StackSAGA
+                            coordinator will coordinate all the microservices and if an error occurred the coordinator
+                            has the knowledge to undo all the execution that been doing until now.
+
+
+                        </p>
+
+                        <h5>Act as a circuit breaker</h5>
+                        <div>
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/stacksaga-as-a-circuit-breaker.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/stacksaga-as-a-circuit-breaker.svg"
+                                    alt=""
+                                    title="how-involve-stacksaga for microservice"/></a>
+                        </div>
+                        <p>
+
+                            If you are use stackSAGA for all microservices (with spring boot), the framework can
+                            identify the active services and broken down services. Because stackSAGA uses redis server
+                            internally to communicate through each microservice. <a href="#">Read more..</a>
+
+                        </p>
+                        <h5>Provides multiple execution methods</h5>
+                        <p>
+                            The framework provides you to do the transaction multiple ways as synchronous way,
+                            asynchronous way, and hybrid way
+                        </p>
+
+                        <h5>Tracing dashboard</h5>
+                        <p>
+                            The framework provides a dashboard to see all the executed transactions and how the
+                            transaction got behave.
+                        </p>
+
 
                         <ul>
                             <li>Fully success transaction</li>
@@ -412,9 +462,23 @@
                         <h2>StackSAGA Execution Approaches</h2>
                         <p>according to the requirements of requests, execution approaches are 3 types.</p>
                         <ol>
-                            <li>Send As Fire And Forget</li>
-                            <li>Send As Fire And Forget On Process</li>
-                            <li>Send As Synchronous</li>
+                            <li>
+                                Send As Synchronous
+                                <div>
+                                    <a target="_blank"
+                                       href="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"><img
+                                            class="img-fluid  "
+                                            src="../../assets/images/architecture/1.0/rollback-compensation-revert-failed-transaction-with-stacksaga.svg"
+                                            alt=""
+                                            title="CoderPro Home Page"/></a>
+                                </div>
+                            </li>
+                            <li>Send As Fire And Forget
+                                <ol type="i">
+                                    <li>Fire And Forget full process</li>
+                                    <li>Fire And Forget On Process</li>
+                                </ol>
+                            </li>
                         </ol>
                         <h3>Summary of Execution Approaches</h3>
 
@@ -450,8 +514,9 @@
                                     <th scope="row">01</th>
                                     <td>Fire And Forget</td>
                                     <td><code>fireAndForget()</code></td>
-                                    <td>fire the request and forget. after completing the process controller class's <a
-                                            href="@">listener</a> will
+                                    <td class="col-5">fire the request and forget. after completing the process
+                                        controller class's <a
+                                                href="@">listener</a> will
                                         be notified by saga coordinator.
                                     </td>
                                 </tr>
@@ -460,7 +525,8 @@
                                     <th scope="row">02</th>
                                     <td>Fire And Forget On Process</td>
                                     <td><code>fireAndForgetOnProcess()</code></td>
-                                    <td>Fire the request and the request keep waiting until process complete or get an
+                                    <td class="col-5">Fire the request and the request keep waiting until process
+                                        complete or get an
                                         error when executing one of executors' do-process method. (The request will be
                                         forgotten if
                                         occurred a do-process
@@ -476,7 +542,8 @@
                                     <th scope="row">03</th>
                                     <td>Synchronous</td>
                                     <td><code>process()</code></td>
-                                    <td>Fire the request and the request keep waiting until process complete or get an
+                                    <td class="col-5">Fire the request and the request keep waiting until process
+                                        complete or get an
                                         error when executing one of executors' do-revert method. (The request will be
                                         forgotten if only
                                         occurred a do-revert
