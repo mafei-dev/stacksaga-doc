@@ -350,7 +350,8 @@
                         </div>
                         <p>
 
-                            StackSAGA framework mainly focus on saga orchestration design pattern. The main responsibility is, manage
+                            StackSAGA framework mainly focus on saga orchestration design pattern. The main
+                            responsibility is, manage
                             all the execution for each microservice one by one. And if an error occurred, do a
                             compensation for all executed transactions that affected to the database due to the
                             transaction that been happening until the error and keep all the states of each transaction
@@ -358,7 +359,8 @@
                             architecture to store your code regarding each microservice instead of calling all the
                             microservices inside your boilerplate single method. If you use stackSAGA framework you
                             don't want to worry about the compensation and other boring stuff, because the only thing
-                            you have to do is, provide your logic inside of <a href="#">saga executors</a>. Then the StackSAGA
+                            you have to do is, provide your logic inside of <a href="#">saga executors</a>. Then the
+                            StackSAGA
                             coordinator will coordinate all the microservices and if an error occurred the coordinator
                             has the knowledge to undo all the execution that been doing until now.
 
@@ -388,6 +390,15 @@
                         </p>
 
                         <h5>Tracing dashboard</h5>
+
+                        <div>
+                            <a target="_blank"
+                               href="../../assets/images/architecture/1.0/stacksaga-tracing-dashboard.svg"><img
+                                    class="img-fluid  "
+                                    src="../../assets/images/architecture/1.0/stacksaga-tracing-dashboard.svg"
+                                    alt=""
+                                    title="stacksaga tracing dashboard"/></a>
+                        </div>
                         <p>
                             The framework provides a dashboard to see all the executed transactions and how the
                             transaction got behave.
