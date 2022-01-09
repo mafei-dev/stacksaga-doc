@@ -404,13 +404,35 @@
                         The framework provides a dashboard to see all the executed transactions and how the
                         transaction got behave.
                     </p>
+<H1>Components of the stackSAGA </h1>
 
+<ul>
+                        <li>Aggregator</li>
+                        <li>Executor</li>
+                        <li>StackSaga coordinator</li>
+                    </ul>
 
+<H2>Aggregator</h2>
+<P>
+Stacksaga goes with a unique design pattern called "one controller per transaction". One transaction has a one aggregator. An aggregator workers as a identifier as we as the dataset of your transaction. 
+∆ As the Identifier 
+<br>
+
+all the classes regarding the transaction will be related with  the aggregator class. Without keeping a relation with aggregator those classes will not be able to go through the stackSAGA coordinator. Check out the code example. 
+
+∆ As the dataset container 
+<br>
+Aggregator act as the dataset container throughout entire transaction. If you are going to do a transaction, you want some data to pass to the service. Those data is stored in the aggregator.  Check out the code example.
+
+By considering the following image you can get understand what kind of  relationship has between the aggregator and others class that you want to execute the transaction. 
+</p>
+ 
                     <ul>
                         <li>Fully success transaction</li>
                         <li>Rollback/Compensation/Revert success transaction</li>
                         <li>Rollback/Compensation/Revert failed transaction</li>
                     </ul>
+ 
 
                     <br>
                     <h5>01 : Fully success transaction</h5>
