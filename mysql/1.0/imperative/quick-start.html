@@ -308,90 +308,6 @@
                                 the dependencies which we used above.
                             </p>
 
-                            <!--                    <h5>Custom Table:</h5>-->
-                            <div class="table-responsive my-4">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Microservice Name</th>
-                                        <th scope="col">Transaction Mode</th>
-                                        <th scope="col">Transaction</th>
-                                        <th scope="col">Compensating Transaction</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <tr>
-                                        <td>01</td>
-                                        <th class="theme-bg-light">
-                                            User Service
-                                        </th>
-                                        <td>
-                                            <span class="badge bg-warning">Q</span>
-                                            QUERY
-                                        </td>
-                                        <td>CHECK_USER_IS_ACTIVE</td>
-                                        <td>-</td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>02</td>
-                                        <th class="theme-bg-light">
-                                            Order Service
-                                        </th>
-                                        <td>
-                                            <span class="badge bg-primary">C</span>
-                                            COMMAND
-                                        </td>
-                                        <td>CREATE_ORDER</td>
-                                        <td>CANCEL_ORDER</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>03</td>
-                                        <th class="theme-bg-light">
-                                            Payment Service
-                                        </th>
-                                        <td>
-                                            <span class="badge bg-primary">C</span>
-                                            COMMAND
-                                        </td>
-                                        <td>UPDATE_INVENTORY</td>
-                                        <td>REVERT_INVENTORY</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>04</td>
-                                        <th class="theme-bg-light">
-                                            Inventory Service
-                                        </th>
-                                        <td>
-                                            <span class="badge bg-primary">C</span>
-                                            COMMAND
-                                        </td>
-                                        <td>UPDATE_INVENTORY</td>
-                                        <td>REVERT_INVENTORY_UPDATE</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05</td>
-                                        <th class="theme-bg-light">
-                                            Delivery Service
-                                        </th>
-                                        <td>
-                                            <span class="badge bg-primary">C</span>
-                                            COMMAND
-                                        </td>
-                                        <td>DELIVER_ORDER</td>
-                                        <td>CANCEL_DELIVERY</td>
-                                    </tr>
-
-
-                                    </tbody>
-                                </table>
-                            </div><!--//table-responsive-->
 
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
@@ -422,10 +338,24 @@
                     <h4>Use-case</h4>
                     <img class="img-fluid" src="../../../assets/images/architecture/1.0/stack-saga-charts.svg" alt="">
                     <br>
-                    <br>
+                    <h4>Add your configuration in property file</h4>
+                    <script src="https://gist.github.com/mafei-dev/8be0669cda9f56af70f0fde7466fb5a4.js"></script>
+                    <p><a href="">read more</a> about properties</p>
+                    <h4>creating aggregate class</h4>
+                    <p>as the next step you have to crete an aggregate class regarding the transaction that you are
+                        going to do. according to the use-case the aggregate class name will be <code>PlaceOrderAggregate</code>
+                        we will be creating the PlaceOrderAggregate.class under the <code>com.mafei.aggregate</code>
+                        package. as a best practices make sure to create all the aggregate classes in side a one package
+                        called <code>aggregate</code>. and the PlaceOrderAggregate class should be extended from the
+                        <code><a
+                                href="#">SagaAggregate</a></code> class.
+                    </p>
+                    <script src="https://gist.github.com/mafei-dev/a69c37078e2d1aecb5a25c157eb9377a.js"></script>
 
 
-                    <h5>Callout Examples:</h5>
+                    <h4>creating a <code>Microservice</code> class for store all the service's names which we are going
+                        to access. the class will be created in <code>com.mafei.help</code>.
+                    </h4>
                     <div class="callout-block callout-block-info">
 
                         <div class="content">
@@ -435,672 +365,141 @@
 		                            </span><!--//icon-holder-->
                                 Note
                             </h4>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium <code>&lt;code&gt;</code>
-                                , Nemo enim ipsam voluptatem quia voluptas <a href="#">link example</a> sit aspernatur
-                                aut odit aut fugit.</p>
+                            <p>As a best practices, we create a <code>Microservice</code> interface. because, you have
+                                to
+                                access the same name of the microservice many times when you create more executors for
+                                another transaction as well. otherwise, you can just provide a <code>String</code> to
+                                the <code>executeFor</code> parameter.
+                            </p>
+                            <script src="https://gist.github.com/mafei-dev/2e6824b0fd5ba0e943d45153b33ce8d6.js"></script>
                         </div><!--//content-->
                     </div><!--//callout-block-->
 
-                    <div class="callout-block callout-block-warning">
-                        <div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-bullhorn"></i>
-		                            </span><!--//icon-holder-->
-                                Warning
-                            </h4>
-                            <p>Nunc hendrerit odio quis dignissim efficitur. Proin ut finibus libero. Morbi posuere
-                                fringilla felis eget sagittis. Fusce sem orci, cursus in tortor <a href="#">link
-                                    example</a> tellus vel diam viverra elementum.</p>
-                        </div><!--//content-->
-                    </div><!--//callout-block-->
 
-                    <div class="callout-block callout-block-success">
-                        <div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-thumbs-up"></i>
-		                            </span><!--//icon-holder-->
-                                Tip
-                            </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a href="#">Link example</a>
-                                aenean commodo ligula eget dolor.</p>
-                        </div><!--//content-->
-                    </div><!--//callout-block-->
-
-                    <div class="callout-block callout-block-danger me-1">
-                        <div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder">
-		                                <i class="fas fa-exclamation-triangle"></i>
-		                            </span><!--//icon-holder-->
-                                Danger
-                            </h4>
-                            <p>Morbi eget interdum sapien. Donec sed turpis sed nulla lacinia accumsan vitae ut tellus.
-                                Aenean vestibulum <a href="#">Link example</a> maximus ipsum vel dignissim. Morbi ornare
-                                elit sit amet massa feugiat, viverra dictum ipsum pellentesque. </p>
-                        </div><!--//content-->
-                    </div><!--//callout-block-->
-
-                    <h5 class="mt-5">Alert Examples:</h5>
-                    <div class="alert alert-primary" role="alert">
-                        This is a primary alert—check it out!
-                    </div>
-                    <div class="alert alert-secondary" role="alert">
-                        This is a secondary alert—check it out!
-                    </div>
-                    <div class="alert alert-success" role="alert">
-                        This is a success alert—check it out!
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                        This is a danger alert—check it out!
-                    </div>
-                    <div class="alert alert-warning" role="alert">
-                        This is a warning alert—check it out!
-                    </div>
-                    <div class="alert alert-info" role="alert">
-                        This is a info alert—check it out!
-                    </div>
-                    <div class="alert alert-light" role="alert">
-                        This is a light alert—check it out!
-                    </div>
-                    <div class="alert alert-dark" role="alert">
-                        This is a dark alert—check it out!
-                    </div>
-
-
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-1-2">
-                    <h2 class="section-heading">Section Item 1.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                    <h5 class="mt-5">Lightbox Example:</h5>
-
-                    <p>The example below uses the <i class="fas fa-external-link-alt"></i> <a class="theme-link"
-                                                                                              href="https://github.com/andreknieriem/simplelightbox"
-                                                                                              target="_blank">simplelightbox
-                        plugin</a>. </p>
-
-                    <div class="simplelightbox-gallery row mb-3">
-                        <div class="col-12 col-md-4 mb-3">
-                            <a href="../../../assets/images/coderpro-home.png"><img
-                                    class="figure-img img-fluid shadow rounded"
-                                    src="../../../assets/images/coderpro-home-thumb.png"
-                                    alt="" title="CoderPro Home Page"/></a>
-                        </div>
-                        <div class="col-12 col-md-4 mb-3">
-                            <a href="../../../assets/images/coderpro-features.png"><img
-                                    class="figure-img img-fluid shadow rounded"
-                                    src="../../../assets/images/coderpro-features-thumb.png" alt=""
-                                    title="CoderPro Features Page"/></a>
-                        </div><!--//col-->
-                        <div class="col-12 col-md-4 mb-3">
-                            <a href="../../../assets/images/coderpro-pricing.png"><img
-                                    class="figure-img img-fluid shadow rounded"
-                                    src="../../../assets/images/coderpro-pricing-thumb.png" alt=""
-                                    title="CoderPro Pricing Page"/></a>
-                        </div><!--//col-->
-
-                    </div><!--//gallery-->
-
-                    <h5>Custom Table:</h5>
+                    <h4>creating the executor classes</h4>
+                    <p>according to the use-case we have to create 4 executors to call the microservices. there are 3
+                        <a href="">command executors</a> and 1 <a href="">query executor</a> here. as a best practices
+                        the executors will be created in the <code>com.mafei.executor</code> package.</p>
+                    <!--                    <h5>Custom Table:</h5>-->
                     <div class="table-responsive my-4">
                         <table class="table table-bordered">
-                            <tbody>
-                            <tr>
-                                <th class="theme-bg-light"><a class="theme-link" href="#">Option 1</a></th>
-                                <td>Option 1 desc lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            </tr>
-                            <tr>
-                                <th class="theme-bg-light"><a class="theme-link" href="#">Option 2</a></th>
-                                <td>Option 2 desc lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            </tr>
-
-                            <tr>
-                                <th class="theme-bg-light"><a class="theme-link" href="#">Option 3</a></th>
-                                <td>Option 3 desc lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            </tr>
-
-                            <tr>
-                                <th class="theme-bg-light"><a class="theme-link" href="#">Option 4</a></th>
-                                <td>Option 4 desc lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div><!--//table-responsive-->
-                    <h5>Stripped Table:</h5>
-                    <div class="table-responsive my-4">
-                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Microservice Name</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Transaction Mode</th>
+                                <th scope="col">Transaction</th>
+                                <th scope="col">Compensating Transaction</th>
                             </tr>
                             </thead>
                             <tbody>
+
+
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>01</td>
+                                <td>
+                                    Order service
+                                </td>
+                                <td>
+                                    CreateOrder.class
+                                </td>
+
+                                <td>
+                                    <span class="badge bg-primary">C</span>
+                                    COMMAND
+                                </td>
+                                <td>CREATE_ORDER</td>
+                                <td>CANCEL_ORDER</td>
+                            </tr>
+
+
+                            <tr>
+                                <td>02</td>
+                                <td>
+                                    User Service
+                                </td>
+                                <td>
+                                    CheckUserStatus.class
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning">Q</span>
+                                    QUERY
+                                </td>
+                                <td>CHECK_USER_IS_ACTIVE</td>
+                                <td>-</td>
                             </tr>
                             <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                                <td>03</td>
+                                <td>
+                                    Stock Service
+                                </td>
+                                <td>
+                                    StockUpdate.class
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">C</span>
+                                    COMMAND
+                                </td>
+                                <td>UPDATE_INVENTORY</td>
+                                <td>REVERT_INVENTORY_UPDATE</td>
                             </tr>
                             <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                                <td>04</td>
+                                <td>
+                                    Payment Service
+
+                                </td>
+                                <td>
+                                    MakePayment.class
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">C</span>
+                                    COMMAND
+                                </td>
+                                <td>UPDATE_INVENTORY</td>
+                                <td>REVERT_INVENTORY</td>
                             </tr>
+
+
                             </tbody>
                         </table>
                     </div><!--//table-responsive-->
-                    <h5>Bordered Dark Table:</h5>
-                    <div class="table-responsive my-4">
-                        <table class="table table-bordered table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div><!--//table-responsive-->
+                    <h5>Creating CreateOrder class</h5>
+                    <p>have a look the table, you can see it is a <a href="#">command executor</a>. so you have to
+                        create that class
+                        as a command executor. to be a command executor, the executor class should be implemented
+                        from the <code>CommandExecutor&lt;YourAggregate&gt;
+                        </code> with passing the aggregate class that we created earlier. and finally you have to
+                        annotate the class as an executor by annotating <a href="#">executor annotation</a> which
+                        provides from
+                        stackSAGA <code>@Executor(executeFor =
+                            Microservice.ORDER_SERVICE)</code>.
+                    </p>
+                    <script src="https://gist.github.com/mafei-dev/5581bb0135efdae5a95fe3d1e5447e21.js"></script>
+                    <h5>Creating CheckUserStatus class</h5>
+                    <p>have a look the table, you can see it is a <a href="#">query executor</a>. so you have to
+                        create that class
+                        as a query executor. to be a query executor, the executor class should be implemented
+                        from the <code>CommandExecutor&lt;YourAggregate&gt;
+                        </code> with passing the aggregate class that we created earlier. and finally you have to
+                        annotate the class as an executor by annotating <a href="#">executor annotation</a> which
+                        provides from
+                        stackSAGA <code>@Executor(executeFor =
+                            Microservice.USER_SERVICE)</code>.
+                    </p>
 
 
-                </section><!--//section-->
+                    <script src="https://gist.github.com/mafei-dev/407e14a1a26c6a10e2370afbae5afc32.js"></script>
+                    same as the before create other executors one by one. here is the code.
+                    <h5>Creating StockUpdate class</h5>
+                    <script src="https://gist.github.com/mafei-dev/64929c2af8fb3c3b7120a276dead3f66.js"></script>
+                    <h5>Creating StockUpdate class</h5>
+                    <script src="https://gist.github.com/mafei-dev/365389be71308d684b5504604a75ee88.js"></script>
 
-                <section class="docs-section" id="item-1-3">
-                    <h2 class="section-heading">Section Item 1.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                    <h5>Badges Examples:</h5>
-                    <div class="my-4">
-                        <span class="badge badge-primary">Primary</span>
-                        <span class="badge badge-secondary">Secondary</span>
-                        <span class="badge badge-success">Success</span>
-                        <span class="badge badge-danger">Danger</span>
-                        <span class="badge badge-warning">Warning</span>
-                        <span class="badge badge-info">Info</span>
-                        <span class="badge badge-light">Light</span>
-                        <span class="badge badge-dark">Dark</span>
-                    </div>
-                    <h5>Button Examples:</h5>
-                    <div class="row my-3">
-                        <div class="col-md-6 col-12">
-                            <ul class="list list-unstyled pl-0">
-                                <li><a href="#" class="btn btn-primary">Primary Button</a></li>
-                                <li><a href="#" class="btn btn-secondary">Secondary Button</a></li>
-                                <li><a href="#" class="btn btn-light">Light Button</a></li>
-                                <li><a href="#" class="btn btn-success">Succcess Button</a></li>
-                                <li><a href="#" class="btn btn-info">Info Button</a></li>
-                                <li><a href="#" class="btn btn-warning">Warning Button</a></li>
-                                <li><a href="#" class="btn btn-danger">Danger Button</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <ul class="list list-unstyled pl-0">
-                                <li><a href="#" class="btn btn-primary"><i class="fas fa-download me-2"></i> Download
-                                    Now</a></li>
-                                <li><a href="#" class="btn btn-secondary"><i class="fas fa-book me-2"></i> View Docs</a>
-                                </li>
-                                <li><a href="#" class="btn btn-light"><i class="fas fa-arrow-alt-circle-right me-2"></i>
-                                    View Features</a></li>
-                                <li><a href="#" class="btn btn-success"><i class="fas fa-code-branch me-2"></i> Fork Now</a>
-                                </li>
-                                <li><a href="#" class="btn btn-info"><i class="fas fa-play-circle me-2"></i> Find Out
-                                    Now</a></li>
-                                <li><a href="#" class="btn btn-warning"><i class="fas fa-bug me-2"></i> Report Bugs</a>
-                                </li>
-                                <li><a href="#" class="btn btn-danger"><i class="fas fa-exclamation-circle me-2"></i>
-                                    Submit Issues</a></li>
-                            </ul>
-                        </div>
-                    </div><!--//row-->
-
-                    <h5>Progress Examples:</h5>
-                    <div class="my-4">
-                        <div class="progress my-4">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
-                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="progress my-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                 aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="progress my-4">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
-                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="progress my-4">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
-                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-1-4">
-                    <h2 class="section-heading">Section Item 1.4</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-
-
-                    <h5>Pagination Example:</h5>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pl-0">
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-
-                </section><!--//section-->
-                <section class="docs-section" id="item-1-5">
-                    <h2 class="section-heading">Section Item 1.5</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-                <section class="docs-section" id="item-1-6">
-                    <h2 class="section-heading">Section Item 1.6</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
                 </section><!--//section-->
 
             </article>
-
-            <article class="docs-article" id="section-2">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Installation</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-2-1">
-                    <h2 class="section-heading">Section Item 2.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-2-2">
-                    <h2 class="section-heading">Section Item 2.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-2-3">
-                    <h2 class="section-heading">Section Item 2.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-
-            <article class="docs-article" id="section-3">
-                <header class="docs-header">
-                    <h1 class="docs-heading">APIs</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-3-1">
-                    <h2 class="section-heading">Section Item 3.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-3-2">
-                    <h2 class="section-heading">Section Item 3.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-3-3">
-                    <h2 class="section-heading">Section Item 3.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-            <article class="docs-article" id="section-4">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Intergrations</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-4-1">
-                    <h2 class="section-heading">Section Item 4.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-4-2">
-                    <h2 class="section-heading">Section Item 4.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-4-3">
-                    <h2 class="section-heading">Section Item 4.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-            <article class="docs-article" id="section-5">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Utilities</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-5-1">
-                    <h2 class="section-heading">Section Item 5.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-5-2">
-                    <h2 class="section-heading">Section Item 5.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-5-3">
-                    <h2 class="section-heading">Section Item 5.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-
-            <article class="docs-article" id="section-6">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Web</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-6-1">
-                    <h2 class="section-heading">Section Item 6.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-6-2">
-                    <h2 class="section-heading">Section Item 6.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-6-3">
-                    <h2 class="section-heading">Section Item 6.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-
-            <article class="docs-article" id="section-7">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Mobile</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-7-1">
-                    <h2 class="section-heading">Section Item 7.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-7-2">
-                    <h2 class="section-heading">Section Item 7.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-7-3">
-                    <h2 class="section-heading">Section Item 7.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-
-            <article class="docs-article" id="section-8">
-                <header class="docs-header">
-                    <h1 class="docs-heading">Resources</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-8-1">
-                    <h2 class="section-heading">Section Item 8.1</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-8-2">
-                    <h2 class="section-heading">Section Item 8.2</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-8-3">
-                    <h2 class="section-heading">Section Item 8.3</h2>
-                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis
-                        leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis
-                        bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis
-                        ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet,
-                        commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
-
-
-            <article class="docs-article" id="section-9">
-                <header class="docs-header">
-                    <h1 class="docs-heading">FAQs</h1>
-                    <section class="docs-intro">
-                        <p>Section intro goes here. You can list all your FAQs using the format below.</p>
-                    </section><!--//docs-intro-->
-                </header>
-                <section class="docs-section" id="item-9-1">
-                    <h2 class="section-heading">Section Item 9.1 <small>(FAQ Category One)</small></h2>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?
-                    </h5>
-                    <p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-                        quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam,
-                        scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
-                    <p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id,
-                        metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-                    <p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam
-                        mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo.
-                        Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis.
-                        Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-9-2">
-                    <h2 class="section-heading">Section Item 9.2 <small>(FAQ Category Two)</small></h2>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?
-                    </h5>
-                    <p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-                        quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam,
-                        scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
-                    <p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id,
-                        metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-                    <p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam
-                        mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo.
-                        Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis.
-                        Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-                </section><!--//section-->
-
-                <section class="docs-section" id="item-9-3">
-                    <h2 class="section-heading">Section Item 9.3 <small>(FAQ Category Three)</small></h2>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to dapibus sollicitudin justo vel
-                        fermentum?</h5>
-                    <p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-                        quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam,
-                        scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How long bibendum sodales?</h5>
-                    <p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id,
-                        metus. Nullam accumsan lorem in dui. </p>
-                    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where dapibus sollicitudin?</h5>
-                    <p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam
-                        mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo.
-                        Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis.
-                        Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-                </section><!--//section-->
-            </article><!--//docs-article-->
 
             <footer class="footer">
                 <div class="container text-center py-5">
