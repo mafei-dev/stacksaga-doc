@@ -490,7 +490,53 @@
                     <script src="https://gist.github.com/mafei-dev/64929c2af8fb3c3b7120a276dead3f66.js"></script>
                     <h5>Creating StockUpdate class</h5>
                     <script src="https://gist.github.com/mafei-dev/365389be71308d684b5504604a75ee88.js"></script>
+                    <br>
 
+                    <h4>run the project</h4>
+                    <p>you can run the project and see a log what are the configured executors and other staffs
+                        regarding the stackSAGA framework like this.</p>
+                    <!--<img class="img-fluid" src="../../../assets/images/architecture/1.0/log-after-executors.jpeg"
+                         alt="stack saga log after executors">-->
+                    <pre style="color: #28b76b; background-color: #f4fcf6;">
+
+ _____  _                 _     _____   ___   _____   ___
+/  ___|| |               | |   /  ___| / _ \ |  __ \ / _ \
+\ `--. | |_   __ _   ___ | | __\ `--. / /_\ \| |  \// /_\ \
+ `--. \| __| / _` | / __|| |/ / `--. \|  _  || | __ |  _  |
+/\__/ /| |_ | (_| || (__ |   < /\__/ /| | | || |_\ \| | | |
+\____/  \__| \__,_| \___||_|\_\\____/ \_| |_/ \____/\_| |_/ by Mafei
+Version - 1.0.0
+
+┌───────────────────────────────────────────────┐
+│Collected MicroServices Summary.               │
+├───────────────┬───────────────────────────────┤
+│               │CircuitBreakerMeta             │
+├───────────────┼────────────┬──────────────────┤
+│MicroService   │HalfOpenRate│MaxAttempts       │
+├───────────────┼────────────┼──────────────────┤
+│ORDER_SERVICE  │10          │10                │
+├───────────────┼────────────┼──────────────────┤
+│PAYMENT_SERVICE│10          │10                │
+├───────────────┼────────────┼──────────────────┤
+│STOCK_SERVICE  │10          │10                │
+├───────────────┼────────────┼──────────────────┤
+│USER_SERVICE   │10          │10                │
+└───────────────┴────────────┴──────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│StackSAGA Configured Executors Summery.                                   │
+├───────────────────────────────────────────┬─────────┬─────────┬──────────┤
+│Process Aggregators - [1]                  │Executors│Command  │Query     │
+│                                           │         │Executor │Executor  │
+│                                           │         │Listeners│Listeners │
+├───────────────────────────────────────────┼─────────┼─────────┼──────────┤
+│[1]-com.mafei.aggregate.PlaceOrderAggregate│4        │0        │0         │
+└───────────────────────────────────────────┴─────────┴─────────┴──────────┘
+                    </pre>
+                    <h3>create the PlaceOrderDTO</h3>
+                    <script src="https://gist.github.com/mafei-dev/ee412a8550d22e670f824ea96bc3345c.js"></script>
+                    <h3>create the controller class (create the endpoint <code>/place-order</code>)</h3>
+                    <script src="https://gist.github.com/mafei-dev/903a46b0837277206ba38f445ef202e2.js"></script>
                 </section><!--//section-->
 
             </article>
