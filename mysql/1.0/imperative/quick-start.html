@@ -174,16 +174,23 @@
                     </nav>
                     <h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2019-06-01</span></h1>
                     <section class="docs-intro">
-                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                            finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec
-                            eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae
-                            dapibus nibh facilisis a. Fusce in malesuada odio.</p>
+                        <p>
+                            Here we are going to implement a complete microservices project by using spring boot with
+                            stacksaga framework step by step.
+                            by following this example you will be able to have a good idea of how the microservice
+                            architecture flows,
+                            and how StackSaga framework gives the support for solving the architecture's challenges.
+                        </p>
+
+                        <a href="https://github.com/stacksaga/stacksaga-implementation-example/tree/without-StackSaga"
+                           target="_blank">
+                            Full source code on Github
+                        </a>
+                        <br>
+                        <br>
                     </section><!--//docs-intro-->
                     <h2 class="section-heading">Requirements</h2>
-                    <p>
-
-                    </p>
-                    <!--                    <h5>Custom Table:</h5>-->
+                    <p>The following requirements are required</p>
                     <div class="table-responsive my-4">
                         <table class="table table-bordered">
                             <tbody>
@@ -197,14 +204,14 @@
                                 <th class="theme-bg-light"><a class="theme-link" target="_blank"
                                                               href="https://dev.mysql.com/doc/">MYSQL</a>
                                 </th>
-                                <td>5.7 server (min) and related java library</td>
+                                <td>5.7 server (min)</td>
                             </tr>
 
                             <tr>
                                 <th class="theme-bg-light"><a class="theme-link" target="_blank"
                                                               href="https://redis.io/download">Redis</a>
                                 </th>
-                                <td>5.0 server (min) and related java library</td>
+                                <td>5.0 server (min)</td>
                             </tr>
 
 
@@ -213,7 +220,729 @@
                     </div><!--//table-responsive-->
 
 
+                    <h2 class="section-heading">Overview</h2>
+                    <p>The following projects are built in this example.</p>
+                    <div class="table-responsive my-4">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    api-gateway
+                                </a>
+                                </th>
+                                <td>To routing the requests and as a basic load balancing</td>
+                            </tr>
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    eureka-service (eureka-server)
+                                </a>
+                                </th>
+                                <td>As the service registry</td>
+                            </tr>
+
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    order-service
+                                </a>
+                                </th>
+                                <td>This is the main service which responsible for managing and maintain the orders
+                                    related data and operations.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    user-service
+                                </a>
+                                </th>
+                                <td>This is the main service which responsible for managing and maintain the user
+                                    related data and operations.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    payment-service
+                                </a>
+                                </th>
+                                <td>This is the main service which responsible for managing and maintain the payment
+                                    related data and operations.
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th class="theme-bg-light"><a class="theme-link" target="_blank"
+                                                              href="https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html">
+                                    delivery-service
+                                </a>
+                                </th>
+                                <td>This is the main service which responsible for managing and maintain the delivery
+                                    related data and operations.
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div><!--//table-responsive-->
+                    <p>
+                        Here is the interaction diagram between above listed services. (before adding the stack saga
+                        framework)
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-high-level-architecture.drawio.svg"
+                         alt="stacksaga e-store example high level diagram (before adding the stacksaga framework)"/>
+                    <p>
+                        Here is the flow diagram how the place-order request gets complete.
+                        (before adding the stack saga
+                        framework)
+                    </p>
+
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-place-order-basic-steps.drawio.svg"
+                         alt="stacksaga e-store example functional high level diagram (before adding the stacksaga framework)"/>
+
+
+                    <p>
+                        The customer place an order and the place-order request coming into the backend side and how the
+                        request goes through each service.
+                    </p>
+                    <ol>
+                        <li>
+                            <b>create-order</b>
+                            <p>
+                                the order service will create the order as the first step.
+                            </p>
+                        </li>
+                        <li>
+                            <b>check-user</b>
+                            <p>
+                                After creating the order, to be executed other process, the user status is checked by
+                                using the user service.
+                            </p>
+                        </li>
+
+                        <li>
+                            <b>make-payment</b>
+                            <p>
+                                After checking the user status, if the user is eligible to place the order,the payment
+                                will be proceeded.</p>
+                        </li>
+
+                        <li>
+                            <b>increase-point</b>
+                            <p>
+                                just imagine, the store has a feature to collect points when the customer buy upon the
+                                total bill amount. after making the payment, the customer will be qualified to get
+                                increased their points.
+                                as the example, the point are managed by the user-service as well.
+                            </p>
+                        </li>
+
+                        <li>
+                            <b>increase-point</b>
+                            <p>
+                                after increasing the point the order is get readied to be delivered.
+                                the delivery-service will keep the delivery data finally.
+                            </p>
+                        </li>
+
+                        <li>
+                            <b>update-order-status</b>
+                            <p>
+                                after processing all the process, this is the time to update the order status as the
+                                order has been successfully placed.
+                            </p>
+                        </li>
+
+                    </ol>
+
+
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-full-diagram.drawio.svg"
+                         alt="stacksaga e-store example functional full diagram (before adding the stacksaga framework)"/>
+
+
                 </header>
+
+                <section class="docs-section" id="item-1-0">
+                    <div class="callout-block callout-block-info">
+
+                        <div class="content">
+                            <h4 class="callout-title">
+                                                    <span class="callout-icon-holder me-1">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </span>
+                                Note
+                            </h4>
+                            <p>
+                                This is the typical example that you can see when you are moving to microservice
+                                architecture.
+                                as the initial, let's build the typical example and after that we will be adding more
+                                advanced topic and concept into this small example. it will be convenient adn
+                                appropriate for you if you are new to the microservices.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="docs-section" id="item-1-1">
+                    <h2 class="section-heading">Implementation</h2>
+                    <p>
+                        according to the use-case the 1st step is creating the Eureka service (service registry
+                        service).
+                        so you might have a question, why the eureka service is the 1st implementation ?
+                        The simple answer is that all others listed services are connected with the registry server.
+                        without having the registry server, other services can't talk to each other even the API gateway
+                        service. so you can mainly identify 2 types of server components are here.
+                    </p>
+
+                    <b>you can see here the classification of the components in microservice architecture by service or
+                        non-service</b>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-classification-of-microservice-s-components.drawio.svg"
+                         alt="stacksaga e-store example classification of microservice's components"/>
+
+
+                </section>
+
+                <section class="docs-section" id="item-1-2">
+                    <h3 class="section-heading">Creating eureka service.</h3>
+                    <p>
+                        Visit to the spring initializer and create the project by adding the following dependencies.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-eureka-server-creating.jpeg"
+                         alt="stacksaga e-store example creating eureka server"/>
+                    <p>
+                        for creating the eureka-service,
+                        <a target="_blank"
+                           href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started.first-application.pom">spring-boot-starter-web
+                        </a>dependency, <a
+                            target="_blank"
+                            href="https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/">spring-cloud-starter-netflix-eureka-server</a>
+                        dependency and
+                        <a target="_blank"
+                           href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/">spring-boot-starter-actuator</a>
+                        dependency have been used.
+                        <br>
+                        spring-boot-starter-web dependency will take care of the endpoints and
+                        spring-cloud-starter-netflix-eureka-server provides the
+                        service registry capabilities and spring-boot-starter-actuator provides metrics endpoint to
+                        monitoring
+                        the application.
+                    </p>
+                    <p>
+                        unzip and open the project with your favourite IDE. and next annotate the main class of the
+                        project by <code>@EnableEurekaServer</code>. it will enable the service registry capabilities
+                        for your application.
+                    </p>
+
+                    <script src="https://gist.github.com/mafei-dev/3767cdc2efdbd08ba9c3f76e25ca59ee.js"></script>
+                    <p>
+                        now we move to the configuration part of the eureka-service. the required configurations are
+                        configured here, and we use <code>.yml</code> file format instead of <code>.properties</code>
+                        format. by default your project has <code>.properties</code> file. if you prefer to use <code>.properties</code>,
+                        it doesn't matter.
+                        if you want to more configurations, please be kind to refer the official reference document <a
+                            href="https://cloud.spring.io/spring-cloud-netflix/reference/html/appendix.html">here</a>.
+                        <br>
+                        <br>
+                        <b>eureka-service > src/main/resources/application.yaml</b>
+                    </p>
+                    <script src="https://gist.github.com/mafei-dev/717b4c17e1296785e1ed0dc3066ac660.js"></script>
+
+                    Now you have successfully created and configured your eureka-service application, and it is ready to
+                    run.
+                    <br>
+                    <br>
+                    <b>after all, the folder structure of the eureka-server application's src directory will be like
+                        this.</b>
+                    <pre>
+├───main
+│   ├───java
+│   │   └───org
+│   │       └───mono
+│   │           └───stacksaga
+│   │               └───example
+│   │                   └───eurekaservice
+│   │                           EurekaServiceApplication.java
+│   │
+│   └───resources
+│       │   application.yaml
+│       │
+│       ├───static
+│       └───templates
+└───test
+    └───java
+        └───org
+            └───mono
+                └───stacksaga
+                    └───example
+                        └───eurekaservice
+
+                    </pre>
+                </section>
+
+
+                <section class="docs-section" id="item-1-4">
+                    <h3 class="section-heading">Creating order-service.</h3>
+                    <p>
+                        In the user-service we have to use additional dependencies than the eureka service. because in
+                        the user-service we want to access the database as well. therefore, we use spring boot jpa with
+                        mysql dependencies.
+                    </p>
+                    <ol>
+                        <li>
+                            spring-boot-starter-actuator
+                        </li>
+                        <li>spring-boot-starter-web</li>
+                        <li>spring-cloud-starter-netflix-eureka-client</li>
+                        <li>spring-boot-devtools</li>
+                        <li>lombok</li>
+                        <li>
+                            spring-cloud-starter-openfeign: The rest client for http
+                        </li>
+                    </ol>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-order-service-creating.jpeg"
+                         alt="stacksaga e-store example creating order-service"/>
+
+                    <p>
+                        Same as th before, open the project with your favourite IDE. the order service is the service
+                        that is the starting point of the place order process.
+                    </p>
+                    <p>
+                        <b>let's implement step by step.</b>
+                    </p>
+
+                    <h5>Configure the configuration</h5>
+                    <small>
+                        <b>order-service > src/main/resources/application.yml</b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/4016ecae747937d2709564f2915529bb.js"></script>
+                    <h5>Annotate the server as a eureka-client and enable feign-client</h5>
+                    <script src="https://gist.github.com/mafei-dev/e41470f9dfa2baf3aa84234c7b9d7c67.js"></script>
+
+                    <h5>Database for order-service</h5>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/order-service-database.png"
+                         alt="stacksaga e-store example database order-service"/>
+
+                    <br>
+                    <br>
+                    <h5>Creating the entity classes according the order-service-db tables</h5>
+
+                    <h6>Order.class (for ss_order table)</h6>
+                    <small>
+                        <b>order-service > src/main/java/org/mono/stacksaga/example/orderservice/entity/Order.java</b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/dd93b4ba62cb1e82ea17887664677c82.js"></script>
+                    <br>
+                    <br>
+                    <h6>CustomerOrder.class (for ss_customer_order table)</h6>
+                    <small>
+
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/entity/CustomerOrder.java</b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/e3e6514a52f6440f523fdabe202412dd.js"></script>
+                    <br>
+                    <br>
+                    <h6>OrderStatusHistory.class (for ss_order_status_history table)</h6>
+                    <small>
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/entity/OrderStatusHistory.java</b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/196ba1defa8c00bf114f302019013981.js"></script>
+
+                    <br>
+                    <br>
+                    <h5>Creating repositories for each entity classes</h5>
+                    <h6>OrderRepository.class</h6>
+                    <small>
+
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/repository/OrderRepository.java</b>
+
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/157f84e25b30ddd2e0cb211c6fdae6fe.js"></script>
+                    <br>
+                    <br>
+                    <h6>CustomerOrderRepository.class</h6>
+                    <small>
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/repository/CustomerOrderRepository.java</b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/e5721e95fcf63ed81ee2672d3a68cac6.js"></script>
+                    <br>
+                    <br>
+                    <h6>OrderStatusHistoryRepository.class</h6>
+                    <small>
+                        <b>
+                            order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/repository/OrderStatusHistoryRepository.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/0355f9fbbe9d8e2c074e9abf25b5faff.js"></script>
+                    <br>
+                    <br>
+                    <h5>creating the services for execute the business logics</h5>
+                    <p>
+                        You know already about the design pattern we normally use in spring boot project. it is <code>controller
+                        > service > repository</code> but here we have divided the service layer into two parts called
+                        <b>internal-services</b> and <b>external-services</b> upon the usage (accessing) of resources
+                        for operations.
+                    </p>
+
+                    <ol>
+                        <li><b>Internal-services</b> - all services which access local repositories or local supportive
+                            services for their operations
+                        </li>
+
+                        <li><b>External-services</b> - all services which access external endpoints or external services
+                            for their operations
+                        </li>
+
+                    </ol>
+                    <br>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-orchestration-service-types.drawio.svg"
+                         alt="stacksaga e-store example database order-service"/>
+
+                    <br>
+                    <h6>InternalCustomerOrderService.class</h6>
+                    <p>Due to the accessing their own repositories to process the operations the CustomerOrderService
+                        is an internal service. For convenience, we use a prefix for the class name as
+                        Internal.</p>
+                    <p>CustomerOrderService has two methods for creating the order and update the order after creating
+                        the order. in the next step the service class will be accessed by the controller class to place
+                        the order.</p>
+                    <small>
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/service/internal/InternalCustomerOrderService.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/d060ced38460bf1f760b26e9d8fca005.js"></script>
+
+                    <br>
+                    <br>
+                    <p>now we have completed 1st step and 5th step of the place order process. those processes are
+                        processed by using internal resources. The current status of the flow like below. </p>
+
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-steps-1.drawio.svg"
+                         alt="stacksaga e-store example after creating 1step"/>
+
+                    <br>
+                    <br>
+                    <p>next we are going to implement the step of the flow called <b>check-user</b>. the check user
+                        process is proceed from the user-service (external). but the user-service hasn't been
+                        implemented yet.
+                        even though, we are going to implement the rest-client part of accessing user-service, inside
+                        the order-service by imagining the rest-endpoint already implemented. (in the few next steps,
+                        the user-service is created)
+                    </p>
+                    <br>
+                    <br>
+                    <h5>creating user service access class</h5>
+                    <p>before creating the user service we have to create the response body DTO. </p>
+                    <h6>UserIsActiveResponseBody.class</h6>
+                    <script src="https://gist.github.com/mafei-dev/bd4e80553a99b5db292ab3c6b9f80f02.js"></script>
+                    <p>next we are going to create the external user service by using the dto that we created above.</p>
+                    <h6>ExternalUserService.class</h6>
+                    <p>due to the accessing the data from external service, the ExternalUserService is created at the
+                        external-service package.
+                        The ExternalUserService is a feign-client bean. the bean will make a request to the user-service
+                        by the URL that we provided and pass the response as the return when we call the method.
+                        if you are not familiar with feign-client, <a target="_blank"
+                                                                      href="https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/">please
+                            refer this</a>. or alternatively you can use spring <a target="_blank"
+                                                                                   href="https://docs.spring.io/spring-android/docs/current/reference/html/rest-template.html">rest-template</a>
+                        as well.
+                    </p>
+
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/service/external/ExternalUserService.java
+                        </b>
+                    </small>
+
+                    <script src="https://gist.github.com/mafei-dev/d0e83958fa6cd12142f5efe71cd6b023.js"></script>
+
+                    <p>now we have completed 1st, 2nd step and 6th step of the place order process.</p>
+
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-step-2.drawio.svg"
+                         alt="stacksaga e-store example after creating 2step"/>
+
+
+                    <br>
+                    <br>
+                    <h5>Creating payment service access class</h5>
+                    <p>before creating the user service we have to create the response body and request body DTOs to
+                        communicate with the user microservice using http protocol.</p>
+                    <h6>MakePaymentRequestBody.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/dto/MakePaymentRequestBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/41c2d4cd4fedae6da11da3fac34aa625.js"></script>
+                    <br>
+                    <br>
+                    <h6>MakePaymentResponseBody.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/dto/MakePaymentResponseBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/cffe7e57eb643b7f490253d5ef7d12f6.js"></script>
+                    <br>
+                    <p>next we are going to create the external user service by using the DTOs that we created
+                        above.</p>
+                    <br>
+
+                    <h6>ExternalPaymentService.class</h6>
+                    <p>Next we are going to implement the step of the flow called <b>make_payment</b>. the make payment
+                        process is proceed from the payment-service (external). but the payment-service hasn't been
+                        implemented yet.
+                        even though, we are going to implement the rest-client part of accessing payment-service, inside
+                        the order-service by imagining the rest-endpoint already implemented. (in the few next steps,
+                        the payment-service is created)
+                    </p>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/service/external/ExternalPaymentService.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/324f74e22e6cac563dd81d4c9417b42a.js"></script>
+                    <p>now we have completed 1st, 2nd , 3rd and 6th steps of the place order process.</p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-step-3.drawio.svg"
+                         alt="stacksaga e-store example after creating 3step"/>
+                    <br>
+                    <br>
+                    <h5>Creating user point service access class</h5>
+
+
+                    <h6>ExternalUserPointsService.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/service/external/ExternalUserPointsService.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/6859a939e402aa728b0a813bcd30acbb.js"></script>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-step-4.drawio.svg"
+                         alt="stacksaga e-store example after creating 4step"/>
+                    <br>
+                    <br>
+                    <h5>Creating delivery service access class</h5>
+                    <p>before creating the user service we have to create the response body and request body DTOs to
+                        communicate with the user microservice using http protocol.</p>
+
+                    <h6>AddToDeliverRequestBody.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/dto/AddToDeliverRequestBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/744507dcf8ab2159e8923532922bf4e2.js"></script>
+                    <br>
+                    <br>
+                    <h6>AddToDeliverResponseBody.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/dto/AddToDeliverResponseBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/887c1e874f673df6e00c6f0faf21a856.js"></script>
+                    <br>
+                    <br>
+                    <h6>ExternalDeliveryService.class</h6>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/service/external/ExternalDeliveryService.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/a1be69e993ea333182949e4a693f5637.js"></script>
+                    <br>
+                    <br>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-step-5.drawio.svg"
+                         alt="stacksaga e-store example after creating 5step"/>
+                    <p>now we have successfully created all external and internal access service classes. now we are
+                        going too to use those services to place the order process and create the endpoint in the
+                        order-service.</p>
+                    <br>
+                    <br>
+                    <h5>Creating the controller and endpoint</h5>
+                    <p>
+                        This is the time to create the endpoint (controller) for place order. but before creating the
+                        controller, we have to create the DTOs fore place order response and place order request.
+                    </p>
+
+
+                    <br>
+                    <br>
+
+                    <h6>PlaceOrderRequestBody.class</h6>
+                    <p>The data transfer object for place order request. (RequestBody)</p>
+                    <small>
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/dto/PlaceOrderRequestBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/75600ced8a337751d7340217dc3d2f63.js"></script>
+
+                    <br>
+                    <br>
+                    <h6>PlaceOrderResponseBody.class</h6>
+                    <p>The data transfer object for place order response. (ResponseBody)</p>
+                    <small>
+                        <b>order-service >
+                            src/main/java/org/mono/stacksaga/example/orderservice/dto/PlaceOrderResponseBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/f1b816c4b525cf20505513dd7d40324a.js"></script>
+
+                    <br>
+                    <br>
+                    <h6>OrderController.class</h6>
+                    <p>by using the response body and request body object classes, the controller class will be created
+                        like below.</p>
+                    <small>
+                        <b>order-service >
+                            org/mono/stacksaga/example/orderservice/controller/OrderController.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/6a3284a719a2742dee390fedac44f962.js"></script>
+
+
+                    <br>
+                    <p>here, we have implemented all process that we want to process the place-order inside
+                        order-service.
+                        now you can run
+                        the project. but you can't call the endpoint <code>localhost:8080/order-service/place</code>
+                        cause the other microservices haven't been implemented yet. in the next few steps, we are going
+                        to implement all other microservices.</p>
+                    <br>
+                    <br>
+                    <h4>So far, The order-service's project file structure will be like below</h4>
+                    <pre>
+└───main
+    ├───java
+    │   └───org
+    │       └───mono
+    │           └───stacksaga
+    │               └───example
+    │                   └───orderservice
+    │                       │   OrderServiceApplication.java
+    │                       │
+    │                       ├───controller
+    │                       │       OrderController.java
+    │                       │
+    │                       ├───dto
+    │                       │       AddToDeliverRequestBody.java
+    │                       │       AddToDeliverResponseBody.java
+    │                       │       MakePaymentRequestBody.java
+    │                       │       MakePaymentResponseBody.java
+    │                       │       PlaceOrderFailedResponseBody.java
+    │                       │       PlaceOrderRequestBody.java
+    │                       │       PlaceOrderSuccessResponseBody.java
+    │                       │       UserIsActiveResponseBody.java
+    │                       │
+    │                       ├───entity
+    │                       │       CustomerOrder.java
+    │                       │       Order.java
+    │                       │       OrderStatusHistory.java
+    │                       │
+    │                       ├───repository
+    │                       │       CustomerOrderRepository.java
+    │                       │       OrderRepository.java
+    │                       │       OrderStatusHistoryRepository.java
+    │                       │
+    │                       └───service
+    │                           ├───external
+    │                           │       ExternalDeliveryService.java
+    │                           │       ExternalPaymentService.java
+    │                           │       ExternalUserPointsService.java
+    │                           │       ExternalUserService.java
+    │                           │
+    │                           └───internal
+    │                                   InternalCustomerOrderService.java
+    │
+    └───resources
+        │   application.yml
+        │
+        ├───static
+        └───templates
+                    </pre>
+
+                </section>
+
+                <section class="docs-section" id="item-1-3">
+                    <h3 class="section-heading">Creating Cloud Api Gateway.</h3>
+                    <p>
+                        As the 2nd step we are going to implement our api gateway project. Same as before, go the <a
+                            target="_blank" href="https://start.spring.io/">spring
+                        initializer</a> and add the following dependencies and create a project and open
+                        it with your IDE.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/api-gateway-implementation/stack-saga-example-cloud-api-gateway-creating.jpeg"
+                         alt="stacksaga e-store example creating Cloud Api Gateway"/>
+
+                    <p>
+                        At this time we have eureka-service. therefore we have to register our api
+                        gateway application with the eureka service. to do that, the following configurations have to be
+                        configured. after doing configuration, the eureka-client dependency provides the capability of
+                        connecting with the eureka service.
+                        That means the API cloud gateway project run as a clint of the eureka service as well.
+                    </p>
+                </section>
+
+
+                <section class="docs-section" id="item-1-5">
+                    <h3 class="section-heading">Creating user-service.</h3>
+                    <p>
+                        Visit to the spring initializer and create the project by adding the following dependencies.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-user-service-creating.jpeg"
+                         alt="stacksaga e-store example creating user-service"/>
+                </section>
+
+                <section class="docs-section" id="item-1-6">
+                    <h3 class="section-heading">Creating payment-service.</h3>
+                    <p>
+                        Visit to the spring initializer and create the project by adding the following dependencies.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-payment-service-creating.jpeg"
+                         alt="stacksaga e-store example creating payment-service"/>
+                </section>
+
+                <section class="docs-section" id="item-1-7">
+                    <h3 class="section-heading">Creating delivery-service.</h3>
+                    <p>
+                        Visit to the spring initializer and create the project by adding the following dependencies.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/delivery-service-implementation/stack-saga-example-delivery-service-creating.jpeg"
+                         alt="stacksaga e-store example creating delivery-service"/>
+                </section>
+
+
+                <!--
                 <section class="docs-section" id="item-1-1">
 
                     <ul style="padding-left: 0" class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -238,9 +967,9 @@
 
                                 <div class="content">
                                     <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span><!--//icon-holder-->
+                                    <span class="callout-icon-holder me-1">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>&lt;!&ndash;//icon-holder&ndash;&gt;
                                         Note
                                     </h4>
                                     <p>In this quick start example, we are not going to use spring eureka and the API
@@ -251,8 +980,8 @@
                                         eureka
                                         server. we mainly focus how does this framework work.
                                     </p>
-                                </div><!--//content-->
-                            </div><!--//callout-block-->
+                                </div>&lt;!&ndash;//content&ndash;&gt;
+                            </div>&lt;!&ndash;//callout-block&ndash;&gt;
                             <p>
                                 Go to the <a href="https://start.spring.io">Spring Initializr</a> and create a project
                                 by adding
@@ -318,16 +1047,16 @@
 
                         <div class="content">
                             <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span><!--//icon-holder-->
+                                    <span class="callout-icon-holder me-1">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>&lt;!&ndash;//icon-holder&ndash;&gt;
                                 Note
                             </h4>
                             <p>If you don't want to create that much of microservices (if just you are going to test the
                                 framework), make sure to create at least tow of them. one for command type and other
                                 one for query type. then you will get the idea well.</p>
-                        </div><!--//content-->
-                    </div><!--//callout-block-->
+                        </div>&lt;!&ndash;//content&ndash;&gt;
+                    </div>&lt;!&ndash;//callout-block&ndash;&gt;
 
                     <h4>Use-case</h4>
                     <img class="img-fluid" src="../../../assets/images/architecture/1.0/stack-saga-charts.svg" alt="">
@@ -354,9 +1083,9 @@
 
                         <div class="content">
                             <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span><!--//icon-holder-->
+                                    <span class="callout-icon-holder me-1">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>&lt;!&ndash;//icon-holder&ndash;&gt;
                                 Note
                             </h4>
                             <p>As a best practices, we create a <code>Microservice</code> interface. because, you have
@@ -366,15 +1095,15 @@
                                 the <code>executeFor</code> parameter.
                             </p>
                             <script src="https://gist.github.com/mafei-dev/2e6824b0fd5ba0e943d45153b33ce8d6.js"></script>
-                        </div><!--//content-->
-                    </div><!--//callout-block-->
+                        </div>&lt;!&ndash;//content&ndash;&gt;
+                    </div>&lt;!&ndash;//callout-block&ndash;&gt;
 
 
                     <h4>creating the executor classes</h4>
                     <p>according to the use-case we have to create 4 executors to call the microservices. there are 3
                         <a href="">command executors</a> and 1 <a href="">query executor</a> here. as a best practices
                         the executors will be created in the <code>com.mafei.executor</code> package.</p>
-                    <!--                    <h5>Custom Table:</h5>-->
+                    &lt;!&ndash;                    <h5>Custom Table:</h5>&ndash;&gt;
                     <div class="table-responsive my-4">
                         <table class="table table-bordered">
                             <thead>
@@ -458,7 +1187,7 @@
 
                             </tbody>
                         </table>
-                    </div><!--//table-responsive-->
+                    </div>&lt;!&ndash;//table-responsive&ndash;&gt;
                     <h5>Creating CreateOrder class</h5>
                     <p>have a look the table, you can see it is a <a href="#">command executor</a>. so you have to
                         create that class
@@ -495,14 +1224,14 @@
                     <h4>run the project</h4>
                     <p>you can run the project and see a log what are the configured executors and other staffs
                         regarding the stackSAGA framework like this.</p>
-                    <!--<img class="img-fluid" src="../../../assets/images/architecture/1.0/log-after-executors.jpeg"
-                         alt="stack saga log after executors">-->
+                    &lt;!&ndash;<img class="img-fluid" src="../../../assets/images/architecture/1.0/log-after-executors.jpeg"
+                         alt="stack saga log after executors">&ndash;&gt;
                     <pre style="color: #28b76b; background-color: #f4fcf6;">
 
  _____  _                 _     _____   ___   _____   ___
 /  ___|| |               | |   /  ___| / _ \ |  __ \ / _ \
-\ `--. | |_   __ _   ___ | | __\ `--. / /_\ \| |  \// /_\ \
- `--. \| __| / _` | / __|| |/ / `--. \|  _  || | __ |  _  |
+\ `&#45;&#45;. | |_   __ _   ___ | | __\ `&#45;&#45;. / /_\ \| |  \// /_\ \
+ `&#45;&#45;. \| __| / _` | / __|| |/ / `&#45;&#45;. \|  _  || | __ |  _  |
 /\__/ /| |_ | (_| || (__ |   < /\__/ /| | | || |_\ \| | | |
 \____/  \__| \__,_| \___||_|\_\\____/ \_| |_/ \____/\_| |_/ by Mafei
 Version - 1.0.0
@@ -537,7 +1266,8 @@ Version - 1.0.0
                     <script src="https://gist.github.com/mafei-dev/ee412a8550d22e670f824ea96bc3345c.js"></script>
                     <h3>create the controller class (create the endpoint <code>/place-order</code>)</h3>
                     <script src="https://gist.github.com/mafei-dev/903a46b0837277206ba38f445ef202e2.js"></script>
-                </section><!--//section-->
+                </section>&lt;!&ndash;//section&ndash;&gt;
+-->
 
             </article>
 

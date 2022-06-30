@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quick Start - Stack SAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Stack SAGA Quick Start with spring boot microservice.">
+    <meta name="author" content="Mafei">
+    <link rel="shortcut icon" href="../../../favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+
+</head>
+
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="site-logo"><a class="navbar-brand" href="../../../index.html"><img class="logo-icon me-2"
+                                                                                               src="../../../assets/images/coderdocs-logo.svg"
+                                                                                               alt="logo"><span
+                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <!--<form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input"/>
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>-->
+                    <form class="search-form search-input">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option selected>version 1.0.0</option>
+                            </select>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+                <a href="https://doc.stacksaga.com" target="_blank"
+                   class="btn btn-primary d-none d-lg-flex">DOC</a>
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+
+
+<div class="docs-wrapper">
+    <div id="docs-sidebar" class="docs-sidebar">
+        <div class="top-search-box d-lg-none p-3">
+            <form class="search-form">
+                <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <nav id="docs-nav" class="docs-nav navbar">
+            <ul class="section-items list-unstyled nav flex-column pb-3">
+                <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
+            </ul>
+
+        </nav><!--//docs-nav-->
+    </div><!--//docs-sidebar-->
+    <div class="docs-content">
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <div class="text-center" style="padding-bottom: 10px">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="#" class="btn btn-primary">Imperative Way</a>
+                            <a href="#" class="btn btn-light">Reactive Way</a>
+
+                        </div>
+                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="padding-left: 0 !important;">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Imperative</a></li>
+                            <li class="breadcrumb-item"><a href="#">Mysql</a></li>
+                            <li class="breadcrumb-item"><a href="#">1.0.0</a></li>
+                            <li class="breadcrumb-item"><a href="#">example</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">api-gateway-service implementation
+                            </li>
+                        </ol>
+                    </nav>
+                    <h1 class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <section class="docs-intro">
+                        <p>
+                            In the previous articles, we have successfully created the eureka-server,
+                            As the next we are going to implement the spring api cloud gateway. this is the gateway that
+                            uses for communication between each microservice. in the monolithic architecture, the
+                            servers communicate with the ports of each service running on.
+                            in the microservice architecture we don't know what is the exact port that each
+                            microservice running on. even though we know the ports we don't want to care about it.
+                            because the eureka server handles internally all instances we have configured with eureka
+                            service. therefore, the api gateway can talk with the eureka server and get all the relevant
+                            services details to be routed from the eureka server. therefore, we don't care about the
+                            port
+                            numbers there.
+                        </p>
+                        <a href="https://github.com/stacksaga/stacksaga-implementation-example/tree/without-StackSaga"
+                           target="_blank">
+                            Full source code on Github
+                        </a>
+                        <br>
+                        <br>
+                        <img class="img-fluid"
+                             src="../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-api-gateway-with-eureka-server.drawio.svg"
+                             alt="stacksaga e-store example creating api-gateway-service"/>
+                        <br>
+                        <br>
+                        <h3 class="section-heading">Creating api-gateway-service.</h3>
+                        <p>
+                            Visit to the spring initializer and create the project by adding the following dependencies.
+                        </p>
+                        <img class="img-fluid"
+                             src="../../../assets/img/mysql/1.0/imperative/api-gateway-implementation/stack-saga-example-cloud-api-gateway-creating.jpeg"
+                             alt="stacksaga e-store example creating api-gateway-service"/>
+                        <br>
+                        <br>
+                        <h4>Implementation of api-gateway-service</h4>
+                        <br>
+                        <h5>
+                            Configuration properties
+                        </h5>
+                        <p>
+                            To connect with eureka server and other utility microservices, We have to put our some
+                            properties and configurations
+                            in the <code>application.yml</code>
+                            file.
+                        </p>
+                        <h6>application.yml</h6>
+                        <small>
+                            <b>api-gateway >
+                                src/main/resources/application.yml
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/4d95ac121d0e523e99441e074daf3470.js"></script>
+                        <br>
+                        <br>
+                        <h5>
+                            Annotate the main class
+                        </h5>
+
+                        <p>in the api-gateway project, we have to use two annotations for enabling the eureka client
+                            capabilities <code>@EnableEurekaClient</code> and enabling the webflux capabilities <code>@EnableWebFlux</code>.
+                            (Api-gateway uses internally reactive way with webflux to increase the performance and to
+                            the
+                            resilience of the application due to all the requests are going through the Api-gateway for
+                            each service )
+                        </p>
+                        <small>
+                            <b>api-gateway >
+                                org/mono/stacksaga/example/apigateway/ApiGatewayApplication.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/31a494c930f9554960f9825191d3345a.js"></script>
+                        <br>
+                        <br>
+                        <p>Now the api-gateway is ready to use.</p>
+                        <img class="img-fluid"
+                             src="../../../assets/img/mysql/1.0/imperative/api-gateway-implementation/stacksaga-example-api-gateway-health-check.png"
+                             alt="stacksaga e-store example  api-gateway health check"/>
+                        <br>
+                        <p>Check the health by using the Curl.</p>
+
+                        <code>
+                            curl --location --request GET 'http://localhost:8080/actuator/health'
+                        </code>
+                        <br>
+                        <br>
+
+                        <p>
+                            <b>After all, The api-gateway project folder and file structure like below.</b></p>
+
+                        <pre>
+└───main
+    ├───java
+    │   └───org
+    │       └───mono
+    │           └───stacksaga
+    │               └───example
+    │                   └───apigateway
+    │                           ApiGatewayApplication.java
+    │
+    └───resources
+            application.yml
+
+                        </pre>
+                    </section><!--//docs-intro-->
+
+
+                </header>
+
+
+            </article>
+
+            <footer class="footer">
+                <div class="container text-center py-5">
+                    <small class="copyright">Template Copyright &copy; <a href="https://themes.3rdwavemedia.com/"
+                                                                          target="_blank">3rd Wave Media</a></small>
+                    <ul class="social-list list-unstyled pt-4 mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                </div>
+            </footer>
+        </div>
+    </div>
+</div><!--//docs-wrapper-->
+
+
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+
+
+</body>
+</html> 
+

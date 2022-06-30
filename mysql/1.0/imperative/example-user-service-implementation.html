@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quick Start - Stack SAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Stack SAGA Quick Start with spring boot microservice.">
+    <meta name="author" content="Mafei">
+    <link rel="shortcut icon" href="../../../favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+
+</head>
+
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="site-logo"><a class="navbar-brand" href="../../../index.html"><img class="logo-icon me-2"
+                                                                                               src="../../../assets/images/coderdocs-logo.svg"
+                                                                                               alt="logo"><span
+                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <!--<form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input"/>
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>-->
+                    <form class="search-form search-input">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option selected>version 1.0.0</option>
+                            </select>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+                <a href="https://doc.stacksaga.com" target="_blank"
+                   class="btn btn-primary d-none d-lg-flex">DOC</a>
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+
+
+<div class="docs-wrapper">
+    <div id="docs-sidebar" class="docs-sidebar">
+        <div class="top-search-box d-lg-none p-3">
+            <form class="search-form">
+                <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <nav id="docs-nav" class="docs-nav navbar">
+            <ul class="section-items list-unstyled nav flex-column pb-3">
+                <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
+            </ul>
+
+        </nav><!--//docs-nav-->
+    </div><!--//docs-sidebar-->
+    <div class="docs-content">
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <div class="text-center" style="padding-bottom: 10px">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="#" class="btn btn-primary">Imperative Way</a>
+                            <a href="#" class="btn btn-light">Reactive Way</a>
+
+                        </div>
+                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="padding-left: 0 !important;">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Imperative</a></li>
+                            <li class="breadcrumb-item"><a href="#">Mysql</a></li>
+                            <li class="breadcrumb-item"><a href="#">1.0.0</a></li>
+                            <li class="breadcrumb-item"><a href="#">example</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">user-service implementation</li>
+                        </ol>
+                    </nav>
+                    <h1 class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <section class="docs-intro">
+                        <p>
+                            In the previous two articles, we have successfully created the eureka-server and the
+                            order-service. now we are going to create one of next microservices. the next service which
+                            we are going to implement is user-service. in the user-service we want to have two endpoints
+                            for execute the place-order according the use-case.
+                        </p>
+                        <p>The following endpoints will be created in this part</p>
+                        <ul>
+                            <li>
+                                <span class="badge  bg-primary">GET</span>
+                                <code>/user-service/user/active</code>
+                            </li>
+                            <li>
+                                <span class="badge  bg-warning">PUT</span>
+                                <code>/user-service/user/point</code>
+                            </li>
+                        </ul>
+                    </section><!--//docs-intro-->
+
+
+                </header>
+
+
+                <section class="docs-section" id="item-1-5">
+                    <h3 class="section-heading">Creating user-service.</h3>
+                    <p>
+                        Visit to the spring initializer and create the project by adding the following dependencies.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-user-service-creating.jpeg"
+                         alt="stacksaga e-store example creating user-service"/>
+
+                    <h4>Database</h4>
+                    <p>There is one table called <code>ss_user</code> in th user-service-db. in the user table, contents
+                        the
+                        user basic details and
+                        the points count the user have been collecting upon their purchasing.
+                        (you don't want to creat the database manually. because, spring-data-jpa will create the
+                        database and the tables when start the project.)
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/img/mysql/1.0/imperative/creating-user-service/stacksaga-example-user-service-database.png"
+                         alt="stacksaga e-store user-service database"/>
+                    <br>
+                    <br>
+                    <h4>Implementation of user-service</h4>
+                    <br>
+                    <h5>
+                        Configuration properties
+                    </h5>
+                    <p>
+                        same as the order-service, we have to put our properties in the <code>application.yml</code>
+                        file.
+                    </p>
+                    <h6>application.yml</h6>
+                    <small>
+                        <b>user-service >
+                            src/main/resources/application.yml
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/6475a65852019f04bca3325e32b819d4.js"></script>
+
+                    <br>
+                    <br>
+                    <h5>
+                        Annotate the main class
+                    </h5>
+
+                    <p>for now, we have been using the only eureka client in this project. therefore, one and only
+                        annotation for main class is <code>@EnableEurekaClient</code>.</p>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/UserServiceApplication.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/95b8c8121cea04f8af8eabbfaa59f533.js"></script>
+
+                    <br>
+                    <br>
+                    <h5>
+                        Entity classes
+                    </h5>
+                    <p>to access the database, we have to create the entity classes same as the before article. in the
+                        user-service microservice's database we have only one table called <code>ss_user</code>. let's
+                        create the <code>UserEntity.class</code></p>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/entity/UserEntity.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/59bf03fd19c852d3df57594363d706b5.js"></script>
+
+                    <br>
+                    <br>
+                    <h5>
+                        Repository classes of user-service
+                    </h5>
+                    <p>
+                        To access the <code>UserEntity.class</code> we want to have a repository called <code>UserRepository.class</code>
+                    </p>
+                    <h6>UserRepository.class</h6>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/repository/UserRepository.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/b8273ae6237a566977dcc44de4a17532.js"></script>
+
+                    <br>
+                    <br>
+                    <h5>
+                        Service classes of user-service
+                    </h5>
+
+                    <p>
+                        To access the <code>UserRepository.class</code> we want to have a service called <code>UserService.class</code>
+                    </p>
+                    <h6>UserService.class</h6>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/service/UserService.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/04bf4832ff85ff6a3de5438d405e033e.js"></script>
+
+                    <h5>
+                        Controller classes of user-service
+                    </h5>
+
+                    <p>now we are going to create the endpoints for check user and increment the user points. we create
+                        two separate controller classes for those endpoints named
+                        <code>UserStatusController.class</code> and <code>UserPointsController.class</code></p>
+
+                    <p>before creating the controller class we are going to create the response dto object for transfer
+                        the
+                        data through the endpoint.</p>
+                    <h6>UserIsActiveResponseBody.class</h6>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/dto/UserIsActiveResponseBody.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/340d6892607e5af4bfb87f37e98addc4.js"></script>
+                    <br>
+                    <br>
+                    <p>Now we are going to create our UserStatusController controller by using the response body class
+                        that created above.</p>
+                    <h6>UserStatusController.class</h6>
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/controller/UserStatusController.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/121d3b3a0d1988ee966557aa19b10723.js"></script>
+                    <br>
+                    <br>
+
+                    <h6>UserPointsController.class</h6>
+
+                    <small>
+                        <b>user-service >
+                            org/mono/stacksaga/example/userservice/controller/UserPointsController.java
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/672abdb8b0fd5038a9f3d5c7e1e75983.js"></script>
+                    <br>
+                    <br>
+                    <p>due to the testing application we have not implemented all the endpoints here. therefore, for the
+                        users are added by using the initial SQL script in user-service. put that file in the <code>resources</code>
+                        folder.</p>
+
+                    <h6>import.sql</h6>
+
+                    <small>
+                        <b>user-service >
+                            src/main/resources/import.sql
+                        </b>
+                    </small>
+                    <script src="https://gist.github.com/mafei-dev/8ef7272e20c25e3d6841d2df9d413a12.js"></script>
+
+                    <p><b>After all, The user-server project folder and file structure like below.</b></p>
+                    <br>
+                    <br>
+                    <pre>
+└───main
+    ├───java
+    │   └───org
+    │       └───mono
+    │           └───stacksaga
+    │               └───example
+    │                   └───userservice
+    │                       │   UserServiceApplication.java
+    │                       │
+    │                       ├───controller
+    │                       │       UserReputationController.java
+    │                       │       UserStatusController.java
+    │                       │
+    │                       ├───dto
+    │                       │       UserIsActiveResponseBody.java
+    │                       │
+    │                       ├───entity
+    │                       │       UserEntity.java
+    │                       │
+    │                       ├───repository
+    │                       │       UserRepository.java
+    │                       │
+    │                       └───service
+    │                               UserService.java
+    │
+    └───resources
+        │   application.yml
+        │   import.sql
+        │
+        ├───static
+        └───templates
+
+                    </pre>
+
+                </section>
+
+
+            </article>
+
+            <footer class="footer">
+                <div class="container text-center py-5">
+                    <small class="copyright">Template Copyright &copy; <a href="https://themes.3rdwavemedia.com/"
+                                                                          target="_blank">3rd Wave Media</a></small>
+                    <ul class="social-list list-unstyled pt-4 mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                </div>
+            </footer>
+        </div>
+    </div>
+</div><!--//docs-wrapper-->
+
+
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+
+
+</body>
+</html> 
+
