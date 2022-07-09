@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Aggregator - StackSAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Introduction to stacksaga">
+    <meta name="author" content="Mafei">
+    <link rel="shortcut icon" href="../../favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+
+</head>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="site-logo"><a class="navbar-brand" href="/index.html"><img class="logo-icon me-2"
+                                                                                       src="../../../assets/images/coderdocs-logo.svg"
+                                                                                       alt="logo"><span
+                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+                <a href="https://doc.stacksaga.com" target="_blank"
+                   class="btn btn-primary d-none d-lg-flex">DOC</a>
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+<div>
+
+    <div>
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <h1 id="microservice-introduction" class="docs-heading">Aggregator <span class="docs-time">Last updated: 2019-06-01</span>
+                    </h1>
+                    <section class="docs-intro">
+                        <p>
+
+                            An aggregator is the main location that all the data should be kept for the entire
+                            transaction.
+                            According to the StackSaga example, the entire process have set pf sub processes. Create
+                            order , check user activeness, make payment, increase points and dispatch the order. While
+                            those processes you have to keep some data regarding the transaction. For instance, the
+                            process is started from creating order. After creating the order you have a data to be kept.
+                            As a response you will get the order id. You have to keep it, and you have to reuse it in
+                            your whole process. After creating the order you check the user activeness. Then the user
+                            service is called and get the response of user's activeness and keep that data as user is
+                            active at the time of the process started. Likewise, each and every process will return you
+                            to data. Those data you have to keep in one location. That location called as the
+                            aggregator. At the start you have to declare the variables and after doing each process, you
+                            can update the values in the aggregator. On other hand we can say it is the data bucket that
+                            you bring the data to each executor.
+                        </p>
+                        <p>
+                            Other special thing is that the aggregator is used as the key of your entire transaction.
+                            That means the executors are identified by the aggregator class that you use. Because your
+                            entire transaction can have only one aggregator. Therefore, the aggregator class is used in
+                            each and every time by representing the transaction. For instance according to the StackSaga
+                            example, the place order is the entire process. It contains many sub processes like create
+                            order, check user ect. each process are introduced to the framework by using executors. So,
+                            for each process have separate executors. When you create each executor, you should mention
+                            what ks the aggregator that you want to use in that executors.
+                        </p>
+
+                        <div class="callout-block callout-block-info">
+
+                            <div class="content">
+                                <h4 class="callout-title">
+	                                <span class="callout-icon-holder me-1">
+		                                <i class="fas fa-info-circle"></i>
+		                            </span><!--//icon-holder-->
+                                    Note
+                                </h4>
+                                <p>
+                                    you can <b>store/update</b> the data in the aggregator by using the process
+                                    execution only
+                                    (<code><b>doProcess()</b></code>). If you want to keep some metadata while your
+                                    revert/compensation
+                                    processes, you can use the <a href="#">hint-store</a> that the framework provides.
+                                </p>
+                            </div><!--//content-->
+                        </div>
+                    </section><!--//docs-intro-->
+                </header>
+                <section class="docs-section" id="item-1-1">
+
+                    <h4>Relation between Aggregator and Executors.</h4>
+                    <div>
+                        <a target="_blank"
+                           href="../../../assets/img/1.0/topics/stack-saga-e-store-example-aggregator-and-executors.drawio.svg"><img
+                                class="img-fluid  "
+                                src="../../../assets/img/1.0/topics/stack-saga-e-store-example-aggregator-and-executors.drawio.svg"
+                                alt=""
+                                title="CoderPro Home Page"/></a>
+                    </div>
+                    <h4>How the Aggregator is used through the Executors</h4>
+                    <div>
+                        <a target="_blank"
+                           href="../../../assets/img/1.0/topics/stack-saga-e-store-example-aggregator-state.drawio.svg"><img
+                                class="img-fluid  "
+                                src="../../../assets/img/1.0/topics/stack-saga-e-store-example-aggregator-state.drawio.svg"
+                                alt=""
+                                title="CoderPro Home Page"/></a>
+                    </div>
+                    <h3>Custom Aggregator class</h3>
+                    <p>In the real implementation, you have to extend your aggregator from
+                        <code><a href="SagaAggregate">SagaAggregate</a></code> class, and the class should be annotated by <code>@Aggregator</code>.
+                        <br>
+                        the @Aggregator annotation consist of some properties.
+                    </p>
+                    <ul>
+                        <li><b>version</b> (String | required) <p>what is the version of the aggregator. if you
+                            make some changes
+                            the
+                            version should be updated like API versioning.</p></li>
+                        <li><b>description</b> (String | not required) <p>The description about the aggregator. (it is
+                            not
+                            required)</p></li>
+                        <li><b>versionUpdateNote</b> (String | not required) <p>if you want to add some note when the
+                            version is
+                            updated, you can put here and the note will be saved in the database, and you can see all
+                            the version details that you added by using
+                            <a href="StackSaga Admin">StackSaga-Admin.</a></p></li>
+                        <li><b>mapper</b> (AggregatorMapper | not required) <p>if you want to customize the default
+                            mapper, you can
+                            use your custom implementation by extending <code><a href="AggregatorMapper">AggregatorMapper</a>.</code>
+                                otherwise, the <a href="default">default</a> jackson object-mapper will be used as
+                                default.
+                        </p></li>
+                    </ul>
+                    <script src="https://gist.github.com/mafei-dev/57915ac561b10396cd71fa283ad0f0f4.js"></script>
+                    <h4>Custom Aggregator Mapper Implementation</h4>
+                    <p>here you can see a custom implementation of the <code>AggregatorMapper</code>.
+                        you can decide your custom configurations for the objectMapper. the framework will use the
+                        custom Aggregator Mapper that you suggested to the aggregator. you can create your own
+                        Aggregator Mapper with your own <a
+                                href="https://fasterxml.github.io/jackson-databind/javadoc/2.7/com/fasterxml/jackson/databind/ObjectMapper.html">object
+                            mapper</a> serialization and deserialization configurations
+                        for each aggregator that you use in
+                        the project. **The class should be a bean (Annotate with <code>@Component</code>).
+                    </p>
+                    <script src="https://gist.github.com/mafei-dev/103559761f15148649da89caf0194019.js"></script>
+                </section><!--//section-->
+
+            </article>
+
+        </div>
+    </div>
+</div>
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+</body>
+</html> 
+

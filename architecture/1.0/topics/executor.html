@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Executor - StackSAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Introduction to stacksaga">
+    <meta name="author" content="Mafei">
+    <link rel="shortcut icon" href="../../favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+
+</head>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="site-logo"><a class="navbar-brand" href="/index.html"><img class="logo-icon me-2"
+                                                                                       src="../../../assets/images/coderdocs-logo.svg"
+                                                                                       alt="logo"><span
+                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+                <a href="https://doc.stacksaga.com" target="_blank"
+                   class="btn btn-primary d-none d-lg-flex">DOC</a>
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+<div>
+
+    <div>
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <h1 id="microservice-introduction" class="docs-heading">Executors
+                    </h1>
+                    <section class="docs-intro">
+                        <p>
+
+                            According to the saga design pattern, sub processes (atomic executions) can have two
+                            executions called process execution and compensation execution. And those executions you van
+                            create as the methods in your application anywhere. But the framework has to know about
+                            exactly what is the process execution a is the compensation/revert execution method to be
+                            executed when running the whole process. As a example in your application can have a service
+                            called payment service and that payment service class can have hundreds of methods for many
+                            tasks. Its also have the make payment process method and its revert/compensation method. But
+                            you have to inform those are the methods that you use when the process is executed. To
+                            overcome that, the framework provides a template for you. That is called as the executor.
+                            According to the framework the executors are two types.
+                        </p>
+                        <ol>
+                            <li>
+                                <b>Query executors</b>
+                                <p>
+                                    if some atomic process have no compensation <b>(query execution)</b> , that
+                                    kind of processes are used in a query executor
+                                </p>
+                                <p>
+                                    <b>Example</b> - if you want to check the user is active at the time of the
+                                    transaction happen,
+                                    and you
+                                    want to keep the user's activeness until the end of the transaction. See the
+                                    implementation.
+                                </p>
+                            </li>
+                            <li>
+                                <b>Command executors</b>
+                                <p>
+                                    if some atomic process have a compensation <b>(command execution)</b>, that
+                                    kind of processes are used in a command executor.
+                                </p>
+                                <p>
+                                    <b>Example</b> - think that you want to create an order and order process is done
+                                    successfully. But
+                                    after make payment process will fail. Then the compensation process will be started.
+                                    Now you
+                                    must have a compensation against the creating order. So create order process is a
+                                    command
+                                    process, and it goes to a command executor.
+                                </p>
+                            </li>
+                        </ol>
+
+                        <br>
+                        <br>
+
+                        <a target="_blank"
+                           href="../../../assets/img/1.0/topics/stack-saga-e-store-example-executor-types-in-stacksaga.drawio.svg"><img
+                                class="img-fluid  "
+                                src="../../../assets/img/1.0/topics/stack-saga-e-store-example-executor-types-in-stacksaga.drawio.svg"
+                                alt=""
+                                title="CoderPro Home Page"/>
+                        </a>
+
+
+                    </section><!--//docs-intro-->
+                </header>
+                <section class="docs-section" id="item-1-1">
+
+                    <h3>Usage of The Executors.</h3>
+                    <h4>Query executor</h4>
+                    <p>
+                        In the query executor you only have a one method to do your atomic execution. It's called as
+                        atomic process execution. Upon the aggregator that you provided you will have the aggregator as
+                        a parameter. That is the aggregator object which runs for entire transaction. In the method you
+                        are permitted to read write and update the values from that object. And you can invoke your
+                        atomic execution inside the method body by using the values of given aggregator. According to
+                        the StackSaga example, just think we are going to check the user status. To do this part, you
+                        already have the service class and the function. For here, the only thing that you do is,
+                        introduction that method and get the relevant data from the given aggregator. The framework is
+                        responsible for invoking that method you mentioned.
+
+                        ** in one executor you can introduce one atomic process only.
+                    </p>
+                    <p>
+                        Finally, you have to return what is the next executor that you want to execute. It is totally
+                        runtime. You can decide it the data by using the given aggregator or by anything else. Or, if
+                        your process is completed from this execution, you can notify about that by complete single.
+                    </p>
+                    <h4>Command executor </h4>
+                    <p>
+                        In the command executor, you will have two methods to be implemented. One for process the
+                        transaction forward. And other one for its compensation. Now you know what you can do inside of
+                        the doProcess. Let's talk about the doRevert method.
+                        This is the location that you can execute your compensation atomic transaction. For here, you
+                        will have the final status of the aggregator. What is the final status of the aggregator? It
+                        means, the aggregator will change on each and every executor's doProcess method. Some values are
+                        added and some values can be changed. Just think the aggregator was used for 10 sub processes.
+                        But the target processes is 20. But the process can't be executed further more due the error
+                        that occurred at step number 10. That means old 9 steps (sub executions/ sub transactions) have
+                        been done successfully. But 10 was failed. The framework ignore the changes of the step number
+                        10. Because the atomic transaction is failed and updated data is not valid due the failure.
+                        Therefore, in the doRever method, you will get the aggregator object that was before going to be
+                        executed at step number 10. For instance, if you change the value of xyz variable as 2, but in
+                        the step number 9 the value of xyz is null. Because you have set the value then. Then step
+                        number 10 is failed. Sothe final aggregator that you will be given is xyz = null.
+                        In the revert method you are not permitted to change the data. Because it is the final status of
+                        the aggregator. It should be immutable and all the revert methods should use the data to process
+                        the compensation. Due to having the getters and setters you can set the values and change the
+                        values by using the reference. But the framework ignore those updates. Other special thing is
+                        that the rever method doesn't have a return. Because the framework knows the order of the revert
+                        executions and you can't change the direction.
+                    </p>
+                    <br>
+                    <br>
+                    <h3>How Executors Behave In A Application.</h3>
+                    <a target="_blank"
+                       href="../../../assets/img/1.0/topics/stack-saga-e-store-example-what-is-executor-in-stacksaga.drawio.svg"><img
+                            class="img-fluid  "
+                            src="../../../assets/img/1.0/topics/stack-saga-e-store-example-what-is-executor-in-stacksaga.drawio.svg"
+                            alt=""
+                            title="CoderPro Home Page"/>
+                    </a>
+
+                    <h3>Implementation Of Executors</h3>
+                    <h1>Query Executors</h1>
+                    <script src="https://gist.github.com/mafei-dev/350109f71d073e3e70363dca48fcce4a.js"></script>
+                    <p></p>
+
+                    <h1>Command Executors</h1>
+                    <script src="https://gist.github.com/mafei-dev/5c23c266c4f347eca263f5e13a828f12.js"></script>
+                    <p></p>
+
+
+                </section><!--//section-->
+
+            </article>
+
+        </div>
+    </div>
+</div>
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+</body>
+</html> 
+
