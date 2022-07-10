@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SEC - Saga Execution Coordinator - StackSAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Introduction to stacksaga">
+    <meta name="author" content="Mafei">
+    <link rel="shortcut icon" href="../../favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+
+</head>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="site-logo"><a class="navbar-brand" href="/index.html"><img class="logo-icon me-2"
+                                                                                       src="../../../assets/images/coderdocs-logo.svg"
+                                                                                       alt="logo"><span
+                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+                <a href="https://doc.stacksaga.com" target="_blank"
+                   class="btn btn-primary d-none d-lg-flex">DOC</a>
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+<div>
+
+    <div>
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <h1 id="microservice-introduction" class="docs-heading">Saga execution coordinator (SEC)
+                    </h1>
+                    <section class="docs-intro">
+                        <p>
+                            The Saga Execution Coordinator (SEC) is the core component for implementing a successful
+                            Saga flow. It maintains a Saga log that contains the sequence of events of a particular
+                            flow. If a failure occurs within any of the components, the SEC queries the logs and helps
+                            identify which components are impacted and in which sequence the compensating transactions
+                            must be executed. Essentially, the SEC helps maintain an eventually consistent state of the
+                            overall process.
+
+                        </p>
+                        <p>
+                            If the SEC component itself fails, it can read the SEC logs when coming back up to identify
+                            which of the components are successfully rolled back, identify which ones were pending, and
+                            start calling them in reverse chronological order.
+                        </p>
+
+                        <ul>
+                            <li>
+                                Stores & interprets a Saga’s state machine
+                            </li>
+                            <li>
+                                Executes the Requests of a Saga by talking to other services
+                            </li>
+
+                            <li>
+                                Handles failure recovery by executing Compensating Requests
+                            </li>
+
+
+                        </ul>
+
+
+                        <div>
+                            <a target="_blank"
+                               href="../../../assets/img/1.0/topics/stack-saga-e-store-example-SEC.drawio.svg"><img
+                                    class="img-fluid"
+                                    src="../../../assets/img/1.0/topics/stack-saga-e-store-example-SEC.drawio.svg"
+                                    alt="Handler in StackSaga"
+                                    title="Handler"/>
+                            </a>
+                        </div>
+                        <br>
+                        <br>
+                        <h3>Handovering the initial process to SEC.</h3>
+                        <p>here you can see an example code, how your process hand over to StackSaga SEC by using java
+                            code in spring boot application. you have to autowire the <code>SagaTemplate</code> from the
+                            StackSaga package by mentioning the Aggregator which is related to the transaction. it
+                            contains one method that you can use.
+                        </p>
+                        <ul>
+                            <li>
+                                <code>void process(InitAggregator,StartExecutorClass);</code>
+                                <ul>
+                                    <li><b>InitAggregator</b> : the aggregator with initialed values</li>
+                                    <li><b>StartExecutorClass</b> : the executor class which start the transaction.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <script src="https://gist.github.com/mafei-dev/7248a0d0e74816f742c4bb20c34ffe60.js"></script>
+                    </section>
+                </header>
+
+            </article>
+
+        </div>
+    </div>
+</div>
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+</body>
+</html> 
+

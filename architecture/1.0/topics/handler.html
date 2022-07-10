@@ -88,64 +88,111 @@
                     <section class="docs-intro">
                         <p>
 
-                            While some process is executed some errors can be happened without knowing. Those exceptions
-                            are called as runtime exception. And some errors can be occurred upon the data that you
-                            pass. All those exceptions can be divided into two parts upon the retry capability.
+                            The handler is where the transaction is initiated as well as you're notified about each and
+                            every action while the process by the SEC. As an example
+                            you hand over your transaction to the stack saga by mentioning the starting point. After
+                            handing over, the framework will invoke your executors one by one. This process happens from
+                            the base microservice. (The application that you are working on) So base microservice is
+                            the responsible service to update the status of each sub process. According to the example
+                            after doing the payment successfully the order status should be updated as payment
+                            successful. How you can get notified about that? Handler is the place you get notified about
+                            the event after executing each and every sub process. Likewise, there are many callback
+                            functions are there to be notified about some events by the framework. The following table
+                            will show you what they're.
                         </p>
-                        <h4>What is retry capability?</h4>
-                        <p>
-                            Just imagine make a request to the payment service to make the payment. But at the moment
-                            the request can be failed for mainly two reasons. One, the passing data is incorrect or the
-                            customer balance is insufficient to process the execution. And the second one is, the
-                            request can't achieve the payment service due to a network issue or, although the request
-                            goes to the payment service, a database connection failure of the payment service database
-                            can be effected to the request failure. So, passing incorrect data or inefficient balanne
-                            are not retryable, because although we retried the process again and again, the same error
-                            gets occurred every time. Because the reason is stable. But think about the second
-                            reason. If it had a network issue in short period of time, the issue will be fixed soon.
-                            Then the process can be invoked as usual. Most of the time, This kind of errors can be
-                            runtime exception ( Io base exceptions/ network exceptions.) Other than that there can have
-                            many exception upon your use-case. The programmer is the responsible person who decide the
-                            exception is retryable or not.
+
+                        <ol>
+                            <li>
+                                <b>onEachProcessPerformed</b>
+                                <p>
+                                    This method will be invoked after executing each sub process successfully.
+                                    - just think about our example. After payment process success the order status
+                                    should be updated as payment successful and also after successfully dispatched the
+                                    order, the order status should be updated as order dispatched. And just think, you
+                                    want to update your customer by sending an email after payment process and after
+                                    dispatching process. Handler is the place that you can invoke your processes.
+
+                                </p>
+                            </li>
+                            <li>
+                                <b>onEachRevertPerformed</b>
+                                <p>
+                                    This is the opposite of the onEachProcess. That works after every successful
+                                    process. If the whole transaction has to be reverted in some point, the compensation
+                                    process start from that point. Then the revert method of each executed executors
+                                    start to be executed as the compensations. If you want to get notified after each
+                                    compensation onEachRevert method will be invoked by the framework with all the data
+                                    that you want.
+                                </p>
+                                <p>
+                                    According to the example, if the payment process is failed, you have to update the
+                                    order status as payment failed. This kind of execution can be proceeded in this
+                                    method.
+                                </p>
+                            </li>
+
+
+                            <li>
+                                <b>onTransactionCompleted</b>
+                                <p>
+                                    There are two meanings of transaction-complete. One is that the transaction was
+                                    processed without any process exception. When considering the example the
+                                    create-order success, user checking is successful, make payment is success ,
+                                    increase point is success , and finally dispatching the order is also success.
+                                    The 2nd success is, a process exception was happened and after that all the relevant
+                                    compensation has been processed successfully. (That means a revert error hasn't been
+                                    occurred while the compensation process) otherwise we can say the compensation has
+                                    been processed smoothly without any exceptions.
+                                </p>
+                            </li>
+
+
+                            <li>
+                                <b>onProcessException</b>
+                                <p>
+                                    This is not relevant to the sub process. That means the process exception can be
+                                    happened only one time in entire process. When considering the example, you are
+                                    going to dispatch the order, and it is failed because of non retryable exception.
+                                    (Just think the order is not existing in the database) then the compensation
+                                    process will be started. This is the turning point to compensation start. On that
+                                    time this method will invoke by the framework with the data that you want.
+                                </p>
+                            </li>
+
+                            <li>
+                                <b>onTransactionTerminated</b>
+                                <p>
+                                    According to the flow any revert process can't have non retryable exception. That is
+                                    the rule. But sometimes the programmer may haven't been handled that. Then the
+                                    revert process also can't be processed anymore. Then the framework mark that
+                                    transaction as a garbage transaction and terminate the process. This is very rare
+                                    case. But it can be happened.
+                                </p>
+                            </li>
+
+                        </ol>
+
+                        <div>
+                            <a target="_blank"
+                               href="../../../assets/img/1.0/topics/stack-saga-e-store-example-handler.drawio.svg"><img
+                                    class="img-fluid"
+                                    src="../../../assets/img/1.0/topics/stack-saga-e-store-example-handler.drawio.svg"
+                                    alt="Handler in StackSaga"
+                                    title="Handler"/>
+                            </a>
+                        </div>
+                        <br>
+                        <br>
+                        <h3>Implementation of a Handler</h3>
+                        <p>here you can see a handler Implementation. the handler is for the transaction place-order.
+                            that's why the handler called as <code>PlaceOrderHandler</code>. and the handler class
+                            annotate as <code>@Handler</code> and the class has been implemented by
+                            <code>ExecutionListener</code> with providing the relevant aggregator called <code>PlaceOrderAggregator</code>.
+                            according to the ExecutionListener interface your custom handler have all the methods that
+                            we have disused above.
                         </p>
-                        <h4>
-                            Why we identify the retryable exception in stacksaga?
-                        </h4>
-                        <p>
-                            Retryable exception are not happened regularly. those exceptions are not accepted. Those are
-                            very rare. You know in the microservices' architecture the main process have set of sequence
-                            processes. We can't say how many number of steps are there. It will depend on your use-case.
-                            Just think the whole process consist of 20 sub processes. 15 of process have been
-                            successfully executed and the 16-step gets failed due to an issue. Then framework stop the
-                            process and start the compensation process. While processing the compensations, one of
-                            compensations is failed due to a network issue. Compensation transactions are Not just like
-                            process executions,compensations is must. (if the process execution is failed at some point,
-                            the compensation process can be executed. But if the compensation is failed we have nothing
-                            to do anymore. If there's a compensation error, The transaction will be terminated and the
-                            transaction is marked as garbage transaction.) Before terminate the transaction the
-                            framework should know the error is caused due to a retryable exception or non retryable
-                            exception. If it's a retryable exception the framework will keep the transaction pending to
-                            execute that atomic compensation transaction after connection is fixed. If the reason is a
-                            non retryable exception, the transaction will be marked as a garbage transaction by the
-                            framework. That's why the retryable exceptions should be identified and inform about to the
-                            framework.
-                        </p>
-                        <!--<div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span>&lt;!&ndash;//icon-holder&ndash;&gt;
-                                Note
-                            </h4>
-                            <p>
-                                you can <b>store/update</b> the data in the aggregator by using the process
-                                execution only
-                                (<code><b>doProcess()</b></code>). If you want to keep some metadata while your
-                                revert/compensation
-                                processes, you can use the <a href="#">hint-store</a> that the framework provides.
-                            </p>
-                        </div>-->
-                    </section><!--//docs-intro-->
+                        <script src="https://gist.github.com/mafei-dev/e377060f8ce71161a0b8b9a53ac9b1f9.js"></script>
+                    </section>
                 </header>
 
             </article>
