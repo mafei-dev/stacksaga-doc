@@ -130,23 +130,105 @@
                             framework. That's why the retryable exceptions should be identified and inform about to the
                             framework.
                         </p>
-                        <!--<div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span>&lt;!&ndash;//icon-holder&ndash;&gt;
-                                Note
-                            </h4>
-                            <p>
-                                you can <b>store/update</b> the data in the aggregator by using the process
-                                execution only
-                                (<code><b>doProcess()</b></code>). If you want to keep some metadata while your
-                                revert/compensation
-                                processes, you can use the <a href="#">hint-store</a> that the framework provides.
-                            </p>
-                        </div>-->
                     </section><!--//docs-intro-->
                 </header>
+
+                <h1 id="how-retry-works-in-the-revert-process">How retry compensation-execution in the StackSaga</h1>
+                <section class="docs-intro">
+
+                    <p>
+                        you already know that the process-execution (to forward executions) can be failed due to some
+                        exceptions.
+                        but the compensation process can't be failed if it not a retryable
+                        error. most probably the retryable error happens due to a network error. that means
+                        after
+                        fixing the network issue, the transaction can be invoked as usual from the point tha
+                        transaction
+                        was stopped due to the network error.
+                    </p>
+                    <p>
+                        the execution can be happened in three ways in StackSaga.
+                    </p>
+
+                    <ol>
+                        <li>
+                            <p>
+                                <b>As a scheduled task.</b>
+                            </p>
+                            <p>
+                                you can configure what time that you want to invoke that kind of revert-stuck
+                                transactions in
+                                your application as <a target="_blank"
+                                                       href="./../reference/configuration-properties.html">configurations</a>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <b>As a manual invocation from the Admin Dashboard.</b>
+                            </p>
+                            <p>in this option, you can manually invoke your stuck transactions by using <a
+                                    href="./../topics/stacksaga-admin-dashboard.html"
+                                    target="_blank">StackSaga
+                                Admin
+                                Dashboard</a></p>
+                        </li>
+                        <li>
+                            <p>
+                                <b>As an invocation of the StackSaga circuit breaker.</b>
+                            </p>
+                            <p>
+                                just think that while the compensation is being processed, one of compensation is
+                                failed
+                                because
+                                of that a related service is not running that time. (there is no at least one
+                                instance
+                                is up and
+                                running.)
+                                then the compensation process can't be invoked anymore. then the process is stuck
+                                and
+                                waiting
+                                for the invocation after fixing the network issue. <a
+                                    href="./../topics/stacksaga-circuit-breaker.html">StackSaga
+                                circuit
+                                breaker</a> is a live minicam to be notified about the availability of all
+                                configured
+                                services.
+                                in
+                                this example, the
+                                order-service is listening to the payment-service's , delivery-service's,
+                                user-service's
+                                instance
+                                updates through StackSaga and instantly the service will be notified when each and
+                                every
+                                server
+                                gets up.
+                            </p>
+                            <p>
+                                See the image below, at the start, there is no any payment-service up and running.
+                                After
+                                a
+                                while, one payment-service gets up. Due to the order-service and user-service is
+                                listening to the
+                                payment-service's server updates, all the order-service and user-service instances will
+                                be notified
+                                instantly about the
+                                new
+                                upped
+                                payment-service. After that, the SEC checks the database to verify if there are some
+                                stuck
+                                transactions due to the payment-service's network issue. if there are transactions, the
+                                SEC invoke that transaction as batch process. you can configure the <a
+                                    href="./../reference/configuration-properties.html#batch-process-configuration-properties">batch
+                                processing
+                                configuration</a> in your application.
+                            </p>
+
+                            <img class="img-fluid"
+                                 src="../../../assets/images/architecture/1.0/how-update-cb-in-stacksaga.gif"
+                                 alt=""/>
+                        </li>
+                    </ol>
+                </section>
 
             </article>
 
