@@ -49,10 +49,15 @@
                     <span></span>
                     <span></span>
                 </button>
-                <div class="site-logo"><a class="navbar-brand" href="/index.html"><img class="logo-icon me-2"
-                                                                                       src="../../assets/images/coderdocs-logo.svg"
-                                                                                       alt="logo"><span
-                        class="logo-text">stack<span class="text-alt">SAGA</span></span></a></div>
+
+                <div class="site-logo">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img src="../../assets/images/StackSagaIcon.png"
+                             alt="logo"/>
+                        <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
+                    </a>
+                </div>
+
             </div><!--//docs-logo-wrapper-->
             <div class="docs-top-utilities d-flex justify-content-end align-items-center">
                 <div class="top-search-box d-none d-lg-flex">
@@ -65,63 +70,164 @@
                 </div>
 
                 <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
+                            class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://stackoverflow.com/questions/tagged/stacksaga"><i
+                            class="fab fa-stack-overflow fa-fw"></i></a></li>
                 </ul><!--//social-list-->
-                <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-5-documentation-template-for-software-projects/"
-                   class="btn btn-primary d-none d-lg-flex">Download</a>
             </div><!--//docs-top-utilities-->
         </div><!--//container-->
     </div><!--//branding-->
 </header><!--//header-->
 <div class="docs-wrapper">
     <div id="docs-sidebar" class="docs-sidebar">
-        <div class="top-search-box d-lg-none p-3">
+        <!--<div class="top-search-box d-lg-none p-3">
             <form class="search-form">
                 <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
                 <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
             </form>
-        </div>
+        </div>-->
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Microservice Architecture</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Section Item 1.2</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Section Item 1.3</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Section Item 1.4</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Section Item 1.5</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Section Item 1.6</a></li>
+                        class="theme-icon-holder me-2"><i class="fab fa-hubspot"></i></span>
+                    StackSaga in High-level
+                </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link scrollto" href="#diagram">Diagram</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#explanation">Explanation</a>
+                </li>
+
 
             </ul>
+        </nav>
 
-        </nav><!--//docs-nav-->
-    </div><!--//docs-sidebar-->
-
+        <!--//docs-nav-->
+    </div>
     <div class="docs-content">
         <div class="container">
             <article class="docs-article" id="section-1">
+
                 <header class="docs-header">
-                    <h1 class="docs-heading">Introduction<span
-                            class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <h1 id="diagram" class="docs-heading">
+                        StackSaga in High-level
+                    </h1>
                     <section class="docs-intro">
-                        <p>In this section, you will get the architecture of this framework. other than that, you will
-                            get
-                            what are the limitations you have to face when you are going to use microservice
-                            architecture
-                            and how overcome those difficulties by using StackSAGA framework.</p>
+                        <p>
+                            in the <a href="./introduction.html">introduction</a>, we got a clear idea of how
+                            microservice
+                            architecture works and what are the challenges that we have to face when implementing the
+                            microservice. here, we are going to explain how the stack saga works together with typical
+                            microservice architecture. here we have demonstrated a spring boot microservice architecture
+                            and
+                            how the StackSaga framework provides the Saga execution coordinator (SEC) capabilities
+                            without
+                            bothering to the default architecture.
+                        </p>
+                        <a target="_blank"
+                           href="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"><img
+                                class="img-fluid  "
+                                src="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"
+                                alt=""
+                                title="stackSAGA High-level architecture diagram"/>
+                        </a>
+
+                        <p id="explanation">
+                            Stacksaga is not just a framework that provides SCE facilities. Stacksaga has many features.
+                            The
+                            following features StackSaga provides.
+                        </p>
+
+                        <ul>
+                            <li>
+                                Saga execution coordinator features.
+                            </li>
+                            <li>
+                                Real-time circuit breaker features.
+                            </li>
+                            <li>
+                                Distributed tracing dashboard.
+                            </li>
+                            <li>
+                                Service's heath matrices monitoring dashboard.
+                            </li>
+
+                            <li>
+                                Event sourcing
+                            </li>
+
+                            <li>
+                                Self retryable execution
+                            </li>
+
+
+                        </ul>
+                        <p>
+                            After adding stack saga in the microservice architecture you can see there are some
+                            additional
+                            components in the high level architecture diagram. Let's discuss all components and
+                            how they are interacted with general architecture. When you use StackSaga, you have to
+                            provide
+                            the facilities to create a database in addition to the database that you use for each
+                            microservice. This also same as the database per service design pattern. A service group
+                            (multiple
+                            instances of one service) uses a database to store the events of the executions. The only
+                            thing
+                            is newly added an extra schema. If you like to use one database for all microservices for
+                            StackSaga, it doesn't matter you can use one database. But as a best practice, database per
+                            service is recommended. After the database part, you can see a component called Redis. Redis
+                            is
+                            an in-memory data structure store, used as a distributed, in-memory key–value database,
+                            cache
+                            and message broker, with optional durability. In the framework architecture, Redis is used
+                            for
+                            communicating with each microservice and admin service and storing each service's live
+                            health
+                            data.
+                            What are the responsibilities of Redis in Stacksaga?
+                        </p>
+
+                        <ul>
+                            <li>
+                                <b>Collecting and Update the instance health for interested services.</b>
+                                <p>
+                                    After adding the StackSaga dependencies into the application, the application called
+                                    as
+                                    StackSaga client application. That client application contains a configurable
+                                    scheduler
+                                    to update the health to the Redis service. Redis service save the health details
+                                    in-memory and Redis push about server changes to other interested microservices and
+                                    the
+                                    admin service. See more how the CB works.
+                                </p>
+                            </li>
+
+                            <li>
+                                <b>Work as a data transfer protocol thorough the StackSaga client and StackSaga Admin
+                                    server.</b>
+                                <p>
+                                    The framework communicate with all the microservices based with the admin service.
+                                    Admin server retrieves some data from each microservices. But the framework doesn't
+                                    user Http protocol to their communications. All the data is communicated through the
+                                    Redis service.
+                                </p>
+                            </li>
+
+
+                        </ul>
                     </section><!--//docs-intro-->
 
                 </header>
 
                 <section class="docs-section" id="item-1-4">
-                    <h4>Components of the stackSAGA </h4>
+                    <h4>Explore the concepts behind stackSaga</h4>
                     <ul>
                         <li><a href="./introduction.html">Introduction</a></li>
-                        <li><a href="./architecture.html">Architecture</a></li>
-                        <li><a href="./how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types works </a></li>
+                        <li><a href="./architecture.html">High-level Architecture</a></li>
+                        <li><a href="./how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
+                            works </a></li>
                         <li><a href="topics/SEC.html">Saga execution coordinator (SEC)</a></li>
                         <li><a target="_blank" href="topics/aggregator.html">Aggregator</a></li>
                         <li><a target="_blank" href="topics/executor.html">Executor</a></li>
@@ -133,42 +239,12 @@
 
                 </section>
 
-                <section>
-                    <h3>stackSAGA High-level architecture diagram</h3>
-                    <div>
-                        <a target="_blank"
-                           href="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"><img
-                                class="img-fluid  "
-                                src="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"
-                                alt=""
-                                title="stackSAGA High-level architecture diagram"/></a>
-                    </div>
-                    <p>
-                        in the <a href="./introduction.html">introduction</a>, we got a clear idea of how microservice
-                        architecture works and what are the challenges that we have to face when implementing the
-                        microservice. here, we are going to explain how the stack saga works together with typical
-                        microservice architecture. here we have demonstrated a spring boot microservice architecture and
-                        how the StackSaga framework provides the Saga execution coordinator (SEC) capabilities without
-                        bothering to the default architecture.
-                    </p>
-                    <p>
-                        you can see in the High-level architecture diagram, there are new components newly added.
-                        mainly, other than the default database schema of each service, you can see they have new
-                        database schema called <a href="event-store">event-store</a>. the event-store will help to the
-                        framework to store all the metadata and transaction events.
-                    </p>
-                    <p>
-                        after adding the StackSaga into the application, the application try to connect with the Redis
-                        server.
-                    </p>
-
-                </section>
-
             </article>
 
         </div>
     </div>
 </div>
+
 <!-- Javascript -->
 <script src="../../assets/plugins/popper.min.js"></script>
 <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>

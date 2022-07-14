@@ -50,10 +50,15 @@
                     <span></span>
                     <span></span>
                 </button>
-                <div class="site-logo"><a class="navbar-brand" href="/index.html"><img class="logo-icon me-2"
-                                                                                       src="../../assets/images/coderdocs-logo.svg"
-                                                                                       alt="logo"><span
-                        class="logo-text">Stack<span class="text-alt">SAGA</span></span></a></div>
+
+                <div class="site-logo">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img src="../../assets/images/StackSagaIcon.png"
+                             alt="logo"/>
+                        <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
+                    </a>
+                </div>
+
             </div><!--//docs-logo-wrapper-->
             <div class="docs-top-utilities d-flex justify-content-end align-items-center">
                 <div class="top-search-box d-none d-lg-flex">
@@ -66,23 +71,25 @@
                 </div>
 
                 <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
+                            class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://stackoverflow.com/questions/tagged/stacksaga"><i
+                            class="fab fa-stack-overflow fa-fw"></i></a></li>
+
                 </ul><!--//social-list-->
-                <a href="https://doc.stacksaga.com" target="_blank"
-                   class="btn btn-primary d-none d-lg-flex">DOC</a>
-            </div><!--//docs-top-utilities-->
+
+            </div>
         </div><!--//container-->
     </div><!--//branding-->
 </header><!--//header-->
 <div class="docs-wrapper">
     <div id="docs-sidebar" class="docs-sidebar">
-        <div class="top-search-box d-lg-none p-3">
+        <!--<div class="top-search-box d-lg-none p-3">
             <form class="search-form">
                 <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
                 <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
             </form>
-        </div>
+        </div>-->
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
@@ -108,23 +115,26 @@
                 <li class="nav-item"><a class="nav-link scrollto" href="#what-is-saga-architecture-pattern">What Is Saga
                     Architecture Pattern</a>
                 </li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#saga-orchestration-pattern">Saga Orchestration Pattern</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#saga-orchestration-pattern">Saga Orchestration
+                    Pattern</a></li>
                 <li class="nav-item"><a class="nav-link scrollto" href="#classification-of-saga">Classification of SAGA
                     transactions</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#summary-of-classification-of-saga">Summary of Classification of SAGA
+                <li class="nav-item"><a class="nav-link scrollto" href="#summary-of-classification-of-saga">Summary of
+                    Classification of SAGA
                     translations</a></li>
             </ul>
+        </nav>
 
+        <!--//docs-nav-->
+    </div>
 
-        </nav><!--//docs-nav-->
-    </div><!--//docs-sidebar-->
+    <!--//docs-sidebar-->
 
     <div class="docs-content">
         <div class="container">
             <article class="docs-article" id="section-1">
                 <header class="docs-header">
-                    <h1 id="microservice-introduction" class="docs-heading">Introduction <span class="docs-time">Last updated: 2019-06-01</span>
-                    </h1>
+                    <h1 id="microservice-introduction" class="docs-heading">Introduction</h1>
                     <section class="docs-intro">
                         <p>In this section, you will get the architecture of this framework. other than that, you will
                             get
@@ -249,7 +259,7 @@
 
                 <section class="docs-section" id="classification-of-transactions">
                     <h2 id="classification-of-saga" class="section-heading">Classification of SAGA transactions</h2>
-                    <p >
+                    <p>
                         According to the behaviours of the transaction we can mainly identify 3 transaction types
                         that can be happened when we use saga.
                     </p>
@@ -349,24 +359,27 @@
                     <!--                        </li>-->
                     <!--                    </ul>-->
 
-<!--                    <h3>What is the revert problem in SAGA?</h3>-->
+                    <!--                    <h3>What is the revert problem in SAGA?</h3>-->
                     <br>
-                    <!--<div class="callout-block callout-block-success">
 
-                        <div class="content">
-                            <h4 class="callout-title">
-	                                <span class="callout-icon-holder me-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span>&lt;!&ndash;//icon-holder&ndash;&gt;
-                                Note
-                            </h4>
-                            <p>Now is the time to be executed all the service classes one by one to do the
-                                transaction fallowing the instructions that you have coded.</p>
-                        </div>&lt;!&ndash;//content&ndash;&gt;
-                    </div>&lt;!&ndash;//callout-block&ndash;&gt;
--->
                 </section><!--//section-->
+                <section class="docs-section" id="item-1-4">
+                    <h4>Explore the concepts behind stackSaga</h4>
+                    <ul>
+                        <li><a href="./introduction.html">Introduction</a></li>
+                        <li><a href="./architecture.html">High-level Architecture</a></li>
+                        <li><a href="./how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
+                            works </a></li>
+                        <li><a href="topics/SEC.html">Saga execution coordinator (SEC)</a></li>
+                        <li><a target="_blank" href="topics/aggregator.html">Aggregator</a></li>
+                        <li><a target="_blank" href="topics/executor.html">Executor</a></li>
+                        <li><a target="_blank" href="topics/handler.html">Handlers</a></li>
+                        <li><a target="_blank" href="topics/retryable-exception-vs-non-retryable-exception.html">Retryable
+                            Exceptions</a></li>
+                        <li><a href="topics/hint-store.html">Hint store</a></li>
+                    </ul>
 
+                </section>
             </article>
 
         </div>
