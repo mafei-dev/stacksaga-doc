@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Quick Start - Stack SAGA</title>
+    <title>Spring Boot Api Cloud Gateway Implementation - StackSaga</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Stack SAGA Quick Start with spring boot microservice.">
+    <meta name="description" content="Spring Boot Api Cloud Gateway Implementation - StackSaga">
     <meta name="author" content="Mafei">
 
 
@@ -134,30 +134,51 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Imperative</a></li>
                             <li class="breadcrumb-item"><a href="#">Mysql</a></li>
-                            <li class="breadcrumb-item"><a href="#">1.0.0</a></li>
-                            <li class="breadcrumb-item"><a href="#">example</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">api-gateway-service implementation
-                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">1.0</li>
                         </ol>
                     </nav>
-                    <h1 class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <h1 class="docs-heading">Introduction</h1>
                     <section class="docs-intro">
                         <p>
-                            In the previous articles, we have successfully created the eureka-server,
-                            As the next we are going to implement the spring api cloud gateway. this is the gateway that
-                            uses for communication between each microservice. in the monolithic architecture, the
-                            servers communicate with the ports of each service running on.
-                            in the microservice architecture we don't know what is the exact port that each
-                            microservice running on. even though we know the ports we don't want to care about it.
-                            because the eureka server handles internally all instances we have configured with eureka
-                            service. therefore, the api gateway can talk with the eureka server and get all the relevant
-                            services details to be routed from the eureka server. therefore, we don't care about the
-                            port
-                            numbers there.
+                            In the <a href="example-eureka-service-implementation.html">previous articles</a>, we have
+                            successfully created the eureka-server,
+                            As the next step we are going to implement the spring api cloud gateway. An API gateway is
+                            programming that sits in front of an API ( Application Programming
+                            Interface) and is the single-entry point for defined back-end APIs and microservices (which
+                            can be both internal and external). Sitting in front of APIs, the gateway acts as
+                            protection, administering security and scalability, and high availability. To put it simply,
+                            API Gateway takes all API requests from a customer, determines which services are demanded,
+                            and combines them into a unified, flawless experience for users.
                         </p>
+                        <br>
+                        <b>Advantages of API Gateway</b>
+                        <ul>
+                            <li>
+                                It improves the security of the microservices as we limit the access of external calls
+                                to all our services.
+                            </li>
+
+                            <li>
+                                The cross-cutting concerns like authentication, monitoring/metrics, and resiliency will
+                                be needed to be implemented only in the API Gateway as all our calls will be routed
+                                through it.
+                            </li>
+
+
+                            <li>
+                                The client does not know about the internal architecture of our microservices system.
+                                The client will not be able to determine the location of the microservice instances.
+                            </li>
+
+                            <li>
+                                Simplifies client interaction as he will need to access only a single service for all
+                                the requirements.
+                            </li>
+
+                        </ul>
                         <a href="https://github.com/stacksaga/stacksaga-implementation-example/tree/without-StackSaga"
                            target="_blank">
-                            Full source code on Github
+                            Full source code on GitHub (Without StackSaga)
                         </a>
                         <br>
                         <br>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Quick Start - Stack SAGA</title>
+    <title>Spring Boot Eureka Service Implementation - StackSaga</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -109,6 +109,18 @@
             </form>
         </div>
         <nav id="docs-nav" class="docs-nav navbar">
+            <ul class="section-items list-unstyled nav flex-column pb-3">
+                <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Eureka service
+                    implementation</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#classification-Of-Services">classification Of
+                    Services</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-eureka-service">creating eureka
+                    service</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#structure">structure</a></li>
+
+            </ul>
         </nav><!--//docs-nav-->
     </div><!--//docs-sidebar-->
     <div class="docs-content">
@@ -131,8 +143,24 @@
                         </ol>
                     </nav>
 
+                    <h2 id="classification-Of-Services" class="section-heading">Classification Of Services In
+                        Microservice Architecture By
+                        Function </h2>
+                    <p>
+                        According to the use-case the 1st step is creating the Eureka-service (service registry
+                        service).
+                        so you might have a question, why the eureka service is the 1st implementation ?
+                        The simple answer is that all others listed services are connected with the registry server.
+                        without having the registry server, other services can't talk to each other even the API gateway
+                        service. so you can mainly identify 2 types of servers.
+                    </p>
+
+                    <img class="img-fluid"
+                         src="../../../../../assets/img/mysql/1.0/imperative/stack-saga-e-store-example-classification-of-microservice-s-components.drawio.svg"
+                         alt="stacksaga e-store example classification of microservice's service"/>
+
                     <section class="docs-section" id="item-1-2">
-                        <h3 class="section-heading">Creating eureka service.</h3>
+                        <h3 id="creating-eureka-service" class="section-heading">Creating eureka service.</h3>
                         <p>
                             Visit to the spring initializer and create the project by adding the following dependencies.
                         </p>
@@ -149,7 +177,7 @@
                             dependency and
                             <a target="_blank"
                                href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/">spring-boot-starter-actuator</a>
-                            dependency have been used.
+                            dependencies have been used.
                             <br>
                             spring-boot-starter-web dependency will take care of the endpoints and
                             spring-cloud-starter-netflix-eureka-server provides the
@@ -188,7 +216,7 @@
                         <br>
                         <b>after all, the folder structure of the eureka-server application's src directory will be like
                             this.</b>
-                        <pre>
+                        <pre id="structure" style="background-color: #f4fcf6">
 ├───main
 │   ├───java
 │   │   └───org
