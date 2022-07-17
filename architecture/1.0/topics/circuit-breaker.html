@@ -124,13 +124,13 @@
                         <p>
 
                             The real-time CB works based on the live application's health. That means each servers
-                            publish their health to one location for period of time and then those health-information is
-                            shared with each other interested microservices. The common location is the Redis server.
+                            publish their health to one place for a period of time and then those health-information are
+                            shared with each other interested microservices. The common place is the Redis server.
                             The
-                            Redis server receive all the application health which use StackSaga. The health can be
+                            Redis server receives all the application health which use StackSaga. The health can be
                             positive or negative.
                             <br>
-                            here upu cane see how the StackSaga clint application push the health to Redis server. <a
+                            here you can see how the StackSaga clint application push the health to Redis server. <a
                                 href="./../reference/configuration-properties.html">it can be configured</a> in your
                             application.
                             <br>
@@ -169,6 +169,8 @@
                             <br>
                             <img src="./../../../assets/images/architecture/1.0/how-update-cb-in-stacksaga.gif" alt=""/>
                         </p>
+                        <h4>How StackSaga Circuit Breaker deal with StackSaga client services and non-stacksaga
+                            services.</h4>
                         <p>
                             <b>For instance</b>, your
                             microservice application can have many services called A,B,C,D likewise.

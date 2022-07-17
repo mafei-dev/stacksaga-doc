@@ -185,85 +185,6 @@
                 </header>
 
 
-                <section class="docs-section" id="item-1-2">
-                    <h3 class="section-heading">Creating eureka service.</h3>
-                    <p>
-                        Visit to the spring initializer and create the project by adding the following dependencies.
-                    </p>
-                    <img class="img-fluid"
-                         src="../../../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-eureka-server-creating.jpeg"
-                         alt="stacksaga e-store example creating eureka server"/>
-                    <p>
-                        for creating the eureka-service,
-                        <a target="_blank"
-                           href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started.first-application.pom">spring-boot-starter-web
-                        </a>dependency, <a
-                            target="_blank"
-                            href="https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/">spring-cloud-starter-netflix-eureka-server</a>
-                        dependency and
-                        <a target="_blank"
-                           href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/">spring-boot-starter-actuator</a>
-                        dependency have been used.
-                        <br>
-                        spring-boot-starter-web dependency will take care of the endpoints and
-                        spring-cloud-starter-netflix-eureka-server provides the
-                        service registry capabilities and spring-boot-starter-actuator provides metrics endpoint to
-                        monitoring
-                        the application.
-                    </p>
-                    <p>
-                        unzip and open the project with your favourite IDE. and next annotate the main class of the
-                        project by <code>@EnableEurekaServer</code>. it will enable the service registry capabilities
-                        for your application.
-                    </p>
-
-                    <script src="https://gist.github.com/mafei-dev/3767cdc2efdbd08ba9c3f76e25ca59ee.js"></script>
-                    <p>
-                        now we move to the configuration part of the eureka-service. the required configurations are
-                        configured here, and we use <code>.yml</code> file format instead of <code>.properties</code>
-                        format. by default your project has <code>.properties</code> file. if you prefer to use <code>.properties</code>,
-                        it doesn't matter.
-                        if you want to more configurations, please be kind to refer the official reference document <a
-                            href="https://cloud.spring.io/spring-cloud-netflix/reference/html/appendix.html">here</a>.
-                        <br>
-                        <br>
-                        <b>eureka-service > src/main/resources/application.yaml</b>
-                    </p>
-                    <script src="https://gist.github.com/mafei-dev/717b4c17e1296785e1ed0dc3066ac660.js"></script>
-
-                    Now you have successfully created and configured your eureka-service application, and it is ready to
-                    run.
-                    <br>
-                    <br>
-                    <b>after all, the folder structure of the eureka-server application's src directory will be like
-                        this.</b>
-                    <pre>
-├───main
-│   ├───java
-│   │   └───org
-│   │       └───mono
-│   │           └───stacksaga
-│   │               └───example
-│   │                   └───eurekaservice
-│   │                           EurekaServiceApplication.java
-│   │
-│   └───resources
-│       │   application.yaml
-│       │
-│       ├───static
-│       └───templates
-└───test
-    └───java
-        └───org
-            └───mono
-                └───stacksaga
-                    └───example
-                        └───eurekaservice
-
-                    </pre>
-                </section>
-
-
                 <section class="docs-section" id="item-1-4">
                     <h3 class="section-heading">Creating order-service.</h3>
                     <p>
@@ -661,57 +582,8 @@
 
                 </section>
 
-                <section class="docs-section" id="item-1-3">
-                    <h3 class="section-heading">Creating Cloud Api Gateway.</h3>
-                    <p>
-                        As the 2nd step we are going to implement our api gateway project. Same as before, go the <a
-                            target="_blank" href="https://start.spring.io/">spring
-                        initializer</a> and add the following dependencies and create a project and open
-                        it with your IDE.
-                    </p>
-                    <img class="img-fluid"
-                         src="../../../assets/img/mysql/1.0/imperative/api-gateway-implementation/stack-saga-example-cloud-api-gateway-creating.jpeg"
-                         alt="stacksaga e-store example creating Cloud Api Gateway"/>
-
-                    <p>
-                        At this time we have eureka-service. therefore we have to register our api
-                        gateway application with the eureka service. to do that, the following configurations have to be
-                        configured. after doing configuration, the eureka-client dependency provides the capability of
-                        connecting with the eureka service.
-                        That means the API cloud gateway project run as a clint of the eureka service as well.
-                    </p>
-                </section>
 
 
-                <section class="docs-section" id="item-1-5">
-                    <h3 class="section-heading">Creating user-service.</h3>
-                    <p>
-                        Visit to the spring initializer and create the project by adding the following dependencies.
-                    </p>
-                    <img class="img-fluid"
-                         src="../../../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-user-service-creating.jpeg"
-                         alt="stacksaga e-store example creating user-service"/>
-                </section>
-
-                <section class="docs-section" id="item-1-6">
-                    <h3 class="section-heading">Creating payment-service.</h3>
-                    <p>
-                        Visit to the spring initializer and create the project by adding the following dependencies.
-                    </p>
-                    <img class="img-fluid"
-                         src="../../../../../assets/img/mysql/1.0/imperative/quick-start/stack-saga-example-payment-service-creating.jpeg"
-                         alt="stacksaga e-store example creating payment-service"/>
-                </section>
-
-                <section class="docs-section" id="item-1-7">
-                    <h3 class="section-heading">Creating delivery-service.</h3>
-                    <p>
-                        Visit to the spring initializer and create the project by adding the following dependencies.
-                    </p>
-                    <img class="img-fluid"
-                         src="../../../assets/img/mysql/1.0/imperative/delivery-service-implementation/stack-saga-example-delivery-service-creating.jpeg"
-                         alt="stacksaga e-store example creating delivery-service"/>
-                </section>
 
                 <div>
                     Previous <a href="api-cloud-gateway-implementation.html">Implementation of Api-gateway</a>

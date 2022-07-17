@@ -224,10 +224,10 @@
                     <p>
                         In the microservice architecture we have concerned highly about the data consistency. As a
                         result of that, you have to move in to the Saga design pattern. But there is problem can be
-                        happened in rare when using SEC. because the SEC is also use a database to store the state and
+                        happened in rare when using SEC. because the SEC also uses a database to store the state and
                         other stuff. Then the frame has the responsibility to keep the data consistency of the main
                         transaction's data and the storing data. Just think the process is being executed and while
-                        after saving successfully some executors and the event-store database does down. Then the
+                        after saving successfully some executors and the event-store database goes down. Then the
                         framework is failed to provide the data consistency of their side. In the stack saga framework,
                         to avoid this consistency issue, a solution is provided.
                     </p>
