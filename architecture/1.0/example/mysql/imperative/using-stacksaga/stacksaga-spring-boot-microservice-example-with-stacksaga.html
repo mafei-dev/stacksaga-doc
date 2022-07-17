@@ -146,6 +146,10 @@
                         layers flow called <b>Handler layer</b> and <b>Executor layer</b> between the controller layer
                         and the service layer. those invocations of the layers are taken care of by the framework.
                     </p>
+                    <br>
+
+                    <b>spring boot mvc layered architecture</b>
+                    <br>
 
                     <a target="_blank"
                        href="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-MVC-layered-architecture.drawio.svg"><img
@@ -156,6 +160,8 @@
                     </a>
 
                     <br>
+                    <br>
+                    <b>StackSaga CHES layered architecture</b>
                     <br>
                     <a target="_blank"
                        href="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-CHES-layered-architecture.drawio.svg"><img
@@ -204,6 +210,23 @@
                         </div>
                     </div>
 
+                    <h3>Adding StackSaga dependencies</h3>
+                    <p>
+                        To use the StackSaga, you have to add the StackSaga dependencies to in your <code>pom.xml</code>
+                        file. here you have to add 2 dependencies. 1st one is the core-dependency and 2nd one is the
+                        implementation of the database accessing dependency. you can choose it as per your requirement.
+                        if you are willing to use Mysql database as your event-store, you can use <code>stack-saga-spring-boot-starter-mysql</code>
+                        dependency, or
+                        if you are willing to use
+                        MongoDb as your event-store, you can use <code>stack-saga-spring-boot-starter-mongo</code>
+                        dependency. <a href="./../../../../reference/dependencies.html">See more available
+                        implementation dependencies.</a> in this example, we use Mysql database as the event-store
+                        database.
+                    </p>
+
+                    <script src="https://gist.github.com/mafei-dev/9a13b74b48a7a8b13b2b46b6d9cee865.js"></script>
+                    <br>
+                    <br>
                     <h3>Creating the Aggregator class for place order process.</h3>
                     <p>we have to create a common class object for carrying the data through the
                         executors. the class is not just a class. it will be the base key for all process reading the
@@ -256,131 +279,134 @@
 
                 <section>
                     <h2>Identifying The executors for each operations</h2>
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>Service</td>
-                            <td>Executor Name</td>
-                            <td>Executor Type</td>
-                            <td>Process-Transaction</td>
-                            <td>Compensation-Transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
+                    <div class="table-responsive">
 
-                            <td>
-                                <code>POCreateOrderExecutor</code>
-                            </td>
+                        <table class="table">
+                            <tr>
+                                <td>#</td>
+                                <td>Service</td>
+                                <td>Executor Name</td>
+                                <td>Executor Type</td>
+                                <td>Process-Transaction</td>
+                                <td>Compensation-Transaction</td>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    order-service
+                                </td>
 
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND Executor</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                ORDER_CANCELED
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <code>POCheckUserExecutor</code>
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-primary">QUERY Executor</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                -
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <code>POMakePaymentExecutor</code>
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND Executor</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                REFUND_PAYMENT
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <code>POIncreasePointsExecutor</code>
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND Executor</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                DECREMENT_POINTS
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <code>PODispatchExecutor</code>
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND Executor</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                CANCEL_DELIVERY
-                            </td>
-                        </tr>
+                                <td>
+                                    <code>POCreateOrderExecutor</code>
+                                </td>
 
 
-                        </tbody>
-                    </table>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND Executor</span>
+                                </td>
+
+                                <td>
+                                    ORDER_CREATED
+                                </td>
+                                <td>
+                                    ORDER_CANCELED
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <code>POCheckUserExecutor</code>
+                                </td>
+
+                                <td>
+                                    <span class="badge  bg-primary">QUERY Executor</span>
+                                </td>
+                                <td>
+                                    CHECK_USER
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    payment-service
+                                </td>
+                                <td>
+                                    <code>POMakePaymentExecutor</code>
+                                </td>
+
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND Executor</span>
+                                </td>
+                                <td>
+                                    MAKE_PAYMENT
+                                </td>
+                                <td>
+                                    REFUND_PAYMENT
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <code>POIncreasePointsExecutor</code>
+                                </td>
+
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND Executor</span>
+                                </td>
+                                <td>
+                                    INCREMENT_POINTS
+                                </td>
+                                <td>
+                                    DECREMENT_POINTS
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    delivery-service
+                                </td>
+                                <td>
+                                    <code>PODispatchExecutor</code>
+                                </td>
+
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND Executor</span>
+                                </td>
+                                <td>
+                                    ADD_TO_DELIVERY
+                                </td>
+                                <td>
+                                    CANCEL_DELIVERY
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
                     <p>According to the summarized table, you can see there are two types of executors called
                         command-executors
                         and query-executors are there. and all the <a
@@ -436,6 +462,7 @@
                                 service name in multiple times as your usage of that particular service. otherwise, you
                                 can put those service in the property file. in this example we maintain those service
                                 names as static data by creating an interface like below.
+
                                 <br>
                                 <br>
                                 <small>
@@ -444,6 +471,7 @@
                                         org/mono/stacksaga/example/orderservice/utils/Services.java
                                     </b>
                                 </small>
+
                                 <script src="https://gist.github.com/mafei-dev/a06310e9e64becfdb34547025318eecc.js"></script>
                                 <br>
                                 <br>

@@ -163,93 +163,99 @@
 
                     <h2>Identifying the compensations transactions</h2>
                     for the convenience, let's use a table.
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <div class="table-responsive">
 
-                    <table class="table">
-                        <tr>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                order-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
+                                <table class="table">
+                                    <tr>
+                                        <td>service</td>
+                                        <td>execution/action/event</td>
+                                        <td>process-transaction</td>
+                                        <td>compensation-transaction</td>
+                                    </tr>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            order-service
+                                        </td>
+                                        <td>
+                                            <span class="badge  bg-warning">COMMAND</span>
+                                        </td>
 
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
+                                        <td>
+                                            ORDER_CREATED
+                                        </td>
+                                        <td>
+                                            <b>ORDER_CANCELED</b>
+                                        </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            user-service
+                                        </td>
+                                        <td>
+                                            <span class="badge  bg-primary">QUERY</span>
+                                        </td>
+                                        <td>
+                                            CHECK_USER
+                                        </td>
+                                        <td>
+                                            <b>----</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            payment-service
+                                        </td>
+                                        <td>
+                                            <span class="badge  bg-warning">COMMAND</span>
+                                        </td>
+                                        <td>
+                                            MAKE_PAYMENT
+                                        </td>
+                                        <td>
+                                            <b>REFUND_PAYMENT</b>
+                                        </td>
+                                    </tr>
 
-                        <tr>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
+                                    <tr>
+                                        <td>
+                                            user-service
+                                        </td>
+                                        <td>
+                                            <span class="badge  bg-warning">COMMAND</span>
+                                        </td>
+                                        <td>
+                                            INCREMENT_POINTS
+                                        </td>
+                                        <td>
+                                            <b>DECREMENT_POINTS</b>
+                                        </td>
+                                    </tr>
 
-                        <tr>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
+                                    <tr>
+                                        <td>
+                                            delivery-service
+                                        </td>
+                                        <td>
+                                            <span class="badge  bg-warning">COMMAND</span>
+                                        </td>
+                                        <td>
+                                            ADD_TO_DELIVERY
+                                        </td>
+                                        <td>
+                                            <b>CANCEL_DELIVERY</b>
+                                        </td>
+                                    </tr>
 
 
-                        </tbody>
-                    </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                     <br>
                     <br>
 
@@ -259,110 +265,112 @@
                         are going to create the next method of compensation for creating the order in the
                         order-service. <b>(cancel-order)</b>. this is an internal service's method. because, the
                         invocation will be done in its own service. (without accessing another service)</p>
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr class="bg-primary">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
+                    <div class="table-responsive">
 
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
+                        <table class="table">
+                            <tr>
+                                <td>#</td>
+                                <td>service</td>
+                                <td>execution/action/event</td>
+                                <td>process-transaction</td>
+                                <td>compensation-transaction</td>
+                            </tr>
+                            <tbody>
+                            <tr class="bg-primary">
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    order-service
+                                </td>
 
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
+                                <td>
+                                    ORDER_CREATED
+                                </td>
+                                <td>
+                                    <b>ORDER_CANCELED</b>
+                                </td>
 
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-primary">QUERY</span>
+                                </td>
+                                <td>
+                                    CHECK_USER
+                                </td>
+                                <td>
+                                    <b>----</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    payment-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    MAKE_PAYMENT
+                                </td>
+                                <td>
+                                    <b>REFUND_PAYMENT</b>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    INCREMENT_POINTS
+                                </td>
+                                <td>
+                                    <b>DECREMENT_POINTS</b>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    delivery-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    ADD_TO_DELIVERY
+                                </td>
+                                <td>
+                                    <b>CANCEL_DELIVERY</b>
+                                </td>
+                            </tr>
 
 
-                        </tbody>
-                    </table>
-
+                            </tbody>
+                        </table>
+                    </div>
                     <small>
                         <span class="badge bg-primary">Updated One</span>
                         <br>
@@ -382,110 +390,112 @@
                         have a compensation transaction.</p>
 
                     <h3>Creating compensation for make-payment (payment-service)</h3>
+                    <div class="table-responsive">
 
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
+                        <table class="table">
+                            <tr>
+                                <td>#</td>
+                                <td>service</td>
+                                <td>execution/action/event</td>
+                                <td>process-transaction</td>
+                                <td>compensation-transaction</td>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    order-service
+                                </td>
 
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
 
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
+                                <td>
+                                    ORDER_CREATED
+                                </td>
+                                <td>
+                                    <b>ORDER_CANCELED</b>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr class="bg-primary">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-primary">QUERY</span>
+                                </td>
+                                <td>
+                                    CHECK_USER
+                                </td>
+                                <td>
+                                    <b>----</b>
+                                </td>
+                            </tr>
+                            <tr class="bg-primary">
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    payment-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    MAKE_PAYMENT
+                                </td>
+                                <td>
+                                    <b>REFUND_PAYMENT</b>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    INCREMENT_POINTS
+                                </td>
+                                <td>
+                                    <b>DECREMENT_POINTS</b>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    delivery-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    ADD_TO_DELIVERY
+                                </td>
+                                <td>
+                                    <b>CANCEL_DELIVERY</b>
+                                </td>
+                            </tr>
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     <p>create the dto class to transfer data.</p>
                     <small>
                         <span class="badge bg-primary">New One</span>
@@ -508,111 +518,112 @@
 
                     <br>
                     <h3>Creating compensation for increase-points</h3>
+                    <div class="table-responsive">
 
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
+                        <table class="table">
+                            <tr>
+                                <td>#</td>
+                                <td>service</td>
+                                <td>execution/action/event</td>
+                                <td>process-transaction</td>
+                                <td>compensation-transaction</td>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    order-service
+                                </td>
 
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
 
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
+                                <td>
+                                    ORDER_CREATED
+                                </td>
+                                <td>
+                                    <b>ORDER_CANCELED</b>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-primary">QUERY</span>
+                                </td>
+                                <td>
+                                    CHECK_USER
+                                </td>
+                                <td>
+                                    <b>----</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    payment-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    MAKE_PAYMENT
+                                </td>
+                                <td>
+                                    <b>REFUND_PAYMENT</b>
+                                </td>
+                            </tr>
 
-                        <tr class="bg-primary">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
+                            <tr class="bg-primary">
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    INCREMENT_POINTS
+                                </td>
+                                <td>
+                                    <b>DECREMENT_POINTS</b>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    delivery-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    ADD_TO_DELIVERY
+                                </td>
+                                <td>
+                                    <b>CANCEL_DELIVERY</b>
+                                </td>
+                            </tr>
 
 
-                        </tbody>
-                    </table>
-
+                            </tbody>
+                        </table>
+                    </div>
                     <small>
                         <span class="badge bg-primary">Updated One</span>
                         <br>
@@ -624,6 +635,7 @@
                     <br>
 
                     <h3>Creating compensation for add-to-delivery (delivery-service)</h3>
+                    <div class="table-responsive">
 
                     <table class="table">
                         <tr>
@@ -729,6 +741,7 @@
                         </tbody>
                     </table>
 
+                    </div>
                     <small>
                         <span class="badge bg-primary">Updated One</span>
                         <br>

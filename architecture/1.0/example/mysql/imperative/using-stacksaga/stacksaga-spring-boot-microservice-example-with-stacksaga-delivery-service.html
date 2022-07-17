@@ -114,634 +114,161 @@
     </div><!--//docs-sidebar-->
 
     <div class="docs-content">
+
         <div class="container">
             <article class="docs-article" id="section-1">
 
                 <header class="docs-header">
-                    <h1 class="docs-heading">Spring boot microservice example with StackSAGA<span
-                            class="docs-time">Last updated: 2019-06-01</span></h1>
+
+                    <h1 class="docs-heading">delivery-service - migration to SAGA</h1>
+                    <section>
+                        <p>
+                            In one of past few sessions we have done our payment-service without moving to the Saga
+                            design
+                            pattern. now we are going to use that service to migrate to Saga design pattern by using
+                            StackSaga. now you know that when the order-service migrates to the StackSaga in the
+                            previous session, one additional method was created apart from the default method to invoke
+                            the compensation-transaction. in that method called an API from the payment-service. that's
+                            what we are going to implement here.
+                        </p>
+
+                        <div class="callout-block callout-block-info">
+
+                            <div class="content">
+                                <h4 class="callout-title">
+                                                    <span class="callout-icon-holder me-1">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </span>
+                                    Note
+                                </h4>
+                                <p>
+                                    Adding StackSaga dependencies is not required in this application. but, in terms of
+                                    Real-time circuit breaker pattern, it would be better if you add StackSaga
+                                    dependencies in to each services. if you don't add the framework into the service,
+                                    Real-time circuit breaker is not used. to get full features of the framework, you
+                                    can use the dependencies in each application. to see how it works <a target="_blank"
+                                                                                                         href="./../../../../topics/circuit-breaker.html">please
+                                    refer this</a>.
+                                </p>
+
+                                <small>
+                                    <span class="badge bg-primary">Updated</span>
+                                    <b>delivery-service >
+                                        pom.xml
+                                    </b>
+                                </small>
+
+
+                                <script src="https://gist.github.com/mafei-dev/9a13b74b48a7a8b13b2b46b6d9cee865.js"></script>
+
+                                <br>
+                                <br>
+
+                                <small>
+                                    <span class="badge bg-primary">Updated</span>
+                                    <b>delivery-service > application.yml
+                                    </b>
+                                </small>
+                                <script src="https://gist.github.com/mafei-dev/794966745a14090eb4801f80130e9a88.js"></script>
+
+                                <br>
+                                <br>
+
+                                <small>
+                                    <span class="badge bg-primary">Updated</span>
+                                    <b>delivery-service >
+                                        org/mono/stacksaga/example/deliveryservice/DeliveryServiceApplication.java
+                                    </b>
+                                </small>
+                                <br>
+                                <br>
+                                <script src="https://gist.github.com/mafei-dev/77fe8d874c68bb411e4e797855ddbb40.js"></script>
+                            </div>
+                        </div>
+
+
+                        <h5 class="docs-heading">
+                            Creating DeliveryStatusRepository
+                        </h5>
+                        <br>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">Updated</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/repository/DeliveryStatusRepository.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/6ecba305517f6868b172f5ecd14fc982.js"></script>
+                        <br>
+                        <br>
+
+
+                        <h5 class="docs-heading">
+                            Creating StartDeliveryRevertRequestBody
+                        </h5>
+                        <br>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">New</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRevertRequestBody.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/222d5ebe9bcd1606dc516a65793b0d5b.js"></script>
+                        <br>
+                        <br>
+
+
+                        <h5 class="docs-heading">
+                            Creating StartDeliveryRevertResponseBody
+                        </h5>
+                        <br>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">New</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRevertRequestBody.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/6475c58751f920f01f34e727ad820e47.js"></script>
+                        <br>
+                        <br>
+
+                        <h5 class="docs-heading">
+                            Updating DeliveryDetailService
+                        </h5>
+                        <br>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">Updated</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/service/DeliveryDetailService.java
+                            </b>
+                        </small>
+
+                        <script src="https://gist.github.com/mafei-dev/d7a927334aa45ea67fb524832591c82b.js"></script>
+                        <br>
+                        <br>
+
+                        <h5 class="docs-heading">
+                            Updating DeliveryController
+                        </h5>
+                        <br>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">Updated</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/controller/DeliveryController.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/d376a7aa4a86a0c8875311dadbfb1aa3.js"></script>
+                        <br>
+                        <br>
+
+                    </section>
 
 
                 </header>
-
-                <section class="docs-section" id="item-1-4">
-                    <h2 class="docs-heading">Order-service migrate to Saga design pattern.</h2>
-
-                    <br>
-                    <h3>Flow without Saga</h3>
-                    <a target="_blank"
-                       href="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-step-flow-without-saga.drawio.svg"><img
-                            class="img-fluid  "
-                            src="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-step-flow-without-saga.drawio.svg"
-                            alt="stack saga microservice spring boot example e-store example step flow without saga"
-                            title="stack saga e-store example step flow without saga"/></a>
-                    <p>
-                        in the previous section, we have built the basic project with happy scenario (success-scenario).
-                        this flow will explain that process how it was executed.
-                    </p>
-                    <br>
-
-                    <h3>Flow with Saga (With compensation transactions)</h3>
-                    <a target="_blank"
-                       href="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-basic-saga-flow.drawio.svg"><img
-                            class="img-fluid  "
-                            src="../../../../../../assets/img/mysql/1.0/imperative/using-stacksaga/stack-saga-e-store-example-basic-saga-flow.drawio.svg"
-                            alt="stack saga microservice spring boot example e-store example step flow with saga"
-                            title="stack saga e-store example step flow with saga"/></a>
-                    <p>
-                        now we are going to add the compensation for all the process (command-process / command
-                        execution) which executed on that flow. You can see here each command execution has a
-                        compensation if the main execution failed in some case.
-                        that means just think the request goes through the first 3 service successfully, but in the
-                        increment points will be failed. then what to do? then we have to decide whether the process we
-                        can skip and continue to forward. or we have ro revert all the execution that we have been
-                        doing. most of the time we have to revert all the process we have done so far. that why the saga
-                        has compensation transaction for all the executions (for command execution).
-                    </p>
-                    <br>
-                    <br>
-
-                    <h2>Identifying the compensations transactions</h2>
-                    for the convenience, let's use a table.
-
-                    <table class="table">
-                        <tr>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                order-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-                    <br>
-                    <br>
-
-                    <h3>Creating compensation for create-order</h3>
-                    <p>We already have the success scenario <b>(create-order)</b> without the compensation. due to the
-                        create-order is a command execution, th execution should have a compensation. So, we
-                        are going to create the next method of compensation for creating the order in the
-                        order-service. <b>(cancel-order)</b>. this is an internal service's method. because, the
-                        invocation will be done in its own service. (without accessing another service)</p>
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr class="bg-primary">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-
-                    <small>
-                        <span class="badge bg-primary">Updated One</span>
-                        <br>
-                        <b>order-service >
-                            src/main/java/org/mono/stacksaga/example/orderservice/service/internal/InternalCustomerOrderService.java
-                        </b>
-                    </small>
-                    <script src="https://gist.github.com/mafei-dev/9526f19ab9b3111912ea8b3845abe930.js"></script>
-
-                    <p>The newly added method as the compensation of the create-order is <code>public void
-                        createOrderRevert(String reason, String orderUid){}</code>
-                    </p>
-
-                    <br>
-                    <br>
-                    <p>**The 2nd execution is checking the user activeness. but it is query execution. so it shouldn't
-                        have a compensation transaction.</p>
-
-                    <h3>Creating compensation for make-payment (payment-service)</h3>
-
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr class="bg-primary">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-                    <p>create the dto class to transfer data.</p>
-                    <small>
-                        <span class="badge bg-primary">New One</span>
-                        <br>
-                        <b>order-service >
-                            org/mono/stacksaga/example/orderservice/dto/MakePaymentRevertRequestBody.java
-                        </b>
-                    </small>
-                    <script src="https://gist.github.com/mafei-dev/ac29559b03c1b71ede2ac2327fcc54cf.js"></script>
-
-                    <p>create the dto class to transfer data.</p>
-                    <small>
-                        <span class="badge bg-primary">Updated One</span>
-                        <br>
-                        <b>order-service >
-                            org/mono/stacksaga/example/orderservice/dto/ExternalPaymentService.java
-                        </b>
-                    </small>
-                    <script src="https://gist.github.com/mafei-dev/befe39a515cf5499e2b8c6968197bcd2.js"></script>
-
-                    <br>
-                    <h3>Creating compensation for increase-points</h3>
-
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
-
-                        <tr class="bg-primary">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-
-                    <small>
-                        <span class="badge bg-primary">Updated One</span>
-                        <br>
-                        <b>order-service >
-                            org/mono/stacksaga/example/orderservice/service/external/ExternalUserPointsService.java
-                        </b>
-                    </small>
-                    <script src="https://gist.github.com/mafei-dev/37aea224124d67c4aba71e87868deb9c.js"></script>
-                    <br>
-
-                    <h3>Creating compensation for add-to-delivery (delivery-service)</h3>
-
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
-
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
-
-                        <tr class="bg-primary">
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-
-                    <small>
-                        <span class="badge bg-primary">Updated One</span>
-                        <br>
-                        <b>order-service >
-                            org/mono/stacksaga/example/orderservice/service/external/ExternalDeliveryService.java
-                        </b>
-                    </small>
-                    <script src="https://gist.github.com/mafei-dev/a7c12006418d1a2885988fee4af634fb.js"></script>
-
-                    <p>now we have created all the compensation transactions methods for relevant command
-                        executions. in the next article we are going to use those created process transactions and their
-                        compensation transactions according to the StackSaga's specifications.</p>
-                </section>
 
                 <section class="docs-section">
                     <h2>Example series</h2>
@@ -888,6 +415,7 @@
             </article>
 
         </div>
+
     </div>
 </div>
 <!-- Javascript -->
