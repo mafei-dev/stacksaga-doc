@@ -101,13 +101,16 @@
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
                         class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Migration to SAGA</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#adding-stacksaga-dependencies">Adding StackSaga dependencies</a>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#adding-stacksaga-dependencies">Adding StackSaga
+                    dependencies</a>
                 </li>
                 <li class="nav-item"><a class="nav-link scrollto" href="#updating-userrepository">Updating
                     UserRepository</a></li>
                 <li class="nav-item"><a class="nav-link scrollto" href="#updating-userservice">Updating UserService</a>
                 </li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#updating-userpointscontroller">Updating UserPointsController</a>
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-userpointscontroller">Updating
+                    UserPointsController</a>
                 </li>
 
 
@@ -123,7 +126,7 @@
                 <header class="docs-header">
 
                     <h1 class="docs-heading">user-service - migration to SAGA</h1>
-                    <section >
+                    <section>
                         <p id="adding-stacksaga-dependencies">
                             In one of past few sessions we have done our user-service without moving to the Saga design
                             pattern. now we are going to use that service to migrate to Saga design pattern by using
@@ -133,7 +136,7 @@
                             what we are going to implement here.
                         </p>
 
-                        <div  class="callout-block callout-block-info">
+                        <div class="callout-block callout-block-info">
 
                             <div class="content">
                                 <h4 class="callout-title">
@@ -236,9 +239,10 @@
                         </div>
 
 
-                        <br >
                         <br>
-                        <p id="updating-userrepository">now we are going to update our existing <code>UserRepository</code> interface to create new
+                        <br>
+                        <p id="updating-userrepository">now we are going to update our existing
+                            <code>UserRepository</code> interface to create new
                             method as a revert of the increment point. the newly added method called as <code>incrementPointsByOneRevert</code>.
                             the method's responsible for revert the increment as a compensation.
                             <br>
@@ -300,12 +304,12 @@
 
                         <script src="https://gist.github.com/mafei-dev/fbd3146451414b774c86dd1e5296598a.js"></script>
 
-                        <p>now the application is ready to use after making those changes.</p>
+                        <p>now the application is ready to use for Saga design pattern after making those changes.</p>
 
                         <br>
                         <br>
 
-                        <p>The next step is that make ready the payment-service to migrate to Saga. </p>
+                        <p>The next step is make ready the payment-service to migrate to Saga. </p>
 
 
                     </section>
