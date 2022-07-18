@@ -636,109 +636,109 @@
                     <h3>Creating compensation for add-to-delivery (delivery-service)</h3>
                     <div class="table-responsive">
 
-                    <table class="table">
-                        <tr>
-                            <td>#</td>
-                            <td>service</td>
-                            <td>execution/action/event</td>
-                            <td>process-transaction</td>
-                            <td>compensation-transaction</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                order-service
-                            </td>
+                        <table class="table">
+                            <tr>
+                                <td>#</td>
+                                <td>service</td>
+                                <td>execution/action/event</td>
+                                <td>process-transaction</td>
+                                <td>compensation-transaction</td>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    order-service
+                                </td>
 
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
 
-                            <td>
-                                ORDER_CREATED
-                            </td>
-                            <td>
-                                <b>ORDER_CANCELED</b>
-                            </td>
+                                <td>
+                                    ORDER_CREATED
+                                </td>
+                                <td>
+                                    <b>ORDER_CANCELED</b>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-primary">QUERY</span>
-                            </td>
-                            <td>
-                                CHECK_USER
-                            </td>
-                            <td>
-                                <b>----</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                payment-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                MAKE_PAYMENT
-                            </td>
-                            <td>
-                                <b>REFUND_PAYMENT</b>
-                            </td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-primary">QUERY</span>
+                                </td>
+                                <td>
+                                    CHECK_USER
+                                </td>
+                                <td>
+                                    <b>----</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    payment-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    MAKE_PAYMENT
+                                </td>
+                                <td>
+                                    <b>REFUND_PAYMENT</b>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                user-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                INCREMENT_POINTS
-                            </td>
-                            <td>
-                                <b>DECREMENT_POINTS</b>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    user-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    INCREMENT_POINTS
+                                </td>
+                                <td>
+                                    <b>DECREMENT_POINTS</b>
+                                </td>
+                            </tr>
 
-                        <tr class="bg-primary">
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                delivery-service
-                            </td>
-                            <td>
-                                <span class="badge  bg-warning">COMMAND</span>
-                            </td>
-                            <td>
-                                ADD_TO_DELIVERY
-                            </td>
-                            <td>
-                                <b>CANCEL_DELIVERY</b>
-                            </td>
-                        </tr>
+                            <tr class="bg-primary">
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    delivery-service
+                                </td>
+                                <td>
+                                    <span class="badge  bg-warning">COMMAND</span>
+                                </td>
+                                <td>
+                                    ADD_TO_DELIVERY
+                                </td>
+                                <td>
+                                    <b>CANCEL_DELIVERY</b>
+                                </td>
+                            </tr>
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
 
                     </div>
                     <small>
@@ -837,19 +837,12 @@
                                 Microservice example by using StackSAGA (Imperative way).
                             </p>
                             <ul>
-                                <li>
-                                    <p>
-                                        <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga.html"
-                                           target="_blank">
-                                            Overview
-                                        </a>
-                                    </p>
-                                </li>
+
                                 <li>
                                     <p>
                                         <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-user-service.html"
                                            target="_blank">
-                                            user-service - migration of SAGA flow
+                                            user-service - migration to Saga design pattern
                                         </a>
                                     </p>
                                 </li>
@@ -858,7 +851,7 @@
                                     <p>
                                         <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-payment-service.html"
                                            target="_blank">
-                                            payment-service - migration of SAGA flow
+                                            payment-service - migration to Saga design pattern
                                         </a>
                                     </p>
                                 </li>
@@ -867,7 +860,7 @@
                                     <p>
                                         <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-delivery-service.html"
                                            target="_blank">
-                                            delivery-service - migration of SAGA flow
+                                            delivery-service - migration to Saga design pattern
                                         </a>
                                     </p>
                                 </li>
@@ -876,7 +869,16 @@
                                     <p>
                                         <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-delivery-service.html"
                                            target="_blank">
-                                            order-service - migration of StackSaga
+                                            order-service - migration to Saga design pattern
+                                        </a>
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>
+                                        <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga.html"
+                                           target="_blank">
+                                            order-service - migration to Saga design pattern with StackSaga
                                         </a>
                                     </p>
                                 </li>
@@ -885,7 +887,7 @@
                                     <p>
                                         <a href="./stacksaga-spring-boot-microservice-example-test-with-stacksaga.html"
                                            target="_blank">
-                                            Final application test with using StackSaga
+                                            Final application using StackSaga
                                         </a>
                                     </p>
                                 </li>
