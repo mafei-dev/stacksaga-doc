@@ -100,13 +100,32 @@
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Microservice Architecture</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Section Item 1.2</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Section Item 1.3</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Section Item 1.4</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Section Item 1.5</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Section Item 1.6</a></li>
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Migration to SAGA</a></li>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#adding-stacksaga-dependencies">Adding StackSaga
+                    dependencies</a>
+                </li>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-deliverystatusrepository">
+                    Updating DeliveryStatusRepository
+                </a>
+                </li>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-deliverydetailservice">
+                    Updating DeliveryDetailService
+                </a>
+                </li>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#adding-startdeliveryrevertrequestbody">
+                    Adding StartDeliveryRevertRequestBody
+                </a>
+                </li>
+
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-deliverycontroller">
+                    Updating DeliveryController
+                </a>
+                </li>
+
 
             </ul>
 
@@ -122,7 +141,7 @@
 
                     <h1 class="docs-heading">delivery-service - migration to SAGA</h1>
                     <section>
-                        <p>
+                        <p id="adding-stacksaga-dependencies">
                             In one of past few sessions we have done our payment-service without moving to the Saga
                             design
                             pattern. now we are going to use that service to migrate to Saga design pattern by using
@@ -151,6 +170,19 @@
                                     refer this</a>.
                                 </p>
 
+                                <p>
+                                    If you add the dependencies into the application, you have to add 2 dependencies.
+                                    1st one is the core-dependency. it is required. and 2nd
+                                    one is the implementation of the database accessing dependency. you can choose it as
+                                    per your requirement. if you are willing to use Mysql database as your event-store,
+                                    you can use stack-saga-spring-boot-starter-mysql dependency, or if you are willing
+                                    to use MongoDb as your event-store, you can use stack-saga-spring-boot-starter-mongo
+                                    dependency. <a href="./../../../../reference/dependencies.html">See more</a>
+                                    available implementation dependencies. in this example, we use
+                                    Mysql database as the event-store database.
+                                </p>
+
+
                                 <small>
                                     <span class="badge bg-primary">Updated</span>
                                     <b>delivery-service >
@@ -163,6 +195,14 @@
 
                                 <br>
                                 <br>
+                                <p>
+                                    If you have added StackSaga in your application, you have to configure the
+                                    properties for StackSaga. you can see below the configurations are done. in you want
+                                    to get the idea for each configuration properties please refer the <a
+                                        href="./../../../../reference/configuration-properties.html">configuration
+                                    reference</a>.
+                                </p>
+                                <br>
 
                                 <small>
                                     <span class="badge bg-primary">Updated</span>
@@ -173,7 +213,30 @@
 
                                 <br>
                                 <br>
-
+                                <p>
+                                    If you have added StackSaga in your application, after changing the properties, you
+                                    have to annotate the application as <code>
+                                    @EnableStackSaga
+                                </code>. and after that you can see that some AutoConfiguration classes are excluded.
+                                    the reason is that the framework uses the
+                                    <code>spring-boot-starter-data-redis</code> dependency and
+                                    <code>liquibase-core</code> dependency in order to have that features. but the
+                                    framework doesn't use the default configuration that the dependencies provide for
+                                    you.
+                                    because the stackSaga use its own configuration to access those features by using
+                                    that dependencies. but in the application, you might want to use those dependencies
+                                    in your application for your wants. you can use those default configurations as
+                                    you want. if stackSaga have used those default configurations for their execution,
+                                    as a developer, you have to configure those configurations by spending some time. it
+                                    will be bothered to you. therefore, if you are not going to use <b>Redis</b> and <b>liquibase</b>
+                                    features for your application, the autoconfiguration class should be excluded like
+                                    as have been done in the example's main class like below.
+                                    otherwise, if you use all or one of them in your application to get those features,
+                                    you
+                                    can provide those configurations by using default property that those dependencies
+                                    provide without excluding the autoconfiguration classes.
+                                </p>
+                                <br>
                                 <small>
                                     <span class="badge bg-primary">Updated</span>
                                     <b>delivery-service >
@@ -187,11 +250,17 @@
                         </div>
 
 
-                        <h5 class="docs-heading">
-                            Creating DeliveryStatusRepository
-                        </h5>
                         <br>
-                        <br>
+                        <p id="updating-deliverystatusrepository">
+                            before going to create the endpoint as compensation of add-to-delivery, we should create all
+                            the necessary methods and classes. therefore, we should have method for updating status of
+                            the existing delivery detail in side of the DeliveryStatusRepository. and after that we
+                            should create the compensation (revert) method in the related service class.
+                        </p>
+                        <p>
+                            here you can see the updated method called <code>updateStatus</code> in the
+                            DeliveryStatusRepository.
+                        </p>
                         <small>
                             <span class="badge bg-primary">Updated</span>
                             <b>delivery-service >
@@ -200,45 +269,14 @@
                         </small>
                         <script src="https://gist.github.com/mafei-dev/6ecba305517f6868b172f5ecd14fc982.js"></script>
                         <br>
-                        <br>
 
+                        <p id="updating-deliverydetailservice">after creating the daa access layer, we are going to
+                            create the new method called <code>startDeliveryRevert</code>
+                            inside
+                            the
+                            DeliveryDetailService class to execute and update the status of the delivery-detail by using
+                            the method which created above in the repository.</p>
 
-                        <h5 class="docs-heading">
-                            Creating StartDeliveryRevertRequestBody
-                        </h5>
-                        <br>
-                        <br>
-                        <small>
-                            <span class="badge bg-primary">New</span>
-                            <b>delivery-service >
-                                org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRevertRequestBody.java
-                            </b>
-                        </small>
-                        <script src="https://gist.github.com/mafei-dev/222d5ebe9bcd1606dc516a65793b0d5b.js"></script>
-                        <br>
-                        <br>
-
-
-                        <h5 class="docs-heading">
-                            Creating StartDeliveryRevertResponseBody
-                        </h5>
-                        <br>
-                        <br>
-                        <small>
-                            <span class="badge bg-primary">New</span>
-                            <b>delivery-service >
-                                org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRevertRequestBody.java
-                            </b>
-                        </small>
-                        <script src="https://gist.github.com/mafei-dev/6475c58751f920f01f34e727ad820e47.js"></script>
-                        <br>
-                        <br>
-
-                        <h5 class="docs-heading">
-                            Updating DeliveryDetailService
-                        </h5>
-                        <br>
-                        <br>
                         <small>
                             <span class="badge bg-primary">Updated</span>
                             <b>delivery-service >
@@ -248,12 +286,30 @@
 
                         <script src="https://gist.github.com/mafei-dev/d7a927334aa45ea67fb524832591c82b.js"></script>
                         <br>
+
+                        <p id="adding-startdeliveryrevertrequestbody">
+                            After creating the service method, now we are going to make the modification in the
+                            controller class. before creating the new compensation method we have to create the Dto
+                            classes to transfer and retrieve the data coming from the request.
+                        </p>
+                        <p>
+                            to grab the data from the request creates the RequestBody class and the class contains one
+                            filed called <code>trackingNumber</code>
+                        </p>
+                        <br>
+                        <small>
+                            <span class="badge bg-primary">New</span>
+                            <b>delivery-service >
+                                org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRevertRequestBody.java
+                            </b>
+                        </small>
+                        <script src="https://gist.github.com/mafei-dev/222d5ebe9bcd1606dc516a65793b0d5b.js"></script>
                         <br>
 
-                        <h5 class="docs-heading">
-                            Updating DeliveryController
-                        </h5>
-                        <br>
+                        <p id="updating-deliverycontroller">now is the time to create the compensation method of <code>start-delivery</code>.
+                            the
+                            method is called as <code>startDeliveryRevert</code> and the endpoint will be <code>delivery-service/start/revert</code>.
+                        </p>
                         <br>
                         <small>
                             <span class="badge bg-primary">Updated</span>
@@ -383,7 +439,7 @@
 
                                 <li>
                                     <p>
-                                        <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-delivery-service.html"
+                                        <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-order-service.html"
                                            target="_blank">
                                             order-service - migration to Saga design pattern
                                         </a>
