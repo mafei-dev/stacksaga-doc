@@ -100,13 +100,16 @@
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Microservice Architecture</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Section Item 1.2</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Section Item 1.3</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Section Item 1.4</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Section Item 1.5</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Section Item 1.6</a></li>
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Migration to SAGA</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#adding-stacksaga-dependencies">Adding StackSaga dependencies</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-userrepository">Updating
+                    UserRepository</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-userservice">Updating UserService</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#updating-userpointscontroller">Updating UserPointsController</a>
+                </li>
+
 
             </ul>
 
@@ -120,8 +123,8 @@
                 <header class="docs-header">
 
                     <h1 class="docs-heading">user-service - migration to SAGA</h1>
-                    <section>
-                        <p>
+                    <section >
+                        <p id="adding-stacksaga-dependencies">
                             In one of past few sessions we have done our user-service without moving to the Saga design
                             pattern. now we are going to use that service to migrate to Saga design pattern by using
                             StackSaga. now you know that when the order-service migrates to the StackSaga in the
@@ -130,7 +133,7 @@
                             what we are going to implement here.
                         </p>
 
-                        <div class="callout-block callout-block-info">
+                        <div  class="callout-block callout-block-info">
 
                             <div class="content">
                                 <h4 class="callout-title">
@@ -139,6 +142,7 @@
                                                     </span>
                                     Note
                                 </h4>
+
                                 <p>
                                     Adding StackSaga dependencies is not required in this application. but, in terms of
                                     Real-time circuit breaker pattern, it would be better if you add StackSaga
@@ -148,6 +152,19 @@
                                                                                                          href="./../../../../topics/circuit-breaker.html">please
                                     refer this</a>.
                                 </p>
+
+                                <p>
+                                    If you add the dependencies into the application, you have to add 2 dependencies.
+                                    1st one is the core-dependency. it is required. and 2nd
+                                    one is the implementation of the database accessing dependency. you can choose it as
+                                    per your requirement. if you are willing to use Mysql database as your event-store,
+                                    you can use stack-saga-spring-boot-starter-mysql dependency, or if you are willing
+                                    to use MongoDb as your event-store, you can use stack-saga-spring-boot-starter-mongo
+                                    dependency. <a href="./../../../../reference/dependencies.html">See more</a>
+                                    available implementation dependencies. in this example, we use
+                                    Mysql database as the event-store database.
+                                </p>
+
 
                                 <small>
                                     <span class="badge bg-primary">Updated</span>
@@ -159,6 +176,16 @@
 
                                 <script src="https://gist.github.com/mafei-dev/9a13b74b48a7a8b13b2b46b6d9cee865.js"></script>
 
+
+                                <br>
+                                <br>
+                                <p>
+                                    If you have added StackSaga in your application, you have to configure the
+                                    properties for StackSaga. you can see below the configurations are done. in you want
+                                    to get the idea for each configuration properties please refer the <a
+                                        href="./../../../../reference/configuration-properties.html">configuration
+                                    reference</a>.
+                                </p>
                                 <br>
                                 <br>
 
@@ -170,56 +197,99 @@
                                 </small>
 
                                 <script src="https://gist.github.com/mafei-dev/2808753d42346583a9f6beff70b2d856.js"></script>
+                                <br>
+                                <br>
+                                <p>
+                                    If you have added StackSaga in your application, after changing the properties, you
+                                    have to annotate the application as <code>
+                                    @EnableStackSaga
+                                </code>. and after that you can see that some AutoConfiguration classes are excluded.
+                                    the reason is that the framework uses the
+                                    <code>spring-boot-starter-data-redis</code> dependency and
+                                    <code>liquibase-core</code> dependency in order to have that features. but the
+                                    framework doesn't use the default configuration that the dependencies provide for
+                                    you.
+                                    because the stackSaga use its own configuration to access those features by using
+                                    that dependencies. but in the application, you might want to use those dependencies
+                                    in your application for your wants. you can use those default configurations as
+                                    you want. if stackSaga have used those default configurations for their execution,
+                                    as a developer, you have to configure those configurations by spending some time. it
+                                    will be bothered to you. therefore, if you are not going to use <b>Redis</b> and <b>liquibase</b>
+                                    features for your application, the autoconfiguration class should be excluded like
+                                    as have been done in the example's main class like below.
+                                    otherwise, if you use all or one of them in your application to get those features,
+                                    you
+                                    can provide those configurations by using default property that those dependencies
+                                    provide without excluding the autoconfiguration classes.
+                                </p>
+                                <small>
+                                    <span class="badge bg-primary">Updated</span>
+                                    <b>user-service >
+                                        org/mono/stacksaga/example/userservice/UserServiceApplication.java
+                                    </b>
+                                </small>
+
+                                <script src="https://gist.github.com/mafei-dev/4f2af76d572b74212ede5093bda87510.js"></script>
+
 
                             </div>
                         </div>
 
-                        <h1 class="docs-heading">
 
-                        </h1>
-                        <p>
+                        <br >
+                        <br>
+                        <p id="updating-userrepository">now we are going to update our existing <code>UserRepository</code> interface to create new
+                            method as a revert of the increment point. the newly added method called as <code>incrementPointsByOneRevert</code>.
+                            the method's responsible for revert the increment as a compensation.
+                            <br>
+                            <br>
+                            **in here you can see kind of a pattern like the prefix name of the revert method is same as
+                            the
+                            process execution. the only thing has been changed is that the end of the method's name
+                            added <b>Revert</b>. this is the pattern the framework propose you as a best practice. but
+                            is not required.
+                        </p>
+                        <small>
+                            <span class="badge bg-primary">Updated</span>
+                            <b>user-service >
+                                org/mono/stacksaga/example/userservice/repository/UserRepository.java
+                            </b>
+                        </small>
 
+
+                        <script src="https://gist.github.com/mafei-dev/b08411e938826644db1882a9fff12d79.js"></script>
+
+
+                        <br>
+                        <br>
+
+                        <p id="updating-userservice">
+                            after creating the repository's revert method for increment-point, the next thing is that
+                            create the service method to access that created method for execution. you can see below
+                            entire UserService class after creating <code>incrementPointsByOneRevert</code> method.
+                        </p>
+                        <small>
+                            <span class="badge bg-primary">Updated</span>
+                            <b>user-service >
+                                org/mono/stacksaga/example/userservice/service/UserService.java
+                            </b>
+                        </small>
+
+                        <script src="https://gist.github.com/mafei-dev/3047cba15c6c10e1b2d16c6a32a2fd32.js"></script>
+                        <br>
+                        <br>
+
+                        <p id="updating-userpointscontroller">
+                            now you are ready to use that created revert function as an End-point to expose the function
+                            to out. we already have the controller class. therefore, we are going to update the
+                            controller class by adding the new End-point.
+                            <span class="badge  bg-warning">PUT</span>
+                            <code>/user-service/user/point/revert</code> (you cane see that In naming the endpoints
+                            also the pattern has
+                            been used )
                         </p>
                         <br>
-                        <br>
 
-
-                        <small>
-                            <span class="badge bg-primary">Updated</span>
-                            <b>user-service >
-                                org/mono/stacksaga/example/userservice/repository/UserRepository.java
-                            </b>
-                        </small>
-
-
-                        <script src="https://gist.github.com/mafei-dev/b08411e938826644db1882a9fff12d79.js"></script>
-
-
-                        <h1 class="docs-heading">
-
-                        </h1>
-
-                        <small>
-                            <span class="badge bg-primary">Updated</span>
-                            <b>user-service >
-                                org/mono/stacksaga/example/userservice/UserServiceApplication.java
-                            </b>
-                        </small>
-
-                        <script src="https://gist.github.com/mafei-dev/4f2af76d572b74212ede5093bda87510.js"></script>
-                        <br>
-                        <br>
-
-                        <small>
-                            <span class="badge bg-primary">Updated</span>
-                            <b>user-service >
-                                org/mono/stacksaga/example/userservice/repository/UserRepository.java
-                            </b>
-                        </small>
-
-                        <script src="https://gist.github.com/mafei-dev/b08411e938826644db1882a9fff12d79.js"></script>
-                        <br>
-                        <br>
 
                         <small>
                             <span class="badge bg-primary">Updated</span>
@@ -230,12 +300,29 @@
 
                         <script src="https://gist.github.com/mafei-dev/fbd3146451414b774c86dd1e5296598a.js"></script>
 
+                        <p>now the application is ready to use after making those changes.</p>
+
+                        <br>
+                        <br>
+
+                        <p>The next step is that make ready the payment-service to migrate to Saga. </p>
+
 
                     </section>
 
 
                 </header>
 
+                <div>
+                    Previous <a href="../microservice-example-test-without-stacksaga.html" target="_blank">
+                    Final application test without using StackSaga
+                </a>
+                    <br>
+                    Next <a href="./stacksaga-spring-boot-microservice-example-with-stacksaga-payment-service.html"
+                            target="_blank">
+                    payment-service - migration to Saga design pattern
+                </a>
+                </div>
 
 
                 <section class="docs-section">
