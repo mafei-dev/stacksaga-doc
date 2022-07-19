@@ -114,8 +114,11 @@
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Testing without stacksaga</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#Overview">Overview</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#Running-services">Running services</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#Testing">Testing</a></li>
             </ul>
 
         </nav><!--//docs-nav-->
@@ -145,9 +148,9 @@
                     </nav>
 
 
-                    <h1 class="docs-heading">Final testing of Spring boot microservice example <span class="docs-time">Last updated: 2019-06-01</span>
+                    <h1 class="docs-heading">Final testing of Spring boot microservice example
                     </h1>
-                    <h2>Overview</h2>
+                    <h2 id="Overview">Overview</h2>
                     <section class="docs-intro">
                         <p>
                             So far, we have implemented eureka-server, api-gateway and other four utility microservices.
@@ -164,7 +167,7 @@
 
 
                 <section class="docs-section" id="item-1-5">
-                    <h3 class="section-heading">Running services</h3>
+                    <h3 id="Running-services" class="section-heading">Running services</h3>
                     <p>
                         there is no order when run the project and the services will be talked to each other when they
                         are run. but for your
@@ -188,8 +191,9 @@
                          alt="stacksaga spring boot microservice example eureka dashboard"/>
                     <br>
                     <br>
-                    <p>Now we are going to test the place order request by using <a href="https://www.postman.com/"
-                                                                                    target="_blank">postman</a>. </p>
+                    <p id="Testing">Now we are going to test the place order request by using <a
+                            href="https://www.postman.com/"
+                            target="_blank">postman</a>. </p>
 
                     <img class="img-fluid"
                          src="../../../../../assets/img/mysql/1.0/imperative/final-test/stacksaga-spring-boot-microservice-example-final-endpoint-test.png"
