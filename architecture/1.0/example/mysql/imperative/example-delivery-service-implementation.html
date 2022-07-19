@@ -113,8 +113,20 @@
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>
+                    Delivery Service
+                    Implementation</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#overview">Overview</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-application">Creating application</a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#database">Database</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#implementation">Implementation</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-entity">Creating Entity</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-repository">Creating Repository </a>
+                </li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-service">Creating Service </a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-controller">Creating Controller </a>
+                </li>
             </ul>
 
         </nav><!--//docs-nav-->
@@ -142,12 +154,12 @@
                     </nav>
 
 
-                    <h1 class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <h1 id="overview" class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
                     <section class="docs-intro">
                         <p>
                             In the previous two articles, we have successfully created the eureka-server and the
                             order-service. now we are going to create one of next microservices. the next service which
-                            we are going to implement is user-service. in the user-service we want to have two endpoints
+                            we are going to implement is delivery-service. in the delivery-service we want to have two endpoints
                             for execute the place-order according the use-case.
                         </p>
                         <p>The following endpoints will be created in this part</p>
@@ -172,7 +184,7 @@
 
 
                 <section class="docs-section" id="item-1-5">
-                    <h3 class="section-heading">Creating delivery-service.</h3>
+                    <h3 id="creating-application" class="section-heading">Creating delivery-service.</h3>
                     <p>
                         Visit to the spring initializer and create the project by adding the following dependencies.
                     </p>
@@ -180,7 +192,7 @@
                          src="../../../../../assets/img/mysql/1.0/imperative/delivery-service-implementation/stack-saga-example-delivery-service-creating.jpeg"
                          alt="stack saga microservice example delivery service setup"/>
 
-                    <h4>Database</h4>
+                    <h4 id="database">Database</h4>
                     <p>There are two tables in the delivery-service's db called <code>ss_delivery_detail</code> and
                         <code>ss_delivery_status_log</code>. (you don't want to creat the database manually. because,
                         spring-data-jpa will create the
@@ -192,7 +204,7 @@
 
                     <br>
                     <br>
-                    <h4>Implementation of delivery-service</h4>
+                    <h4 id="implementation">Implementation of delivery-service</h4>
                     <br>
                     <h5>
                         Configuration properties
@@ -225,7 +237,7 @@
                     <script src="https://gist.github.com/mafei-dev/3f5913c9d5353aa84efc6d138a0cb18c.js"></script>
                     <br>
                     <br>
-                    <h5>
+                    <h5 id="creating-entity">
                         Entity classes
                     </h5>
 
@@ -250,8 +262,8 @@
                     <br>
 
 
-                    <h5>
-                        Repository classes of user-service
+                    <h5 id="creating-repository">
+                        Repository classes of delivery-service
                     </h5>
 
                     <h6>DeliveryStatusRepository.class</h6>
@@ -273,19 +285,22 @@
 
                     <br>
                     <br>
-                    <h5>
+                    <h5 id="creating-service">
                         Service classes of delivery-service
                     </h5>
 
                     <h6>DeliveryDetailService.class</h6>
                     <small>
-                        <b>user-service >
+                        <b>delivery-service >
                             org/mono/stacksaga/example/deliveryservice/service/DeliveryDetailService.java
                         </b>
                     </small>
+
                     <script src="https://gist.github.com/mafei-dev/5e3a0c99f26150d88c8de0463ed31a82.js"></script>
-                    <h5>
-                        Controller classes of user-service
+                    <br>
+                    <br>
+                    <h5 id="creating-controller">
+                        Controller classes of delivery-service
                     </h5>
 
                     <p>now we are going to create the endpoints for put the delivery details after placing the order
@@ -295,7 +310,7 @@
 
                     <h6>StartDeliveryRequestBody.class</h6>
                     <small>
-                        <b>user-service >
+                        <b>delivery-service >
                             org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryRequestBody.java
                         </b>
                     </small>
@@ -304,7 +319,7 @@
                     <br>
                     <h6>StartDeliveryResponseBody.class</h6>
                     <small>
-                        <b>user-service >
+                        <b>delivery-service >
                             org/mono/stacksaga/example/deliveryservice/dto/StartDeliveryResponseBody.java
                         </b>
                     </small>
@@ -317,7 +332,7 @@
                         that we created above.</p>
                     <h6>DeliveryController.class</h6>
                     <small>
-                        <b>user-service >
+                        <b>delivery-service >
                             org/mono/stacksaga/example/deliveryservice/controller/DeliveryController.java
                         </b>
                     </small>

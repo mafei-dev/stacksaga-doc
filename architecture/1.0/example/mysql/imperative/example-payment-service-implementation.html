@@ -113,8 +113,17 @@
         <nav id="docs-nav" class="docs-nav navbar">
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-                <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>
+                    Payment Service
+                    Implementation</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#overview">Overview</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-application">Creating application</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#database">Database</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#implementation">Implementation</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-entity">Creating Entity</a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-repository">Creating Repository </a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-service">Creating Service  </a></li>
+                <li class="nav-item"><a class="nav-link scrollto" href="#creating-controller">Creating Controller   </a></li>
             </ul>
 
         </nav><!--//docs-nav-->
@@ -140,7 +149,7 @@
                             <li class="breadcrumb-item active" aria-current="page">payment-service implementation</li>
                         </ol>
                     </nav>
-                    <h1 class="docs-heading">Overview <span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <h1 id="overview" class="docs-heading">Overview</h1>
                     <section class="docs-intro">
                         <p>
                             In the previous articles, we have successfully created the eureka-server,
@@ -164,7 +173,7 @@
 
 
                 <section class="docs-section" id="item-1-5">
-                    <h3 class="section-heading">Creating user-service.</h3>
+                    <h3 id="creating-application" class="section-heading">Creating user-service.</h3>
                     <p>
                         Visit to the spring initializer and create the project by adding the following dependencies.
                     </p>
@@ -173,7 +182,7 @@
                          alt="stacksaga e-store example creating payment-service"/>
                     <br>
                     <br>
-                    <h4>Database</h4>
+                    <h4 id="database">Database</h4>
                     <p>There is one table called <code>ss_customer_payment</code> in th payment-service-db. it has
                         user's purchasing details.
                         (you don't want to creat the database manually. because, spring-data-jpa will create the
@@ -185,7 +194,7 @@
                          alt="stacksaga e-store payment-service database"/>
                     <br>
                     <br>
-                    <h4>Implementation of payment-service</h4>
+                    <h4 id="implementation">Implementation of payment-service</h4>
                     <br>
                     <h5>
                         Configuration properties
@@ -217,7 +226,7 @@
                     <script src="https://gist.github.com/mafei-dev/2d2ead77c4f21c9bdf643f79d48042a5.js"></script>
                     <br>
                     <br>
-                    <h5>
+                    <h5 id="creating-entity">
                         Entity classes
                     </h5>
                     <p>to access the database, we have to create the entity classes same as the before article. in the
@@ -233,7 +242,7 @@
                     <p>* In the entity class, we have created an enum class to manage the payment-status.</p>
                     <br>
                     <br>
-                    <h5>
+                    <h5 id="creating-repository">
                         Repository classes of payment-service
                     </h5>
                     <p>
@@ -254,7 +263,7 @@
                     </p>
                     <br>
                     <br>
-                    <h5>
+                    <h5 id="creating-service">
                         Service classes of the payment-service
                     </h5>
 
@@ -283,7 +292,7 @@
                         </b>
                     </small>
                     <script src="https://gist.github.com/mafei-dev/2de8f490256b04c17d6a15e21369ab8b.js"></script>
-                    <h5>
+                    <h5 id="creating-controller">
                         Controller classes of payment-service
                     </h5>
 
