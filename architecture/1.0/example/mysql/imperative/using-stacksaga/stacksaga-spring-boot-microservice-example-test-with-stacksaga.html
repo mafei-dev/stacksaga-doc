@@ -12,11 +12,18 @@
     <meta name="author" content="Mafei">
 
 
-    <link type="image/png" sizes="16x16" rel="stacksaga-icon" href="./../../../../../../stacksaga-16.png">
-    <link type="image/png" sizes="32x32" rel="stacksaga-icon" href="./../../../../../../stacksaga-32.png">
-    <link type="image/png" sizes="96x96" rel="stacksaga-icon" href="./../../../../../../stacksaga-96.png">
-    <meta name="stacksaga-TileColor" content="#da532c">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../../../../../assets/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./../../../../../../assets/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./../../../../../../assets/fav/favicon-16x16.png">
+    <link rel="manifest" href="./../../../../../../assets/fav/site.webmanifest">
+    <link rel="mask-icon" href="./../../../../../../assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="stacksaga">
+    <meta name="application-name" content="stacksaga">
+    <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#28b76b">
+
+
 
 
     <!-- Google Font -->
@@ -109,6 +116,95 @@
     <div class="docs-content">
         <div class="container">
             <article class="docs-article" id="section-1">
+
+                <header class="docs-header">
+                    <h1 class="docs-heading">
+                        Testing The Entire Process.
+                    </h1>
+                </header>
+
+                <section class="docs-section" id="item-1-4">
+                    <h2 class="section-heading">Overview</h2>
+                    <p>
+                        This the final step of the entire series of microservice example by using Stacksaga framework.
+                        to test the all features of the framework, we have to check the same place-order request under
+                        many situation. because, there are <a
+                            href="./../../../../how-works-stack-saga-transaction-types.html">3type of transactions</a>
+                        can be identified as the framework
+                        mentioned. let's try to move to them one by one. and in this final step you will be learning how
+                        the
+                        <a href="./../../../../topics/stacksaga-admin-dashboard.html">Stacksaga Admin dashboard</a> is
+                        used to
+                        see
+                        all the statistics and the transaction details we made.
+                    </p>
+
+                    <h3>Testing of Fully success transaction scenario.</h3>
+                    <p>
+                        This is the 1st shep of the transaction can be happened in Saga design pattern. That means all
+                        the service which took part to the place-order process will be successfully executed without any
+                        exception smoothly as we expected.
+                    </p>
+                    <p>
+                        for now, your entire set of applications are running on well. all service has at leas one
+                        service-instance running on. we expect that the process will be done without any error. if the
+                        process has no any error. that means there is no any compensation for the transaction. it is
+                        just like the place-order process that we tested at the 1st example without using Stacksaga.
+                        because, it will not have any compensation.
+                    </p>
+                    <p>
+                        let's make the request by using the postman like below by providing the data should be passed.
+                    </p>
+
+                    <p>
+                        Now you can see in the post response tab, the response has been returned in a flash. about 20
+                        milliseconds. because the whole process has been taken by Stacksaga. and return the transaction
+                        uid (AggregatorUid) and we have built our custom response object by using it. afterword, SEC
+                        will be taking care of the transaction all do all the execution as you guided the SEC.
+                    </p>
+                    <p>
+                        see the log, you can see all the logs we have put in each executors was printed out. all the
+                        processes are successfully executed and as well as the callback methods (Event-Listener methods)
+                        have been invoked by the SEC. you can see in the log, the <code>onEachRevertPerformed</code> has
+                        been invoked each time when the executors successfully executed. and finally the <code>onTransactionCompleted</code>
+                        method has been invoked by the SEC to notify you about the successful transaction.
+                    </p>
+                    <p>
+                        here there is nothing new to you. as the next step, we are going to test the transaction type of
+                        <b>Revert success transaction scenario.</b>
+                    </p>
+
+                    <h3>Testing of Revert success transaction scenario.</h3>
+                    <p>
+                        This testing part might be quite new to you. because this is the time we can see the main
+                        concept of the Saga design pattern. that means the transaction is going to be failed after some
+                        done some executions. on other hand the full process will not be success due to an error that
+                        happens while the process. the error can be expected one or unexpected error.
+                        The expected error means you have thrown the error by knowing the process will not be executed
+                        forward anymore and, stop the process and do the compensations for each executed process. <a
+                            href="./../../../../topics/retryable-exception-vs-non-retryable-exception.html">see more</a>
+                        about the exception.
+                    </p>
+                    <p>
+                        to overcome that kind of expected error, we can change the activeness of the user in the user
+                        service. but we check the user service at the 1st. therefore, we are not going to do that. but
+                        keep it in your mind that if happens that kind of error, it's called as excepted error. we don't
+                        want to identify the error in the process forward (process-exception) but here we have mentioned
+                        that only for you understanding. all the error that happen in the execution-process the SEC will
+                        catch and start the compensation process even if you caught the error and throw. don't worry
+                        about that. but as a best practice, handling exception is useful when get an error and to see
+                        the log by using Stacksaga admin dashboard.
+                    </p>
+                    <p>
+                        interns of the example, the best place to make an exception is the last one. that is the
+                        displacing process. we are going to make an artificial exception by stopping the delivery
+                        service. then the process start and go forward but the <code>PODispatchExecutor</code> try to
+                        execute the process, nut the process can't be done successfully. because there is no any
+                        delivery-service is running on. (we have downed the server.) then the SEC has started invoking
+                        the compensations methods as the descending order. (last to first) you can see the log. until
+                        the process execution of
+                    </p>
+                </section>
 
 
             </article>
