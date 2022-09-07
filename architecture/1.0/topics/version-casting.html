@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Version Casting - StackSAGA</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Version Casting StackSAGA">
+    <meta name="author" content="Mafei">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../../assets/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./../../../assets/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./../../../assets/fav/favicon-16x16.png">
+    <link rel="manifest" href="./../../../assets/fav/site.webmanifest">
+    <link rel="mask-icon" href="./../../../assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="stacksaga">
+    <meta name="application-name" content="stacksaga">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#28b76b">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+    <style>
+        p {
+            text-align: justify;
+        }
+    </style>
+
+</head>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="site-logo">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img height="50" width="50" src="../../../assets/images/StackSagaIcon.png"
+                             alt="logo"/>
+                        <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
+                    </a>
+                </div>
+
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
+                            class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://stackoverflow.com/questions/tagged/stacksaga"><i
+                            class="fab fa-stack-overflow fa-fw"></i></a></li>
+
+                </ul><!--//social-list-->
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+<div>
+
+    <div>
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <h1 id="microservice-introduction" class="docs-heading">Version Casting
+                    </h1>
+                    <section class="docs-intro">
+                        <p>
+                            All the applications will be updated by changing their versions from time to time. When a
+                            new version is deployed, the old version will be replaced by the new version (if you are not
+                            going to use service-mesh). But, in the event-based architecture, some events can have been
+                            waiting to be executed when the new version is being deployed or after deployed as well.
+                            Then the old event should be mapped with the previous version. And if you don't consider
+                            about the old version’s execution, when developing the new version, the events will be
+                            conflicted or crashed. Because, the old version's event is going to be executed by using the
+                            new version of the same service. But the new version doesn't allow the old events, and then
+                            the event will face for an exception due to that the event's data is not mapped with
+                            different versions to be executed smoothly.
+                        </p>
+
+                    </section><!--//docs-intro-->
+                </header>
+                <section class="docs-section" id="item-1-1">
+
+                    <ul>
+                        <li>
+                            <b>Aggregator-Oriented casting</b>
+                            <ul>
+                                <li>Aggregator upcast</li>
+                                <li>Aggregator downcast</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <b>Executor-Oriented casting</b>
+                            <ul>
+                                <li>Executor upcast</li>
+                                <li>Executor downcast</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Aggregator-Oriented casting</h4>
+                    <p>
+                        All the newly added changes to the aggregator of the new version are called as`
+                        aggregator-oriented changes. And then, as a developer, you have to do some casting /mapping
+                        between those aggregator versions to avoid that conflict. But it is not a complicated task
+                        because that, the framework uses the Jackson library for storing events in the database.
+                        Therefore, you can follow the same effort what you have been doing with Jackson mapping as
+                        usual.
+
+
+                    </p>
+                    <p>
+                        For instance, the old version's aggregator has 3 fields and the new version can have 4 fields or
+                        more than that, or else, the new version can have 2 fields. That means the aggregator has got
+                        changed relatively to the old version. If the new aggregator has more values than the previous
+                        one, that kind of updates are called as upcasting changes. According to the example, the
+                        event-store might have the old events consisting of 2 fields. And if the new version has less
+                        amount of fields than the old one, it is called as downcasting changes. Now those remaining
+                        events are going to be executed through the new version. And the framework tries to build the
+                        new aggregator object by using the old event's binaries. This is the time the casting is been
+                        worked on. You have to modify and annotate the aggregator so as not to conflict while building
+                        the object by the framework. Here you can see the best practices related to the casting of
+                        aggregators.
+                    </p>
+                    <h4>Executor-Oriented Casting</h4>
+                    <p>
+                        According to the framework, one aggregator can have multiple executors based on your use case.
+                        When you update the version of the service, you might want to remove existing executors or add
+                        new executors based on the update that should be done. If you are going to add more additional
+                        executors to the existing aggregator that is called as executor-oriented upcasting changes. And
+                        the opposite of that, if you remove some existing executors from the aggregator, that form is
+                        called as executor-oriented downcasting changes. Adding more is not a problem when the old event
+                        executers at all. Just think, for instance, the old aggregator had 3 executors and the new
+                        aggregator has 4 executors due to the additional one which has been added. And after deploying
+                        the new version, the old events are executed through the new version. That execution is not
+                        conflicted because, all the necessary executors are in the new version.
+                    </p>
+
+
+                    <h4>Executor-oriented down casting.</h4>
+                    <p>
+                        If the new version's aggregator has less amount of executors than the old one, it's called as
+                        executor-oriented downcasting changes. This time is not just like Executor-oriented downcasting
+                        because the old event should have all the expected executors to be executed as you plan that
+                        event should be executed upon the old version's use case. But in the new version if one or more
+                        executors do not exist, most of the time the execution can be crashed. (In rare cases it might
+                        not be affected upon your update) by the way, even though you want to use some executors for the
+                        previous version, and for the new version that executor is not used, that kind of situation is
+                        called as executor-oriented downcasting changes. To avoid conflict in this way, the framework
+                        provides a feature to skip the old executor from the latest version and the old executor is
+                        retained only for the remaining old-events as it's.
+                    </p>
+
+
+                </section><!--//section-->
+
+                <section class="docs-section" id="item-1-4">
+                    <h4>Explore the concepts behind stackSaga</h4>
+                    <ul>
+                        <li><a href="./../introduction.html">Introduction</a></li>
+                        <li><a href="./../architecture.html">High-level Architecture</a></li>
+                        <li><a href="./../how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
+                            work</a>
+                        </li>
+                        <li><a href="../topics/SEC.html">Saga execution coordinator (SEC)</a></li>
+                        <li><a href="../topics/SEC.html#dual-consistency-problem-of-sec">Dual-consistency problem of
+                            SEC</a></li>
+
+                        <li><a href="../topics/circuit-breaker.html">Real-time Circuit Breaker</a></li>
+                        <li><a href="../topics/SEC.html#event-store">Event-Store</a></li>
+
+                        <li><a target="_blank" href="../topics/aggregator.html">Aggregator</a></li>
+                        <li><a target="_blank" href="../topics/executor.html">Executor</a></li>
+                        <li><a target="_blank" href="../topics/handler.html">Handlers</a></li>
+                        <li><a target="_blank" href="../topics/retryable-exception-vs-non-retryable-exception.html">Retryable
+                            Exceptions</a></li>
+                        <li><a href="../topics/hint-store.html">Hint store</a></li>
+                        <li><a href="../topics/version-casting.html">Version Casting</a></li>
+                        <li><a href="../topics/stacksaga-admin-dashboard.html">StackSaga Admin</a></li>
+                    </ul>
+
+                </section>
+            </article>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+</body>
+</html>
+
