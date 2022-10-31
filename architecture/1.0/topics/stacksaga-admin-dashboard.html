@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>StackSaga Server (Admin) - StackSAGA</title>
 
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="StackSaga Server (Admin)">
+    <meta name="author" content="Mafei">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="./../../../assets/fav/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./../../../assets/fav/favicon-32x32.png">
@@ -14,33 +20,330 @@
     <meta name="application-name" content="stacksaga">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#28b76b">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <link rel="stylesheet" href="../../../assets/css/custom.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+    <style>
+        p {
+            text-align: justify;
+        }
+    </style>
 
 </head>
-<body>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                        type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="site-logo">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img width="8%" height="8%" src="../../../assets/images/stack-saga-icon.svg"/>
+                        <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
+                    </a>
+                </div>
+
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <div class="top-search-box d-none d-lg-flex">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search the docs..." name="search"
+                               class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
+                            class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://stackoverflow.com/questions/tagged/stacksaga"><i
+                            class="fab fa-stack-overflow fa-fw"></i></a></li>
+
+                </ul><!--//social-list-->
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
 <div>
-    <h5>Tracing dashboard</h5>
-    <p>
-        The framework provides a dashboard to see all the executed transactions and how the
-        transaction got behave.
-    </p>
 
-    <img
-            class="img-fluid  "
-            src="../../../assets/images/architecture/1.0/how-stacksaga-admin-retrieve-data-from-client.gif"
-            alt=""
-            title="stacksaga tracing dashboard"/>
+    <div>
+        <div class="container">
+            <article class="docs-article" id="section-1">
+                <header class="docs-header">
+                    <h1 id="microservice-introduction" class="docs-heading">StackSaga Server (Admin)</h1>
+                    <section class="docs-intro">
+                        <p>
+
+                        </p>
+
+                    </section><!--//docs-intro-->
+                </header>
+
+                <section class="docs-section" id="item-1-1">
+
+                    <div>
+                        <ul class="nav nav-pills mb-3" style="padding-left: 0px !important;" id="pills-tab"
+                            role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="docker-image-tab" data-toggle="pill" href="#docker-image"
+                                   role="tab" aria-controls="pills-home" aria-selected="true">Docker Image</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="download-jar-tab" data-toggle="pill" href="#download-jar"
+                                   role="tab" aria-controls="download-jar" aria-selected="false">Download Jar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="github-code-tab" data-toggle="pill" href="#github-code"
+                                   role="tab" aria-controls="pills-contact" aria-selected="false">Using the source
+                                    code</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="docker-image" role="tabpanel"
+                                 aria-labelledby="docker-image-tab">
+                                <div class="col-12 col-lg-12 py-2">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								       <img src="../../../assets/images/docker50x.svg" height="25" width="25">
+							        </span><!--//card-icon-holder-->
+                                                <span class="card-title-text">Docker Image</span>
+                                            </h5>
+                                            <div class="card-text">
+                                                If docker is running on your computer,
+                                                you can build a container and run StackSaga server (admin)
+                                                by using the
+                                                docker StackSaga server (admin) docker image.
+                                                <br>
+                                                <p>you can choose the StackSaga server wit specific database that you
+                                                    want. <a href="https://hub.docker.com/u/stacksaga" target="_blank">See
+                                                        all images on docker hub.</a></p>
+                                                <br>
+                                                <p>For instance, if you prefer to use mysql StackSaga server, you can
+                                                    run
+                                                    the code to pull the image.</p>
+                                                <code class="input-group-text">
+                                                    docker pull stacksaga/stacksaga_admin_mysql
+                                                </code>
+                                                <br>
+                                                <p>
+                                                    after pulling the image you can create an image and, then you have
+                                                    to
+                                                    provide some <a
+                                                        href="#stacksaga-admin-server-environment-variables">Environment
+                                                    variables</a>.
+                                                </p>
+                                                <br>
+                                                <script src="https://gist.github.com/mafei-dev/e4a2f9e54ebf471c58c291e79753fac6.js"></script>
+                                                <br>
 
 
-    <img
-            class="img-fluid  "
-            src="../../../assets/images/architecture/1.0/how-push-health-stack-saga-client.gif"
-            alt=""
-            title="stacksaga tracing dashboard"/>
+                                                <p>OR, if you prefer doing the deal with docker compose, here is the
+                                                    basic
+                                                    code
+                                                    snippet that you want tin run your own container.</p>
+                                                <script src="https://gist.github.com/mafei-dev/08d411d01e30d395b6d97601478501de.js"></script>
+                                                <br>
+                                                to run the docker-compose file, go the file directory and run this code.
+                                                <br>
+                                                <br>
+                                                <span class="input-group-text">docker compose up</span>
+                                            </div>
+                                        </div><!--//card-body-->
+                                    </div><!--//card-->
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="download-jar" role="tabpanel"
+                                 aria-labelledby="download-jar">
+                                <div class="col-12 col-lg-12 py-2">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-download"></i>
+							        </span><!--//card-icon-holder-->
+                                                <span class="card-title-text">Download Jar</span>
+                                            </h5>
+                                            <div class="card-text">
+                                                Here is the standalone version of StackSaga admin server. you can
+                                                download the <code>stack-saga-admin-server.zip</code>
+                                            </div>
+                                            <br>
+                                            <p><b>Downloads</b></p>
+                                            <ul>
+                                                <li>
+                                                    <a target="_blank"
+                                                       href="https://mega.nz/folder/w8lRXYyI#q5CFtVrNTCJtqYUuDzPPkA">StackSaga
+                                                        Admin Server - MySQL</a>
+                                                </li>
+                                            </ul>
+
+                                            <br>
+                                            <p><b>Minimum Requirements</b></p>
+                                            <ul>
+                                                <li>Java java 8 or upper</li>
+                                                <li>Selected Database</li>
+                                            </ul>
+                                            after unzipping the file you will see the jar file. to run the jar file, run
+                                            the <code>START.sh</code> file or following code below. before run the jar,
+                                            make sure to config your custom
+                                            configuration in the <code>application.properties</code> file.
+                                            <br>
+                                            <br>
+                                            <small>
+                                                <b>> Run on the console</b>
+                                            </small>
+                                            <code class="input-group-text">
+                                                java -jar stack-saga-admin-1.0-SNAPSHOT.jar
+                                                --spring.config.location=file:application.properties
+                                            </code>
+
+                                        </div><!--//card-body-->
+                                    </div><!--//card-->
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="github-code" role="tabpanel"
+                                 aria-labelledby="github-code-tab">
+                                <div class="col-12 col-lg-12 py-2">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        								       <img src="../../../assets/images/github.svg"
+                                                                                    height="25" width="25">
+							        </span>
+                                                <span class="card-title-text">Using the source code</span>
+                                            </h5>
+                                            <div class="card-text">
+                                                if you want to build the StackSaga Admin Server standalone jar from
+                                                scratch, you can use the
+                                                <b>stack-saga-admin</b> repository on <a
+                                                    href="https://github.com/stacksaga/stack-saga-admin"
+                                                    target="_blank">Github</a>.
+                                            </div>
+                                        </div><!--//card-body-->
+                                    </div><!--//card-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
+                </section><!--//section-->
+
+                <section class="docs-section" id="item-1-4">
+                    <h4>Initialize The StackSaga Admin server.</h4>
+                    <p>
+                        > after successfully running the jar file, you can see <b>Admin initialization key</b> in
+                        the
+                        console like below.</p>
+                    <img class="img-fluid"
+                         src="../../../assets/images/architecture/Admin-initialization-key-StackSaga.png"
+                         alt="Admin initialization key StackSaga" srcset=""/>
+                    <br>
+                    <br>
+                    <p>
+                        > copy the key and go to the admin dashboard <code>http://localhost:4444</code> and enter
+                        the code click the button <b>Initialize the server</b>
+                    </p>
+
+                    <img class="img-fluid"
+                         src="../../../assets/images/architecture/Admin-initialization-page-StackSaga.png"
+                         alt="Admin initialization page" srcset=""/>
+
+                    <br>
+                    <br>
+                    <p>
+                        > enter the super admin details.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/images/architecture/Stacksaga-Admin-Server-Super-Admin-Create-page.png"
+                         alt="Stacksaga Admin Server Create Super-Admin" srcset=""/>
+
+                    <br>
+                    <br>
+                    <p>
+                        > Login with the credentials that provided.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/images/architecture/Stacksaga-Admin-Server-Admin-login-page.png"
+                         alt="Stacksaga Admin Server Create Super-Admin login" srcset=""/>
+
+                    <br>
+                    <br>
+                    <p>
+                        > Congratulations! now you have successfully finished the initialization process.
+                    </p>
+                    <img class="img-fluid"
+                         src="../../../assets/images/architecture/Stacksaga-Admin-Server-Super-Admin-page.png"
+                         alt="Stacksaga Admin Server Create Super-Admin Page" srcset=""/>
+                    <br>
+                    <br>
+
+                    <div id="monogo-coming-up" class="callout-block callout-block-success">
+                        <div class="content">
+                            <h4 class="callout-title">
+	                                <span class="callout-icon-holder me-1">
+		                                <i class="fas fa-bullhorn"></i>
+		                            </span><!--//icon-holder-->
+                            </h4>
+                            <p>
+                                now you can experience StackSaga features and connect all the microservices with the <b>StackSaga
+                                Admin Server.</b> the next steps are in the <a href="#">developer guide section</a>.
+                            </p>
+                        </div><!--//content-->
+                    </div>
+                </section>
+
+            </article>
 
 
+        </div>
+    </div>
 </div>
+<!-- Javascript -->
+<script src="../../../assets/plugins/jquery-3.2.1.slim.min.js"></script>
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap4.min.js"></script>
 
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
 </body>
 </html>
+

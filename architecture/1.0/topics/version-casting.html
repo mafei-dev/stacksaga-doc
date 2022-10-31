@@ -145,7 +145,8 @@
                         All the newly added changes to the aggregator of the new version are called as`
                         aggregator-oriented changes. And then, as a developer, you have to do some casting /mapping
                         between those aggregator versions to avoid that conflict. But it is not a complicated task
-                        because that, the framework uses the Jackson library for storing events in the database.
+                        because that, the framework uses the Jackson library for serealization. (storing events in the
+                        database)
                         Therefore, you can follow the same effort what you have been doing with Jackson mapping as
                         usual.
 
@@ -155,9 +156,9 @@
                         For instance, the old version's aggregator has 3 fields and the new version can have 4 fields or
                         more than that, or else, the new version can have 2 fields. That means the aggregator has got
                         changed relatively to the old version. If the new aggregator has more values than the previous
-                        one, that kind of updates are called as upcasting changes. According to the example, the
+                        one, that kind of updates are called as <b>upcasting</b>. According to the example, the
                         event-store might have the old events consisting of 2 fields. And if the new version has less
-                        amount of fields than the old one, it is called as downcasting changes. Now those remaining
+                        amount of fields than the old one, it is called as <b>downcasting</b>. Now those remaining
                         events are going to be executed through the new version. And the framework tries to build the
                         new aggregator object by using the old event's binaries. This is the time the casting is been
                         worked on. You have to modify and annotate the aggregator so as not to conflict while building
@@ -187,14 +188,16 @@
                                 title="Architecture Stacksaga aggregator version down-casting"/></a>
                     </div>
 
+                    <br>
+                    <br>
                     <h4>Executor-Oriented Casting</h4>
                     <p>
                         According to the framework, one aggregator can have multiple executors based on your use case.
                         When you update the version of the service, you might want to remove existing executors or add
                         new executors based on the update that should be done. If you are going to add more additional
-                        executors to the existing aggregator that is called as executor-oriented upcasting changes. And
+                        executors to the existing aggregator that is called as <b>executor-oriented upcasting</b>. And
                         the opposite of that, if you remove some existing executors from the aggregator, that form is
-                        called as executor-oriented downcasting changes. Adding more is not a problem when the old event
+                        called as <b>executor-oriented downcasting</b>. Adding more is not a problem when the old event
                         executers at all. Just think, for instance, the old aggregator had 3 executors and the new
                         aggregator has 4 executors due to the additional one which has been added. And after deploying
                         the new version, the old events are executed through the new version. That execution is not
@@ -202,16 +205,16 @@
                     </p>
 
 
-                    <h4>Executor-oriented down casting.</h4>
+                    <h4>Note:</h4>
                     <p>
-                        If the new version's aggregator has less amount of executors than the old one, it's called as
-                        executor-oriented downcasting changes. This time is not just like Executor-oriented downcasting
+                        IF there is a executor down-cast scenario, This time is not just like Executor-oriented
+                        down-casting
                         because the old event should have all the expected executors to be executed as you plan that
                         event should be executed upon the old version's use case. But in the new version if one or more
                         executors do not exist, most of the time the execution can be crashed. (In rare cases it might
                         not be affected upon your update) by the way, even though you want to use some executors for the
                         previous version, and for the new version that executor is not used, that kind of situation is
-                        called as executor-oriented downcasting changes. To avoid conflict in this way, the framework
+                        called as executor-oriented down-casting changes. To avoid conflict in this way, the framework
                         provides a feature to skip the old executor from the latest version and the old executor is
                         retained only for the remaining old-events as it's.
                     </p>
