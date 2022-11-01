@@ -23,7 +23,6 @@
     <meta name="theme-color" content="#28b76b">
 
 
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
 
@@ -56,13 +55,13 @@
     <div class="branding docs-branding">
         <div class="container-fluid position-relative py-2">
             <div class="docs-logo-wrapper">
-              <!--  <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
-                        type="button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
--->
+                <!--  <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                          type="button">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </button>
+  -->
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../index.html">
                         <img width="8%" height="8%" src="../../assets/images/stack-saga-icon.svg"
@@ -92,164 +91,185 @@
         </div><!--//container-->
     </div><!--//branding-->
 </header><!--//header-->
-<div >
-        <div class="container">
-            <article class="docs-article" id="section-1">
+<div>
+    <div class="container">
+        <article class="docs-article" id="section-1">
 
-                <header class="docs-header">
-                    <h1 id="diagram" class="docs-heading">
-                        StackSaga in High-level
-                    </h1>
-                    <section class="docs-intro">
-                        <p>
-                            in the <a href="./introduction.html">introduction</a>, we got a clear idea of how
-                            microservice
-                            architecture works and what are the challenges that we have to face when implementing the
-                            microservice. here, we are going to explain how the stack saga works together with typical
-                            microservice architecture. here we have demonstrated a spring boot microservice architecture
-                            and
-                            how the StackSaga framework provides the Saga execution coordinator (SEC) capabilities
-                            without
-                            bothering to the default architecture.
-                        </p>
-                        <a target="_blank"
-                           href="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"><img
-                                class="img-fluid  "
-                                src="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"
-                                alt=""
-                                title="stackSAGA High-level architecture diagram"/>
-                        </a>
+            <header class="docs-header">
+                <h1 id="diagram" class="docs-heading">
+                    StackSaga in High-level
+                </h1>
+                <section class="docs-intro">
+                    <p>
+                        in the <a href="./introduction.html">introduction</a>, we got a clear idea of how
+                        microservice
+                        architecture works and what are the challenges that we have to face when implementing the
+                        microservice. here, we are going to explain how the stack saga works together with typical
+                        microservice architecture. here we have demonstrated a spring boot microservice architecture
+                        and
+                        how the StackSaga framework provides the Saga execution coordinator (SEC) capabilities
+                        without
+                        bothering to the default architecture.
+                    </p>
+                    <a target="_blank"
+                       href="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"><img
+                            class="img-fluid  "
+                            src="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"
+                            alt=""
+                            title="stackSAGA High-level architecture diagram"/>
+                    </a>
 
-                        <p id="explanation">
-                            Stacksaga is not just a framework that provides SCE facilities. Stacksaga has many features.
-                            The
-                            following features StackSaga provides.
-                        </p>
+                    <p>
+                        After adding stack saga in the microservice architecture you can see there are some
+                        additional
+                        components in the high-level architecture diagram. in the diagram, the <b>gray colour</b>
+                        components
+                        and lines are related to the <b>general microservice architecture</b> and additional <b>stacksaga
+                        related
+                        components and
+                        lines</b> have been coloured by <b>green colour</b>. Let's discuss all the components
+                        and
+                        how they are interacted with general architecture. When you use StackSaga, you have to
+                        provide
+                        the facilities to create a database in addition to the database that you use for each
+                        microservice. This is also the same as the database per service design pattern. A service group
+                        (multiple
+                        instances of one service) uses one database to store the events of the executions. The only
+                        thing
+                        is newly added an <b>extra schema</b>. If you like to use one database for all microservices for
+                        StackSaga, it doesn't matter <b>you can use one database as the event-store</b>. But as a best
+                        practice, one database per
+                        service is recommended.
+                    </p>
+                    <p>
+                        As a summary of the image above, you can identify mainly 4 components as new.in the next image
+                        below you can see those new component how interact with the general components.
+                    </p>
 
-                        <a target="_blank"
-                           href="../../assets/images/architecture/1.0/Architecture-Stacksaga-products.drawio.svg"><img
-                                class="img-fluid  "
-                                src="../../assets/images/architecture/1.0/Architecture-Stacksaga-products.drawio.svg"
-                                alt=""
-                                title="stackSAGA High-level architecture diagram"/>
-                        </a>
-                        <ul>
-                            <li>
-                                Saga execution coordinator features.
-                            </li>
-                            <li>
-                                Real-time circuit breaker features.
-                            </li>
-                            <li>
-                                Distributed tracing dashboard.
-                            </li>
-                            <li>
-                                Service's heath matrices monitoring dashboard.
-                            </li>
-
-                            <li>
-                                Event sourcing
-                            </li>
-
-                            <li>
-                                Self retryable execution
-                            </li>
-
-
-                        </ul>
-
-                        <a target="_blank"
-                           href="../../assets/images/architecture/1.0/Architecture-Stacksaga-how-to-connect-stacksaga-products.drawio.svg"><img
-                                class="img-fluid  "
-                                src="../../assets/images/architecture/1.0/Architecture-Stacksaga-how-to-connect-stacksaga-products.drawio.svg"
-                                alt=""
-                                title="stackSAGA High-level architecture diagram"/>
-                        </a>
-                        <p>
-                            After adding stack saga in the microservice architecture you can see there are some
-                            additional
-                            components in the high level architecture diagram. Let's discuss all components and
-                            how they are interacted with general architecture. When you use StackSaga, you have to
-                            provide
-                            the facilities to create a database in addition to the database that you use for each
-                            microservice. This also same as the database per service design pattern. A service group
-                            (multiple
-                            instances of one service) uses a database to store the events of the executions. The only
-                            thing
-                            is newly added an extra schema. If you like to use one database for all microservices for
-                            StackSaga, it doesn't matter you can use one database. But as a best practice, database per
-                            service is recommended. After the database part, you can see a component called Redis. Redis
-                            is
-                            an in-memory data structure store, used as a distributed, in-memory key–value database,
-                            cache
-                            and message broker, with optional durability. In the framework architecture, Redis is used
-                            for
-                            communicating with each microservice and admin service and storing each service's live
-                            health
-                            data.
-                            What are the responsibilities of Redis in Stacksaga?
-                        </p>
-
-                        <ul>
-                            <li>
-                                <b>Collecting and Update the instance health for interested services.</b>
-                                <p>
-                                    After adding the StackSaga dependencies into the application, the application called
-                                    as
-                                    StackSaga client application. That client application contains a configurable
-                                    scheduler
-                                    to update the health to the Redis service. Redis service save the health details
-                                    in-memory and Redis push about server changes to other interested microservices and
-                                    the
-                                    admin service. See more how the CB works.
-                                </p>
-                            </li>
-
-                            <li>
-                                <b>Work as a data transfer protocol thorough the StackSaga client and StackSaga Admin
-                                    server.</b>
-                                <p>
-                                    The framework communicate with all the microservices based with the admin service.
-                                    Admin server retrieves some data from each microservices. But the framework doesn't
-                                    user Http protocol to their communications. All the data is communicated through the
-                                    Redis service.
-                                </p>
-                            </li>
-
-
-                        </ul>
-                    </section><!--//docs-intro-->
-
-                </header>
-
-                <section class="docs-section" id="item-1-4">
-                    <h4>Explore the concepts behind stackSaga</h4>
                     <ul>
-                        <li><a href="./introduction.html">Introduction</a></li>
-                        <li><a href="./architecture.html">High-level Architecture</a></li>
-                        <li><a href="./how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
-                            work</a>
+                        <li><b><a href="./../1.0/reference/stacksaga-framwork.html#coordinator">StackSaga
+                            Coordinator</a></b>
+                            (A Library) and
+                            <b><a href="./../1.0/reference/stacksaga-framwork.html#connector">StackSaga
+                                Connector</a></b> (A Library) are located in the
+                            individual
+                            services.
                         </li>
-                        <li><a href="./topics/SEC.html">Saga execution coordinator (SEC)</a></li>
-                        <li><a href="./topics/SEC.html#dual-consistency-problem-of-sec">Dual-consistency problem of
-                            SEC</a></li>
+                        <li><b><a href="./../1.0/reference/stacksaga-framwork.html#shield">StackSaga Shield</a></b> (A
+                            Library) is located in the API gateway.
+                        </li>
+                        <li><b><a href="./../1.0/topics/stacksaga-admin-dashboard.html">StackSaga Server</a></b> (A
+                            Standalone Application) is one separate unit that provides a
+                            dashboard.
+                        </li>
 
-                        <li><a href="./topics/circuit-breaker.html">Real-time Circuit Breaker</a></li>
-                        <li><a href="./topics/SEC.html#event-store">Event-Store</a></li>
-
-                        <li><a target="_blank" href="./topics/aggregator.html">Aggregator</a></li>
-                        <li><a target="_blank" href="./topics/executor.html">Executor</a></li>
-                        <li><a target="_blank" href="./topics/handler.html">Handlers</a></li>
-                        <li><a target="_blank" href="./topics/retryable-exception-vs-non-retryable-exception.html">Retryable
-                            Exceptions</a></li>
-                        <li><a href="./topics/hint-store.html">Hint store</a></li>
-                        <li><a href="./topics/stacksaga-admin-dashboard.html">StackSaga Admin</a></li>
                     </ul>
 
-                </section>
-            </article>
+                    <a target="_blank"
+                       href="../../assets/images/architecture/1.0/Architecture-Stacksaga-products.drawio.svg"><img
+                            class="img-fluid  "
+                            src="../../assets/images/architecture/1.0/Architecture-Stacksaga-products.drawio.svg"
+                            alt=""
+                            title="stackSAGA High-level architecture diagram"/>
+                    </a>
+                </section><!--//docs-intro-->
 
-        </div>
+            </header>
+
+            <section class="docs-section">
+                <h4>Key Processes of ecosystem</h4>
+                <p>
+                    To understand the relation of those components whole process can be summarised as follows.
+                </p>
+                <ul>
+                    <li>
+                        <b>Initialize the admin server with super admin.</b>
+                    </li>
+                    <li>
+                        <b>Register API gateways with admin server</b>
+                        <p>
+                            To connect the StackSaga your API gateway should provide an API-gateway-user credentials.
+                            Therefore, super Admin should create a user with API gateway authorization (role).
+                            After creating the API gateway user, the api gateway can be run because StackSaga Shield wll
+                            check your credentials connecting with the admin server.
+                            <br>
+                            For this process <b>StackSaga server</b> and <b>StackSaga Shield</b> were involved.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Register each microservice with admin server.</b>
+                        <p>
+                            To register the services in the admin server, the super admin or admin has to create a user
+                            for service with service privileges. As a best-practice the StackSaga team recommends you to
+                            create one user for one service group. (service group can have multiple instances but the
+                            service names are the same.) For instance, order-service should have a service user called
+                            order-service-general-user. And payment service should have a service user called
+                            payment-service-general-user. At the start-up the connector will verify your service
+                            credentials and let you the access to register and run the service.
+                            <br>
+                            For this process
+                            <b>StackSaga Server</b>, and <b>StackSaga Connector</b> were involved.
+                        </p>
+                    </li>
+
+                    <li>
+                        <b>Execute a transaction.</b>
+                        <p>
+                            This is the main part that you are willing to see. The request comes through the API gateway
+                            as usual, and the StackSaga coordinator will obtain the request data that you pass, and the
+                            coordinator will handle all the process and executions as you have guided the framework.
+                            <br>
+                            For this process only <b>StackSaga coordinator</b> was involved.
+                        </p>
+                    </li>
+
+                    <li>
+                        <b>Seeing transactions execution data.</b>
+                        <p>
+                            To see tha execution data you should have to have a user account on the admin server. If you
+                            are the super admin, the super admin can see all the details. But as a best-practice, make
+                            sure to create a separate individual account for each user that wat to access the admin
+                            server to see the transaction data. After login to the dashboard, you have to give the
+                            access
+                            path of the API gateway that you want to access the services. you will be able to see the
+                            transaction data.
+                            <br>
+                            For this process, <b>StackSaga server</b>, <b>StackSaga Shield</b> and <b>StackSaga
+                            Connector</b> were involved.
+                        </p>
+                    </li>
+
+
+                </ul>
+            </section>
+            <section class="docs-section" id="item-1-4">
+                <h4>Explore the concepts behind stackSaga</h4>
+                <ul>
+                    <li><a href="./introduction.html">Introduction</a></li>
+                    <li><a href="./architecture.html">High-level Architecture</a></li>
+                    <li><a href="./how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
+                        work</a>
+                    </li>
+                    <li><a href="./topics/SEC.html">Saga execution coordinator (SEC)</a></li>
+                    <li><a href="./topics/SEC.html#dual-consistency-problem-of-sec">Dual-consistency problem of
+                        SEC</a></li>
+
+                    <li><a href="./topics/circuit-breaker.html">Real-time Circuit Breaker</a></li>
+                    <li><a href="./topics/SEC.html#event-store">Event-Store</a></li>
+
+                    <li><a target="_blank" href="./topics/aggregator.html">Aggregator</a></li>
+                    <li><a target="_blank" href="./topics/executor.html">Executor</a></li>
+                    <li><a target="_blank" href="./topics/handler.html">Handlers</a></li>
+                    <li><a target="_blank" href="./topics/retryable-exception-vs-non-retryable-exception.html">Retryable
+                        Exceptions</a></li>
+                    <li><a href="./topics/hint-store.html">Hint store</a></li>
+                    <li><a href="./topics/stacksaga-admin-dashboard.html">StackSaga Admin</a></li>
+                </ul>
+
+            </section>
+        </article>
+
+    </div>
 </div>
 
 <!-- Javascript -->
