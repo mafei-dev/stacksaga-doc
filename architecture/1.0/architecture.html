@@ -72,14 +72,14 @@
 
             </div><!--//docs-logo-wrapper-->
             <div class="docs-top-utilities d-flex justify-content-end align-items-center">
-                <div class="top-search-box d-none d-lg-flex">
-                    <form class="search-form">
-                        <input type="text" placeholder="Search the docs..." name="search"
-                               class="form-control search-input">
-                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
+                <!--                <div class="top-search-box d-none d-lg-flex">
+                                    <form class="search-form">
+                                        <input type="text" placeholder="Search the docs..." name="search"
+                                               class="form-control search-input">
+                                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                                        </button>
+                                    </form>
+                                </div>-->
 
                 <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
                     <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
@@ -147,15 +147,15 @@
                     </p>
 
                     <ul>
-                        <li><b><a href="./../1.0/reference/stacksaga-framwork.html#coordinator">StackSaga
+                        <li><b><a href="reference/stacksaga-framework.html#coordinator">StackSaga
                             Coordinator</a></b>
                             (A Library) and
-                            <b><a href="./../1.0/reference/stacksaga-framwork.html#connector">StackSaga
+                            <b><a href="reference/stacksaga-framework.html#connector">StackSaga
                                 Connector</a></b> (A Library) are located in the
                             individual
                             services.
                         </li>
-                        <li><b><a href="./../1.0/reference/stacksaga-framwork.html#shield">StackSaga Shield</a></b> (A
+                        <li><b><a href="reference/stacksaga-framework.html#shield">StackSaga Shield</a></b> (A
                             Library) is located in the API gateway.
                         </li>
                         <li><b><a href="./../1.0/topics/stacksaga-admin-dashboard.html">StackSaga Server</a></b> (A
@@ -184,6 +184,12 @@
                 <ul>
                     <li>
                         <b>Initialize the admin server with super admin.</b>
+                        <p>
+                            As the first step, you have to create initialize
+                            the admin server. <a
+                                href="./topics/stacksaga-admin-dashboard.html#initialize-stacksaga-admin-server">see the
+                            initialization steps</a>.
+                        </p>
                     </li>
                     <li>
                         <b>Register API gateways with admin server</b>
@@ -194,6 +200,10 @@
                             check your credentials connecting with the admin server.
                             <br>
                             For this process <b>StackSaga server</b> and <b>StackSaga Shield</b> were involved.
+                            <a
+                                    href="./example/mysql/imperative/">see
+                                the
+                                implementation</a> to see more in detail.
                         </p>
                     </li>
                     <li>
@@ -209,6 +219,10 @@
                             <br>
                             For this process
                             <b>StackSaga Server</b>, and <b>StackSaga Connector</b> were involved.
+                            <a
+                                    href="./example/mysql/imperative/">see
+                                the
+                                implementation</a> to see more in detail.
                         </p>
                     </li>
 
@@ -221,6 +235,11 @@
                             <br>
                             For this process only <b>StackSaga coordinator</b> was involved.
                         </p>
+
+                        <a
+                                href="./example/mysql/imperative/">see
+                            the
+                            implementation</a> to see more in detail.
                     </li>
 
                     <li>
@@ -237,6 +256,10 @@
                             For this process, <b>StackSaga server</b>, <b>StackSaga Shield</b> and <b>StackSaga
                             Connector</b> were involved.
                         </p>
+                        <a
+                                href="./example/mysql/imperative/">see
+                            the
+                            implementation</a> to see more in detail.
                     </li>
 
 

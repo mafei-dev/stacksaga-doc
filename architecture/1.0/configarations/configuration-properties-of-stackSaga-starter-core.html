@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Configuration Properties Of StackSaga Starter Core - StackSaga</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Stack SAGA Quick Start with spring boot microservice.">
+    <meta name="author" content="Mafei">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../../assets/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./../../../assets/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./../../../assets/fav/favicon-16x16.png">
+    <link rel="manifest" href="./../../../assets/fav/site.webmanifest">
+    <link rel="mask-icon" href="./../../../assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Configuration Properties Of StackSaga Starter Core - StackSaga">
+    <meta name="application-name" content="stacksaga">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#28b76b">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../../../assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../../../assets/css/theme.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0M1Q19EK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LC0M1Q19EK');
+    </script>
+
+</head>
+<body class="docs-page">
+<header class="header fixed-top">
+    <div class="branding docs-branding">
+        <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+                <!--  <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                          type="button">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </button>
+  -->
+                <div class="site-logo">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img width="8%" height="8%" src="../../../assets/images/stack-saga-icon.svg"
+                             alt="logo"/>
+                        <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
+                    </a>
+                </div>
+
+            </div><!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                <!--                <div class="top-search-box d-none d-lg-flex">
+                                    <form class="search-form">
+                                        <input type="text" placeholder="Search the docs..." name="search"
+                                               class="form-control search-input">
+                                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
+                                        </button>
+                                    </form>
+                                </div>-->
+
+                <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                    <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
+                            class="fab fa-github fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a href="https://stackoverflow.com/questions/tagged/stacksaga"><i
+                            class="fab fa-stack-overflow fa-fw"></i></a></li>
+                </ul><!--//social-list-->
+            </div><!--//docs-top-utilities-->
+        </div><!--//container-->
+    </div><!--//branding-->
+</header><!--//header-->
+<div>
+    <div class="container">
+        <article class="docs-article" id="section-1">
+
+            <header class="docs-header">
+                <h1>Configuration Properties Of StackSaga Starter Core</h1>
+                <small>version 1.0.0</small>
+
+                <br>
+                <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-nowrap">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Default</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.component-scan</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String []</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            The package paths array where the executors, handles and other beans and aggregators have
+                            been configured.
+                            at start-up the configured paths will be scaned
+                            to find the beans and other implementations that you have done in StackSaga framework.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.app-release-version</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            The real release version of the service. it should be updated for each and every change.
+                            especially regarding the Aggregators. (if any aggregator was changed, the version should be
+                            updated.)
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.log.configured-details</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Boolean</td>
+                        <td class="text-nowrap">true</td>
+                        <td>
+                            you can see the configured data summary of the StackSaga framework like
+                            <code>Executors, Aggregators</code> and Etc.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.aggregator.print-summary</code>
+                        </th>
+                        <td class="text-nowrap">java.util.Map&lt;java.lang.String,java.lang.Boolean&gt;</td>
+                        <td class="text-nowrap">true</td>
+                        <td>
+                            if you want to print aggregator summary st the service start-up, you can mention the
+                            aggregator name (<code>@Aggregator(name=
+                            "TheNameOfTheAggregator")</code>) and <b>true</b> or <b>false</b>. this will be helpfull
+                            when the development
+                            profile. you can disable other all other aggregator's summaries, and you can enable the
+                            aggregator summary you
+                            are currently working on.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.log.transaction-summary</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Boolean</td>
+                        <td class="text-nowrap">true</td>
+                        <td>
+                            you can see the transaction summary for each transaction in the log as quite beautiful
+                            table.
+                            it is not recommended in the production profile.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.client.binary-file-path</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Long</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            the file root-path to save the event binary files (<a
+                                href="./../topics/SEC.html#dual-consistency-problem-of-sec">garbage transaction
+                            files</a>).
+                            if the service is running on a container-based system, you can provide a volume location for
+                            the service group. (no need to provide the full path with the service name. the framework
+                            will create the directory. for instance, the service name is <code>order-service</code> and
+                            the root-path is <code>C:\\stacksaga\\binary</code> and the framworl will create the full
+                            path like this <code>C:\\stacksaga\\binary\\order-service</code>).
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.client.trash-bulk-size</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Long</td>
+                        <td class="text-nowrap">10_000L</td>
+                        <td>
+                            by using the <code>stacksaga.client.binary-file-path</code> that provided, the coordinator
+                            tries to collect the garbage binary file from the directory. this value is belonged to that
+                            how many binary files should be collected and execute by the service.
+                            <br>
+                            <b>
+                                this value should be decided upon the resilience (service resources) of the services
+                                because it consumes some resources to process the IO execution.
+                            </b>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.cloud.file-collector-cron</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">*/1 * * * * *</td>
+                        <td>
+                            Schedule that how the garbage file-collector should be invoked by using <a
+                                href="https://en.wikipedia.org/wiki/Cron">cron</a> values.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.client.zone-id</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">default-zone</td>
+                        <td>
+                            zone-id is usaed for determining the master node of the service group.
+                            <a href="#">see more</a>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.client.replay-bulk-size</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Long</td>
+                        <td class="text-nowrap">10_000L</td>
+                        <td>
+                            the bulk size of retreating retryable-transaction from the event-store.
+                            <br>
+                            when the coordinator tries to execute the retryable-transaction, the coordinator will fetch
+                            the retryable-transaction transaction from the event-store.
+                            this value means the limit of the database select query. (how many data should be fetched
+                            per one time.)
+                            <br>
+                            the bulk size should be decided upon the resilience of the services.
+                            because anyone does not know which service will act as the master-node. master node is
+                            responsible for executing the bulk spray,and one of same services will be a master node
+                            based on the time that server was started.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.client.replay-bulk-order-by</code>
+                        </th>
+                        <td><p>java.lang.String</p></td>
+                        <td class="text-nowrap">ASC</td>
+                        <td>
+                            It describes that what order the retryable-transaction execution should be done. ASC or
+                            DESC.
+                            <br>
+                            if the value is ASC, <b>first-in > first-out</b>,
+                            <br>
+                            if the value is DESC, <b>last-in > first-out</b>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.cloud.transaction-replay-cron</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">*/1 * * * * *</td>
+                        <td>
+                            Schedule that how the retryable-transaction invoker should be invoked by using <a
+                                href="https://en.wikipedia.org/wiki/Cron">cron</a> values.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.connect.admin-url</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            the full url of the admin-server running on.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.connect.admin-username</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            the username of the user account that has been created for specifically to the relevant
+                            service by the
+                            SUPER-ADMIN
+                            or
+                            ADMIN.
+                            <a href="./../topics/stacksaga-admin-dashboard.html#create-service-user">see more..</a>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.connect.admin-password</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.String</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            the password of the user account that has been created for specifically to the relevant
+                            service by the
+                            SUPER-ADMIN
+                            or
+                            ADMIN.
+                            <a href="./../topics/stacksaga-admin-dashboard.html#create-service-user">see more..</a>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.connect.enable</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Boolean</td>
+                        <td class="text-nowrap">true</td>
+                        <td>
+                            should the service connect with the StackSaga admin server at the start-up or not.
+                            <br>
+                            the benefit of enabling is you can see all the instance details through the StackSaga admin
+                            server like what time the service was started, what was the instance-id Etc. (equal to the
+                            eureka
+                            that you can see).
+                            if the value is true, you should create a account with SERVICE privileges in the StackSaga
+                            admin server.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.executor.executor-retry-global-config</code>
+                        </th>
+                        <td class="text-nowrap">java.lang.Integer</td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            The default value for that how many hours should be waiting a retryable transaction until
+                            get successful. (if there is a transaction as a retryable transaction, it can try until the
+                            time that you have mentioned here by hours.) for instance, you have mentioned the value as
+                            12
+                            hours.
+                            that transaction can be run for 12 hours to be successful.
+                            otherwise the transaction doesn't try to invoke again and again.
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            <code>stacksaga.executor.executor-retry-config</code>
+                        </th>
+                        <td class="text-nowrap">
+                            java.util.Map&lt;String,ExecutionRetry&gt;
+                        </td>
+                        <td class="text-nowrap">no-default</td>
+                        <td>
+                            if you want to configure retry-hours individually for selected aggregators instead of
+                            using global value (<code>stacksaga.executor.executor-retry-global-config</code>), you can
+                            proce the data by using the aggregator name that mentioned at the <code>@Aggregator(name=
+                            "TheNameOfTheAggregator")</code>
+                            <br>
+                            example,
+                            <br>
+                            <code>
+                                stacksaga.executor.executor-retry-config.OrderAggregator.hours=20
+                            </code>
+                        </td>
+                        <td class="text-nowrap">1.0.0</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </header>
+        </article>
+
+    </div>
+</div>
+
+<!-- Javascript -->
+<script src="../../../assets/plugins/popper.min.js"></script>
+<script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../../assets/plugins/smoothscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="../../../assets/js/highlight-custom.js"></script>
+<script src="../../../assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+<script src="../../../assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+<script src="../../../assets/js/docs.js"></script>
+</body>
+</html> 
+
