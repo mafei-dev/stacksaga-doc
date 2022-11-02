@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Real-time Circuit Breaker - StackSaga</title>
+    <title>Circuit Breaker Implementation in StackSaga - StackSaga</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Introduction to stacksaga">
+    <meta name="description" content="Circuit Breaker Implementation in StackSaga - StackSaga">
     <meta name="author" content="Mafei">
 
 
@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./../../../assets/fav/favicon-16x16.png">
     <link rel="manifest" href="./../../../assets/fav/site.webmanifest">
     <link rel="mask-icon" href="./../../../assets/fav/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="apple-mobile-web-app-title" content="stacksaga">
+    <meta name="apple-mobile-web-app-title" content="Circuit Breaker Implementation in StackSaga - StackSaga">
     <meta name="application-name" content="stacksaga">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#28b76b">
@@ -57,16 +57,11 @@
     <div class="branding docs-branding">
         <div class="container-fluid position-relative py-2">
             <div class="docs-logo-wrapper">
-               <!-- <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
-                        type="button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>-->
+
 
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../../index.html">
-                        <img  width="8%" height="8%" src="../../../assets/images/stack-saga-icon.svg"
+                        <img width="8%" height="8%" src="../../../assets/images/stack-saga-icon.svg"
                              alt="logo"/>
                         <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
                     </a>
@@ -102,150 +97,8 @@
         <div class="container">
             <article class="docs-article" id="section-1">
                 <header class="docs-header">
-                    <h1 id="microservice-introduction" class="docs-heading">Real-time Circuit Breaker
-                    </h1>
-                    <section class="docs-intro">
 
-                        <div class="callout-block callout-block-info">
-
-                            <div class="content">
-                                <h4 class="callout-title">
-                                                    <span class="callout-icon-holder me-1">
-                                                        <i class="fas fa-info-circle"></i>
-                                                    </span>
-                                    Note
-                                </h4>
-                                <p>
-                                    Before dive in to the Real-time Circuit Breaker, if you have no idea about the
-                                    Circuit Breaker pattern it
-                                    would
-                                    be bettor reading <a
-                                        href="https://martinfowler.com/bliki/CircuitBreaker.html">this</a> article.
-                                </p>
-                            </div>
-                        </div>
-
-                        <p>
-
-                            The real-time CB works based on the live application's health. That means each servers
-                            publish their health to one place for a period of time and then those health-information are
-                            shared with each other interested microservices. The common place is the Redis server.
-                            The
-                            Redis server receives all the application health which use StackSaga. The health can be
-                            positive or negative.
-                            <br>
-                            here you can see how the StackSaga clint application push the health to Redis server. <a
-                                href="./../reference/configuration-properties.html">it can be configured</a> in your
-                            application.
-                            <br>
-                            <br>
-                            <img src="./../../../assets/images/architecture/1.0/how-push-health-stack-saga-client.gif"
-                                 class="img-fluid" alt=""/>
-
-
-                            If
-                            one service goes down, that server will notify their termination to the Redis server. Then
-                            the admin
-                            server also listening those changes through the Redis server. Then the admin server check
-                            that at least is one service from the service which was changed in the Redis store and
-                            really running on. If
-                            the value is zero (There is no at least one server instance), other interested services
-                            (StackSaga clients) will be notified as the
-                            server <b>X (server name)</b> is down. Stacksaga clients save the interested servers
-                            which
-                            can
-                            talk with StackSaga health protocol in their application's memory . The whole application,
-                            there can have
-                            many
-                            microservices, But all of them might not use StackSaga framework. Then that kind of
-                            non-stacksaga services don't publish their health though the Redis.
-                            <br>
-
-                            here you can see how the StackSaga client gets update to each other. the payment service is
-                            down status (not live any server instance). and after while, one service goes up and after
-                            the stating the server successfully, the framework will update their health to the Redis
-                            server. then the Redis gets update. all the service updates have been subscribed
-                            by the StackSaga admin server. then the admin server push a message for the services which
-                            subscribed to that upped service's name. according to the image the user-service has
-                            subscribed to the service's updates of payment-service.
-
-                            <br>
-                            <br>
-                            <img src="./../../../assets/images/architecture/1.0/how-update-cb-in-stacksaga.gif" alt=""/>
-                        </p>
-                        <h4>How StackSaga Circuit Breaker deal with StackSaga client services and non-stacksaga
-                            services.</h4>
-                        <p>
-                            <b>For instance</b>, your
-                            microservice application can have many services called A,B,C,D likewise.
-                            you are going to execute a process from the A service by using StackSaga framework. that
-                            means The 'A'
-                            service use the StackSaga framework. and 'A' service is going to access B,C and D while the
-                            execution. then the SEC of the service 'A' check the application B is Up or not to be
-                            executed. due to the using the StackSaga framework in the service 'B', the service 'A' have
-                            already updated the status of the server 'B'. but just think the server C doesn't use
-                            StackSaga framework, the 'A' server can't get the status of the service 'C'. then the SEC of
-                            the service 'A' will skip the checking status of the service 'C' and execute the process
-                            (the circuit-breaker is not used).
-                        </p>
-
-                        <img src="./../../../assets/img/1.0/topics/Architecture-Stacksaga-how-SEC-works-with-stacksaga-real-time-circuit-breaker.drawio.svg"
-                             alt=""/>
-
-                        <ul>
-                            <li>
-                                <span class="badge rounded-pill bg-number">C1</span> Check the service-B is un and
-                                running, and due to the service is up and running the execution will be continued by the
-                                SCE and <span class="badge rounded-pill bg-number">E1</span> the executor process
-                                successfully.
-                            </li>
-
-                            <li>
-                                The server-B doesn't use StackSaga. therefore, there is no health-checking when the
-                                executor of service-B is executed. <span class="badge rounded-pill bg-number">E2</span>
-                                invoke the method without checking the health.
-                            </li>
-
-                            <li>
-                                <span class="badge rounded-pill bg-number">C2</span> As the next step the 3rd executor
-                                is going to be invoked. nut the related service use StackSaga. therefore, there is a
-                                health checking process by the SEC. but the SEC gets know there is no any instance of
-                                service-D. then the SEC is not going to execute the executor. because there is no point
-                                in executing the executor without any instance.
-                            </li>
-
-
-                        </ul>
-
-                    </section>
                 </header>
-
-                <section class="docs-section" id="item-1-4">
-                    <h4>Explore the concepts behind stackSaga</h4>
-                    <ul>
-                        <li><a href="./../introduction.html">Introduction</a></li>
-                        <li><a href="./../architecture.html">High-level Architecture</a></li>
-                        <li><a href="./../how-works-stack-saga-transaction-types.html">How Stack Saga Execution Types
-                            work</a>
-                        </li>
-                        <li><a href="../topics/SEC.html">Saga execution coordinator (SEC)</a></li>
-                        <li><a href="../topics/SEC.html#dual-consistency-problem-of-sec">Dual-consistency problem of
-                            SEC</a></li>
-
-                        <li><a href="../topics/circuit-breaker.html">Real-time Circuit Breaker</a></li>
-                        <li><a href="../topics/SEC.html#event-store">Event-Store</a></li>
-
-                        <li><a target="_blank" href="../topics/aggregator.html">Aggregator</a></li>
-                        <li><a target="_blank" href="../topics/executor.html">Executor</a></li>
-                        <li><a target="_blank" href="../topics/handler.html">Handlers</a></li>
-                        <li><a target="_blank" href="../topics/retryable-exception-vs-non-retryable-exception.html">Retryable
-                            Exceptions</a></li>
-                        <li><a href="../topics/hint-store.html">Hint store</a></li>
-                        <li><a href="../topics/version-casting.html">Version Casting</a></li>
-                        <li><a href="../topics/stacksaga-admin-dashboard.html">StackSaga Admin</a></li>
-                    </ul>
-
-                </section>
             </article>
         </div>
     </div>
