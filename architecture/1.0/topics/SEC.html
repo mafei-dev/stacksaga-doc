@@ -57,13 +57,13 @@
     <div class="branding docs-branding">
         <div class="container-fluid position-relative py-2">
             <div class="docs-logo-wrapper">
-               <!-- <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
-                        type="button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
--->
+                <!-- <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                         type="button">
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                 </button>
+ -->
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../../index.html">
                         <img width="8%" height="8%" src="../../../assets/images/stack-saga-icon.svg"
@@ -169,27 +169,60 @@
                 </header>
 
                 <section id="event-store">
+                    <br>
                     <h2>Event-store</h2>
                     <p>
-                        Event-store is the location that StackSaga stores the data regarding the transaction execution
-                        as well as the storing the metadata of the components that you provided like aggregator
-                        details, executor details, application version details etc. all the data you can see through the
-                        StackSaga dashboard. You can configure the database for event-store as the pattern of database
+                        Event-store is the location that StackSaga stores the data Relevant to the transaction execution
+                        as well as the storing the metadata of the components that you provided like <b>aggregator
+                        details</b>, <b>executor details</b>, <b>application version details</b> etc. all the data you
+                        can see through
+                        the
+                        <a href="./../topics/stacksaga-admin-dashboard.html" target="_blank">StackSaga Admin
+                            dashboard</a>. You can
+                        configure the database for the event-store as the
+                        pattern of database
                         per service. Otherwise, you can provide one event-store for all services. But as a best
                         practice, event-store per service is recommended.
                         You can define separate a schema for event-store by providing the configurations.
                     </p>
+
+                    <br>
+                    <br>
+                    <h4>One Event-Store Per Service</h4>
+                    <a target="_blank"
+                       href="../../../assets/img/1.0/topics/Architecture-Stacksaga-event-store-per-service.drawio.svg"><img
+                            class="img-fluid"
+                            src="../../../assets/img/1.0/topics/Architecture-Stacksaga-event-store-per-service.drawio.svg"
+                            alt="stacksaga architecture - event store per service"
+                            title="event store per service"/>
+                    </a>
+                    <br>
+                    <br>
+                    <h4>One Common Event-Store For All Service</h4>
+
+                    <a target="_blank"
+                       href="../../../assets/img/1.0/topics/Architecture-Stacksaga-one-event-store-for-all-services.drawio.svg"><img
+                            class="img-fluid"
+                            src="../../../assets/img/1.0/topics/Architecture-Stacksaga-one-event-store-for-all-services.drawio.svg"
+                            alt="stacksaga architecture - one-event store for all services"
+                            title="one-event store for all services"/>
+                    </a>
+
+                    <br>
+                    <br>
+
+
                     <h5>How the data is stored in the event-store and how it will be used.</h5>
                     <p></p>
 
                     <h5>The requirement of the event-store</h5>
                     <p>
-                        StackSaga framework provides the SEC capabilities. Then the framework have to store each the
+                        StackSaga framework provides the SEC capabilities. Then the framework has to store each the
                         execution data (aggregator state and the transaction information like that each sub
                         transaction was failed or success etc.) . The interesting part is how the framework saves
                         each state of the whole transaction process. As the initial step the transaction is saved in the
                         event store with initial data that you provided with the relevant aggregator. After the saving
-                        the INIT step, the 1st executor is invoked and after invoking the executor the framework saves
+                        the INIT step, the first executor is invoked and after invoking the executor the framework saves
                         the new updated aggregator state in the event store. Likewise, after each and every steps the
                         updated aggregator state and the execution state are saved in the event-store.
                     </p>
