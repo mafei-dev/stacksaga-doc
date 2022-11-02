@@ -55,31 +55,16 @@
     <div class="branding docs-branding">
         <div class="container-fluid position-relative py-2">
             <div class="docs-logo-wrapper">
-                <!--  <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
-                          type="button">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                  </button>
-  -->
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../index.html">
                         <img width="8%" height="8%" src="../../assets/images/stack-saga-icon.svg"
-                             alt="logo"/>
+                             alt="stacksaga icon svg"/>
                         <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
                     </a>
                 </div>
 
             </div><!--//docs-logo-wrapper-->
             <div class="docs-top-utilities d-flex justify-content-end align-items-center">
-                <!--                <div class="top-search-box d-none d-lg-flex">
-                                    <form class="search-form">
-                                        <input type="text" placeholder="Search the docs..." name="search"
-                                               class="form-control search-input">
-                                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i>
-                                        </button>
-                                    </form>
-                                </div>-->
 
                 <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
                     <li class="list-inline-item"><a href="https://github.com/stacksaga"><i
@@ -103,7 +88,7 @@
                     <p>
                         in the <a href="./introduction.html">introduction</a>, we got a clear idea of how
                         microservice
-                        architecture works and what are the challenges that we have to face when implementing the
+                        architecture works, and what are the challenges that we have to face when implementing the
                         microservice. here, we are going to explain how the stack saga works together with typical
                         microservice architecture. here we have demonstrated a spring boot microservice architecture
                         and
@@ -117,7 +102,7 @@
                                 class="img-fluid  "
                                 src="../../assets/images/architecture/1.0/stack-saga-high-level-diagram.svg"
                                 alt=""
-                                title="stackSAGA High-level architecture diagram"/>
+                                title="stacksaga high-level architecture diagram"/>
                         </a>
                     </div>
 
@@ -172,7 +157,7 @@
                             class="img-fluid  "
                             src="../../assets/images/architecture/1.0/Architecture-Stacksaga-products.drawio.svg"
                             alt=""
-                            title="stackSAGA High-level architecture diagram"/>
+                            title="stacksaga products relation"/>
                     </a>
                 </section><!--//docs-intro-->
 
@@ -238,10 +223,12 @@
                             For this process only <b>StackSaga coordinator</b> was involved.
                         </p>
 
+                        <br>
+                        Read <a
+                            href="./example/mysql/imperative/"> the implementation </a> Or read
                         <a
-                                href="./example/mysql/imperative/">see
-                            the
-                            implementation</a> to see more in detail.
+                                href="./how-works-stack-saga-transaction-types.html">how stack saga execution types
+                            work</a> to see more, in detail.
                     </li>
 
                     <li>
@@ -264,8 +251,47 @@
                                 class="img-fluid  "
                                 src="../../assets/images/architecture/1.0/Architecture-Stacksaga-How-Admin-Dashboard-Access-StackSaga-Endpoint.drawio.svg"
                                 alt=""
-                                title="stackSAGA High-level architecture diagram"/>
+                                title="how admin dashboard access stacksaga endpoint - stacksaga"/>
                         </a>
+                        <ul>
+                            <li>
+                                <span class="badge rounded-pill bg-number">1</span> Admin sends the request to access
+                                the event-store data from the admin-dashboard (<code>/stacksaga/**</code>) with the
+                                admin-user
+                                credentials.
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">2</span> spring API-gateway catches the
+                                request and check the mapping. if the request is starting prefixed with
+                                <code>/stacksaga</code>, the request goes through the <b>StackSaga Shield</b>'s filter.
+                                then the filter will communicate with the stacksaga admin server with the admin-user
+                                credentials and also with the Api-Gateway-user credentials.
+                            </li>
+                            <li>
+                                <span class="badge rounded-pill bg-number">3</span> StackSaga admin received the request
+                                and checks the both credentials.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">4</span> StackSaga admin sends the response
+                                the credentials are valid or not.
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">5</span>
+                                if the request credentials are validated, Api-Gateway sends the request to one of
+                                available service instances (x-Service).
+                                <br>
+                            </li>
+
+                            <li>
+                                <span class="badge rounded-pill bg-number">6</span>
+                                the service will rerun the data set to the incoming request. (the endpoint will be
+                                provided
+                                by the StackSaga connector.)
+                            </li>
+
+                        </ul>
                         <br>
                         <a
                                 href="./example/mysql/imperative/">see
