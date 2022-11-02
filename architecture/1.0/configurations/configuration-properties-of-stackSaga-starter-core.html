@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Stack SAGA Quick Start with spring boot microservice.">
+    <meta name="description" content="Configuration Properties Of StackSaga Starter Core - StackSaga">
     <meta name="author" content="Mafei">
 
 
@@ -159,7 +159,7 @@
                             <code>stacksaga.aggregator.print-summary</code>
                         </th>
                         <td class="text-nowrap">java.util.Map&lt;java.lang.String,java.lang.Boolean&gt;</td>
-                        <td class="text-nowrap">true</td>
+                        <td class="text-nowrap">empty</td>
                         <td>
                             if you want to print aggregator summary st the service start-up, you can mention the
                             aggregator name (<code>@Aggregator(name=
@@ -395,7 +395,7 @@
                         <td class="text-nowrap">
                             java.util.Map&lt;String,ExecutionRetry&gt;
                         </td>
-                        <td class="text-nowrap">no-default</td>
+                        <td class="text-nowrap">empty</td>
                         <td>
                             if you want to configure retry-hours individually for selected aggregators instead of
                             using global value (<code>stacksaga.executor.executor-retry-global-config</code>), you can
