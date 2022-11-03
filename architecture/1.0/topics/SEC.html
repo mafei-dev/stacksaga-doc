@@ -198,7 +198,7 @@
                     </a>
                     <br>
                     <br>
-                    <h4>One Common Event-Store For All Service</h4>
+                    <h4>One Common Event-Store For All Services</h4>
 
                     <a target="_blank"
                        href="../../../assets/img/1.0/topics/Architecture-Stacksaga-one-event-store-for-all-services.drawio.svg"><img
@@ -217,24 +217,33 @@
 
                     <h5>The requirement of the event-store</h5>
                     <p>
-                        StackSaga framework provides the SEC capabilities. Then the framework has to store each the
+                        StackSaga framework provides the SEC capabilities. Then the framework has to store each
                         execution data (aggregator state and the transaction information like that each sub
                         transaction was failed or success etc.) . The interesting part is how the framework saves
-                        each state of the whole transaction process. As the initial step the transaction is saved in the
+                        each state of the whole transaction process. As the initial step, the transaction is saved in
+                        the
                         event store with initial data that you provided with the relevant aggregator. After the saving
                         the INIT step, the first executor is invoked and after invoking the executor the framework saves
                         the new updated aggregator state in the event store. Likewise, after each and every steps the
                         updated aggregator state and the execution state are saved in the event-store.
                     </p>
 
-                    <h6>What is the reason of saving the states in the event-store?</h6>
+                    <h6>What are the reasons of saving the states in the event-store?</h6>
                     <ul>
                         <li>
                             <b>To retry purpose.</b>
                             <p>
-                                The main feature the framework provides is that any compensation transaction can be
-                                re-invoke if there is any network issue. To do the re-invocation, the transaction data
-                                should be saved as persistent.
+                                Any kind of execution can retry if the execution is failed due to a <a
+                                    href="./retryable-exception-vs-non-retryable-exception.html" target="_blank">retryable-exception</a>
+                                like network exception.
+                                because if an execution is failed due to a network error, it is not fair that
+                                it is treated
+                                as an exception in the microservice architecture.
+                                because one transaction consists of multiple individual transactions and any time one
+                                service may have gone down. therefore, retrying the execution is one of the main
+                                features
+                                that StackSaga provides. StackSaga always consider the <a href="">eventual
+                                consistency</a>.
                             </p>
                         </li>
 
@@ -254,6 +263,7 @@
 
 
                 </section>
+
                 <section id="dual-consistency-problem-of-sec">
                     <h2>
                         Dual-Consistency problem of SEC in microservice.
@@ -291,32 +301,31 @@
                     <p>
                         After saving the data file in to the admin database, the admin server tries to invoke by using
                         another randomly selected same microservice. The instance is not a problem here because one
-                        service can have same multiple instances. Then one of same services can invoke that data file if
-                        the database connection is successful. If there is no any instance instead of that the admin
-                        server keep waiting for connection is successful. After connection is back to normal the admin
+                        service can have the same multiple instances. Then one of the same services can invoke that data
+                        file if
+                        the database connection is successful. If there is no any instance instead of that, the admin
+                        server keeps waiting for connection is successful. After that, the connection is back to normal,
+                        the admin
                         server will push the file in to one of services and invoke the file. After invoking the file
-                        data successfully the particular service will push a message to the admin server to delete the
-                        saved file. Because after invoking the file there is no point in saving that file in the admin
-                        server. It should be deleted. Because if the file data is existing in the admin database, the
-                        admin server try to invoke it again. That's how the framework handle its data consistency while
+                        data successfully, the particular service will push a message to the admin server to delete the
+                        saved file. Because after invoking the file, there is no point in saving that file in the admin
+                        server. It should be deleted. Because, if the file data exist in the admin database, the
+                        admin server try to invoke it again. That's how the framework handles its data consistency while
                         keep the client's data consistency as well. It is true that the possibility is very rare but
                         just think that if happen that issue the transaction processes will not be complete and the
-                        transaction can't archive the eventual consistency as well. As a programmer I think this is the
-                        main advantage of using StackSaga framework. Now if you have a doubt what happens if the admin
+                        transaction can't archive the eventual consistency as well. As a programmer, I think this is the
+                        main advantage of using StackSaga framework. Now, if you have a doubt, what happens if the admin
                         server is not up and running? It doesn't matter. If occurred that kind of situation and one of
                         services try to send a file into admin server while the admin server is down, the file is kept
                         by the relevant instance until the admin server up. When the admin server goes up the instance
                         will know about and then the instance will push the file into the admin server as usual. Now you
                         can have a problem in your mind. What happen if the admin server is down and the relevant
                         instance is also going to be down. Then what will happen to that saved file? The framework has
-                        considered that as well. Normally the instances are down by stopping the application
+                        considered that as well. Normally, the instances are down by stopping the application
                         server. Then the framework doesn't give a chance to stop the server until push that kind of
                         saved files are transferred. The server keep waiting until the admin server goes up.
                         Those files can be missing only you kill the application by forcing.
                     </p>
-
-                    <img src="./../../../assets/img/1.0/topics/how-stacksaga-manage-data-consistency-internally.gif"
-                         alt="Dual consistency problem of SEC in microservice StackSaga" class="img-fluid">
                 </section>
 
 
