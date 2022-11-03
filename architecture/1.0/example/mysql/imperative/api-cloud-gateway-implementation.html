@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./../../../../../assets/fav/favicon-16x16.png">
     <link rel="manifest" href="./../../../../../assets/fav/site.webmanifest">
     <link rel="mask-icon" href="./../../../../../assets/fav/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="apple-mobile-web-app-title" content="stacksaga">
+    <meta name="apple-mobile-web-app-title" content="Spring Boot Api Cloud Gateway Implementation - StackSaga">
     <meta name="application-name" content="stacksaga">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#28b76b">
@@ -66,7 +66,7 @@
                 </button>-->
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../../../../index.html">
-                        <img  width="8%" height="8%" src="../../../../../assets/images/stack-saga-icon.svg"
+                        <img width="8%" height="8%" src="../../../../../assets/images/stack-saga-icon.svg"
                              alt="logo"/>
                         <span class="logo-text">Stack<span class="text-alt">SAGA</span></span>
                     </a>
@@ -194,6 +194,62 @@
                              alt="stacksaga e-store example creating api-gateway-service"/>
                         <br>
                         <br>
+
+
+                        <h3 class="section-heading">Usage Of Api-Gateway With StackSaga</h3>
+                        <p>
+                            To communicate individual services with the admin, StackSaga Connect should be used and
+                            therefore, to protect the <code>/stacksaga</code> endpoints, StackSaga shield also should be
+                            used.
+                            to use the StackSaga shield with the api gateway, we have to create a
+                            <code>ROLE_GATEWAY</code> user and get the credentials. let's go to the StackSaga Admin
+                            dashboard and create a new user for a new api-gateway step by step.
+                            <br>
+                            Read <a href="./../../../architecture.html#key-process-of-stacksaga" target="_blank">StackSaga
+                            architecture in high level</a>
+                            page to get the idea how behave the ecosystem.
+                        </p>
+
+
+                        <br>
+                        <p><b>1.</b> Go to the <b>users</b> page and select the <b>Registration</b> tab to register the
+                            new api
+                            gateway user.</p>
+                        <img class="img-fluid"
+                             src="../../../../../assets/images/architecture/1.0/create-ROLE-GATEWAY-step-1.png"
+                             alt="create gateway user step-1"/>
+
+                        <br>
+                        <br>
+                        <p><b>2.</b> Before adding the gateway user, we have to create a new api-gateway (because in the
+                            StackSaga system, one api-gateway-can have multiple gateway-users.)</p>
+                        <img class="img-fluid"
+                             src="../../../../../assets/images/architecture/1.0/create-ROLE-GATEWAY-step-2.png"
+                             alt="create gateway user step-2"/>
+
+                        <br>
+                        <br>
+                        <p><b>3.</b> After entering the user data, you will have a generated password by the StackSaga
+                            admin. Save the username and the password in a secret file. it is the credential that we
+                            want use for the shield congregation properties.</p>
+                        <img class="img-fluid"
+                             src="../../../../../assets/images/architecture/1.0/create-ROLE-GATEWAY-step-3.png"
+                             alt="create gateway user step-2"/>
+
+                        <br>
+                        <br>
+
+                        <p><b>4.</b> you can see the new user in the list.</p>
+                        <img class="img-fluid"
+                             src="../../../../../assets/images/architecture/1.0/create-ROLE-GATEWAY-step-4.png"
+                             alt="create gateway user step-2"/>
+
+                        <br>
+
+
+                        <br>
+
+
                         <h3 id="Creating" class="section-heading">Creating api-gateway-service.</h3>
                         <p>
                             Visit to the spring initializer and create the project by adding the following dependencies.
@@ -205,12 +261,22 @@
                         <br>
                         <h4 id="Implementation">Implementation of api-gateway-service</h4>
                         <br>
+                        <p>
+                            the next step is adding the <a
+                                href="./../../../reference/stacksaga-framework.html#stacksaga-shield" target="_blank">StackSaga
+                            Shield</a> in to the api-gateway service. to add the maven plugin in to the project, copy
+                            this code and enter it into the <code>pom.xml</code>'s <code>dependencies</code> section.
+                        </p>
+                        <script src="https://gist.github.com/mafei-dev/e21ae3ec56fb77d5ecf053c7bf773704.js"></script>
+
+                        <br>
                         <h5>
                             Configuration properties
                         </h5>
                         <p>
-                            To connect with eureka server and other utility microservices, We have to put our some
-                            properties and configurations
+                            To connect with eureka server and other utility microservices, We have to put some
+                            properties and configurations by default in the spring framework.
+                            in addition to that, StackSaga Shield also has more <a href="./../../../configurations/configuration-properties-of-stackSaga-starter-shield.html" target="_blank">configurations</a> to be added.
                             in the <code>application.yml</code>
                             file.
                         </p>
