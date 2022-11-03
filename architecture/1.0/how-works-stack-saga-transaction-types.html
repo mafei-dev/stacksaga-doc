@@ -54,12 +54,12 @@
     <div class="branding docs-branding">
         <div class="container-fluid position-relative py-2">
             <div class="docs-logo-wrapper">
-               <!-- <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
-                        type="button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>-->
+                <!-- <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                         type="button">
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                 </button>-->
 
                 <div class="site-logo">
                     <a class="navbar-brand" href="../../index.html">
@@ -526,8 +526,8 @@
 
                     <br>
                     <br>
-                    <h5 id="evert-failed-transaction-scenario">Fire And Forget full process with
-                        Rollback/Compensation/Revert failed transaction scenario</h5>
+                    <h3 id="evert-failed-transaction-scenario">Rollback/Compensation/Revert failed transaction
+                        scenario</h3>
                     <div>
                         <a target="_blank"
                            href="../../assets/images/architecture/1.0/Architecture-Stacksaga-evert-failed-transaction-scenario.drawio.svg"><img
@@ -535,6 +535,27 @@
                                 src="../../assets/images/architecture/1.0/Architecture-Stacksaga-evert-failed-transaction-scenario.drawio.svg"
                                 alt="Architecture Stacksaga revert failed transaction scenario"
                                 title="Revert failed transaction scenario"/></a>
+                    </div>
+
+                    <br>
+                    <br>
+                    <h3 id="replay-mode">How Replay Types Work In StackSaga</h3>
+                    <ol>
+                        <li>Reply On Trash (Due To the <a href="./topics/Dual-consistency-problem-of-SEC.html">Event-Store
+                            Connection Exception</a>)
+                        </li>
+                        <li>Reply On <a href="./topics/retryable-exception-vs-non-retryable-exception.html">Retryable-Exception</a>
+                        </li>
+                    </ol>
+
+                    <div>
+                        <a target="_blank"
+                           href="../../assets/img/1.0/topics/Architecture-Stacksaga-Replay-Trash-Files-And-Replay-Transactions.drawio.svg"><img
+                                class="img-fluid"
+                                style="max-height: 1000px"
+                                src="../../assets/img/1.0/topics/Architecture-Stacksaga-Replay-Trash-Files-And-Replay-Transactions.drawio.svg"
+                                alt="architecture stacksaga replay trash files and replay transactions"
+                                title="architecture stacksaga replay trash files and replay transactions"/></a>
                     </div>
 
                 </section>
